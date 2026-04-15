@@ -1,6 +1,11 @@
+import MiniUI from "./MiniUI";
+import { useFadeIn } from "../hooks/useFadeIn";
+
 export default function About() {
+    const ref = useFadeIn<HTMLDivElement>();
+
     return (
-        <div className="about-section">
+        <div id="about" className="about-section fade-in" ref={ref}>
             <div className="about-text-wrapper">
                 <div className="about-text">
                     <h1><span>All-In-One</span> Scene Selection Tool</h1>
@@ -9,18 +14,18 @@ export default function About() {
                         <br/><br/>
                         Features:
                     </p>
-                    <li>
-                        <ul>Automatic scene (I-Frame) detection</ul>
-                        <ul>Smooth navigation across scenes</ul>
-                        <ul>Instant clip preview on hover</ul>
-                        <ul>Merging selected clips into a single montage</ul>
-                        <ul>Automatic MP4 Conversion</ul>
-                        <ul>Customizable workflow</ul>
-                    </li>
+                    <ul>
+                        <li>Automatic scene (I-Frame) detection</li>
+                        <li>Smooth navigation across scenes</li>
+                        <li>Instant clip preview on hover</li>
+                        <li>Merging selected clips into a single montage</li>
+                        <li>Automatic MP4 Conversion</li>
+                        <li>Customizable workflow</li>
+                    </ul>
                 </div>
             </div>
             <div className="about-ui-section">
-
+                <MiniUI />
             </div>
         </div>
     )
