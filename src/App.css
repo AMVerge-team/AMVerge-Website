@@ -467,6 +467,23 @@ Explanation Section
 
 /*
 ====================
+Merge Section
+====================
+*/
+
+.merge-info-section {
+  background: red;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+}
+
+.merge-info-section h1 {
+  font-family: 'Jersey 10', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  
+}
+/*
+====================
 CTA Section
 ====================
 */
