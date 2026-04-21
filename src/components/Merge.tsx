@@ -3,7 +3,7 @@ import { useFadeIn } from "../hooks/useFadeIn";
 export default function Merge() {
     const ref = useFadeIn<HTMLDivElement>();
     return (
-        <div className="merge-info-section fade-in" ref={ref}>
+        <div id="merge-section" className="merge-info-section fade-in" ref={ref}>
             <div className="merge-info-text">
                 <h1>
                     <span>Merge</span> Scenes, Stay in Control.

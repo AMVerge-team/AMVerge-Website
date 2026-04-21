@@ -4,6 +4,7 @@ const sections = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
     { id: "explanation", label: "Why AMVerge" },
+    { id: "merge-section", label: "Merge Feature"},
     { id: "download", label: "Download" },
 ];
 
