@@ -7,6 +7,10 @@ type GithubAsset = {
   download_count: number;
 };
 
+type GithubRelease = {
+  assets?: GithubAsset[];
+};
+
 async function getLatestExeAsset(): Promise<GithubAsset | null> {
   try {
     const res = await fetch("https://api.github.com/repos/crptk/AMVerge/releases/latest");
@@ -25,6 +29,30 @@ async function getLatestExeAsset(): Promise<GithubAsset | null> {
   }
 }
 
+async function getCumulativeDownloadCount(): Promise<number> {
+  try {
+    const res = await fetch("https://api.github.com/repos/crptk/AMVerge/releases");
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+
+    const releases: GithubRelease[] = await res.json();
+
+    let total = 0;
+
+    for (const release of releases) {
+      for (const asset of release.assets ?? []) {
+        if (asset.name.endsWith(".exe") && !asset.name.endsWith(".sig")) {
+          total += asset.download_count ?? 0;
+        }
+      }
+    }
+
+    return total;
+  } catch (err) {
+    console.error("Failed to fetch cumulative download count:", err);
+    return 0;
+  }
+}
+
 export default function Landing() {
   const [showMoreInfo, setShowMoreInfo] = useState(true);
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
@@ -32,12 +60,7 @@ export default function Landing() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    async function loadDownloadCount() {
-      const exe = await getLatestExeAsset();
-      setDownloadCount(exe?.download_count ?? 0);
-    }
-
-    loadDownloadCount();
+    getCumulativeDownloadCount().then(setDownloadCount);
   }, []);
 
   useEffect(() => {
@@ -55,7 +78,7 @@ export default function Landing() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   async function handleDownload() {
     if (downloading) return;
 
