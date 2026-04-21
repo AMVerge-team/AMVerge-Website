@@ -141,6 +141,19 @@ body {
 }
 
 /* landing */
+.landing-fade {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.landing-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .title-wrapper {
   height: 100vh;
   width: 100%;

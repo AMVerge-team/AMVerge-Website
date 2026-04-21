@@ -29,6 +29,7 @@ export default function Landing() {
   const [showMoreInfo, setShowMoreInfo] = useState(true);
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     async function loadDownloadCount() {
@@ -39,6 +40,22 @@ export default function Landing() {
     loadDownloadCount();
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoaded(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    function handleScroll() {
+      setShowMoreInfo(window.scrollY < 80);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
   async function handleDownload() {
     if (downloading) return;
 
@@ -62,7 +79,7 @@ export default function Landing() {
   }
 
   return (
-    <div id="home">
+    <div id="home" className={`landing-fade ${loaded ? "visible" : ""}`}>
       <section>
         <div className="title-wrapper">
           <h1 className="AMVerge-title">
