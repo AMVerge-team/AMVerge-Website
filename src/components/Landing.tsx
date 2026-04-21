@@ -119,7 +119,7 @@ export default function Landing() {
           </button>
 
           <div style={{ color: "#888", fontSize: 14, marginTop: 4, marginBottom: 8 }}>
-            Total downloads: {downloadCount === null ? "..." : downloadCount}
+            {downloadCount === null ? "..." : `${downloadCount}+ downloads`}
           </div>
 
           <a
