@@ -19,12 +19,12 @@ Built with React 19, TypeScript, Vite 8, and MDX.
 
 ## Features
 
-- **Landing page** - Hero video background, pixel-style typography, dynamic accent color
-- **Features page** - Alternating left-right layout with demo video placeholders
-- **Changelog** - Live GitHub releases with dedicated per-version pages and download links
-- **FAQ** - Two-column accordion with animated expand
-- **Docs** - MDX-powered documentation matching the landing aesthetic
-- **Live accent slider** - Hue slider rewrites `--accent` CSS variable globally
+- **Landing page**: Hero video background, pixel-style typography, dynamic accent color
+- **Features page**: Alternating left-right layout with demo video placeholders
+- **Changelog**: Live GitHub releases with dedicated per-version pages and download links
+- **FAQ**: Two-column accordion with animated expand
+- **Docs**: MDX-powered documentation matching the landing aesthetic
+- **Live accent slider**: Hue slider rewrites `--accent` CSS variable globally
 
 ---
 

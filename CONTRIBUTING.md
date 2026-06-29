@@ -5,7 +5,7 @@ Thanks for helping make the AMVerge website better.
 ## Reporting Issues
 
 - Use [GitHub Issues](https://github.com/AMVerge-team/AMVerge-Website/issues)
-- Describe the problem clearly - what you expected, what happened
+- Describe the problem clearly: what you expected, what happened
 - Include screenshots if visual
 
 ## Pull Requests
@@ -13,7 +13,7 @@ Thanks for helping make the AMVerge website better.
 1. Fork the repo and create a branch from `main`
 2. Follow the existing code conventions (see [AGENTS.md](AGENTS.md))
 3. Use Conventional Commit messages: `(add)`, `(fix)`, `(update)`
-4. Keep PRs focused - one change per PR
+4. Keep PRs focused. One change per PR
 5. Run `npm run lint` before committing
 6. Run `npm run build` to verify no TypeScript errors
 
@@ -30,8 +30,8 @@ npm run dev
 
 - TypeScript with PascalCase components, camelCase variables
 - One component per file, default exports
-- Plain CSS in `src/css/` - no Tailwind
-- Accent color via `var(--accent)` - never hardcode
+- Plain CSS in `src/css/` (no Tailwind)
+- Accent color via `var(--accent)`, never hardcode
 - Jersey 10 font for all text
 
 ## AI Agents

@@ -114,7 +114,7 @@ export default function Landing() {
           <div className="hero-accent-line" />
           <p className="hero-subtitle">
             Turn hours of footage into a browsable scene grid.
-            Find, preview, and export the shots you need - in seconds.
+            Find, preview, and export the shots you need, in seconds.
           </p>
           <div className="hero-actions">
             <button
