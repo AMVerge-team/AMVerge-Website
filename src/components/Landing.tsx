@@ -126,7 +126,7 @@ export default function Landing() {
         <div className="hero-particles" />
         <div className="hero-grid" />
         <div className="hero-content">
-          {version && <p className="hero-badge">v{version} · Windows</p>}
+          {version && <p className="hero-badge">{version.replace(/^v/, "")} · Windows</p>}
           <h1 className="hero-title">
             <span>AMV</span>erge
           </h1>
