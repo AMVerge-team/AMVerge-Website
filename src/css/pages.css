@@ -181,8 +181,9 @@
 .changelog-badge {
     font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: 10px;
-    color: black;
-    background: var(--accent);
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
     padding: 1px 6px;
     border-radius: 4px;
 }
@@ -226,7 +227,8 @@
 
 .changelog-platform {
     color: #555;
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1;
 }
 
 .changelog-dls {
@@ -235,6 +237,7 @@
     gap: 3px;
     font-size: 12px;
     color: #666;
+    line-height: 1;
 }
 
 .changelog-arrow {
