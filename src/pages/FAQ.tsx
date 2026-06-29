@@ -13,7 +13,7 @@ const faqs = [
     },
     {
         q: "What platforms are supported?",
-        a: "Windows 10 and 11. The download provides a Windows .exe installer.",
+        a: "Windows 10/11 and macOS. The download provides installers for both platforms.",
     },
     {
         q: "What video formats can I import?",

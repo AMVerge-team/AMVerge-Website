@@ -107,7 +107,7 @@ export default function Landing() {
         <div className="hero-overlay" />
         <div className="hero-grid" />
         <div className="hero-content">
-          {version && <p className="hero-badge">{version} · Windows</p>}
+          {version && <p className="hero-badge">{version} · Windows / macOS</p>}
           <h1 className="hero-title">
             <span>AMV</span>erge
           </h1>
@@ -123,7 +123,7 @@ export default function Landing() {
               disabled={downloading}
             >
               <FiDownload />{" "}
-              {downloading ? "Downloading..." : "Download for Windows"}
+              {downloading ? "Downloading..." : "Download"}
             </button>
             <p className="hero-count">
               {downloadCount === null

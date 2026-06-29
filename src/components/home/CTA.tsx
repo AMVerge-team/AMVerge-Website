@@ -51,7 +51,7 @@ export default function CTA() {
                 </p>
 
                 <button className="cta-download" onClick={downloadLatest}>
-                    <FiDownload /> Download for Windows
+                    <FiDownload /> Download
                 </button>
 
                 <div className="cta-secondary">
@@ -73,7 +73,7 @@ export default function CTA() {
 
                 <p className="cta-meta">
                     {count !== null && `${count.toLocaleString()}+ downloads · `}
-                    Windows 10/11{version && ` · ${version}`}
+                    Windows 10/11 · macOS{version && ` · ${version}`}
                 </p>
             </div>
         </section>
