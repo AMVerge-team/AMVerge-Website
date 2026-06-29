@@ -85,6 +85,25 @@ body {
   color: var(--accent);
 }
 
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 14px);
+  justify-self: start;
+}
+
+.nav-github {
+  display: flex;
+  align-items: center;
+  color: #888;
+  font-size: clamp(20px, 1.2vw, 26px);
+  transition: color 0.2s ease;
+}
+
+.nav-github:hover {
+  color: white;
+}
+
 .nav-page {
   font-family: 'Jersey 10', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: clamp(17px, 1vw, 20px);
