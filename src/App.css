@@ -465,7 +465,7 @@ body {
   object-fit: cover;
   background: #222;
   margin-left: -9px;
-  transition: transform 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .ca-dot:first-child {
@@ -474,6 +474,7 @@ body {
 
 .contrib-avatars:hover .ca-dot {
   border-color: var(--accent);
+  transform: translateY(-3px);
 }
 
 .ca-dot.skeleton {
