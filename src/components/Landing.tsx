@@ -123,6 +123,17 @@ export default function Landing() {
   return (
     <div id="home" className={`landing-fade ${loaded ? "visible" : ""}`}>
       <section className="hero">
+        <video
+          className="hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster=""
+        >
+          <source src="/clips/AMVerge-Video.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-overlay" />
         <div className="hero-particles" />
         <div className="hero-grid" />
         <div className="hero-content">
