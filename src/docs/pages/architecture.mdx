@@ -1,0 +1,25 @@
+# Architecture
+
+How the AMVerge ecosystem fits together.
+
+## Pieces
+
+- **Desktop app** (`crptk/AMVerge`): the GUI users download.
+- **CLI / library** (`AMVerge-CLI`): the detection + cutting backend as a
+  `pip install amverge` package.
+- **This website**: marketing landing + these docs.
+
+## Detection pipeline (high level)
+
+```
+video in
+   -> scene detection (I-frame / ML)
+   -> cut into per-scene clips
+   -> thumbnails + previews
+   -> select / merge / export
+```
+
+For the full backend internals, detection methods, and library API, see the
+CLI repo's `AGENTS.md` and `docs/`.
+
+Next: [Contributing](/docs/contributing).
