@@ -3,6 +3,7 @@ import BrowseSection from "../components/features/BrowseSection";
 import MergeFeatureSection from "../components/features/MergeFeatureSection";
 import ExportSection from "../components/features/ExportSection";
 import FeatureCTA from "../components/features/FeatureCTA";
+import "../components/features/Features.css";
 
 export default function Features() {
     return (
