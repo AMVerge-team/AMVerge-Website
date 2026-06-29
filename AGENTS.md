@@ -56,13 +56,24 @@ AMVerge-Website/
 │   ├── mdx.d.ts              type decl for importing *.mdx as components
 │   │
 │   ├── components/
-│   │   ├── Navbar.tsx        fixed nav, scroll-spy active section, hue slider -> --accent
+│   │   ├── Navbar.tsx        route-aware nav: scroll-spy sections + page links, hue slider -> --accent
+│   │   ├── Footer.tsx        shared footer (page links + GitHub), used by SiteLayout
 │   │   ├── Landing.tsx       hero, download btn (GitHub latest .exe), cumulative dl count
 │   │   ├── About.tsx         feature list + MiniUI mock
 │   │   ├── MiniUI.tsx        fake app UI mockup, clip grid + preview pane (Frieren gifs)
 │   │   ├── Explanation.tsx   "Why AMVerge" scrolling clip grid
 │   │   ├── Merge.tsx         merge-feature copy block
 │   │   └── CTA.tsx           closing call-to-action + download btn
+│   │
+│   ├── layouts/
+│   │   └── SiteLayout.tsx    Navbar + <Outlet/> + Footer for the multi-page routes
+│   │
+│   ├── pages/
+│   │   ├── Pages.css         shared styling for the routes below (landing look)
+│   │   ├── Features.tsx      feature cards grid
+│   │   ├── Changelog.tsx     live GitHub releases list
+│   │   ├── FAQ.tsx           collapsible Q/A accordion
+│   │   └── Gallery.tsx       clip showcase grid (Frieren gifs placeholder)
 │   │
 │   ├── hooks/
 │   │   └── useFadeIn.ts      IntersectionObserver -> adds .visible class on scroll
@@ -93,7 +104,13 @@ AMVerge-Website/
 
 ### Routing
 
-`main.tsx` mounts `BrowserRouter`. `/` renders the landing `App`, `/docs` renders `DocsLayout` with nested routes generated from `docs/registry.ts`. First registry entry is the `/docs` index route, the rest are `/docs/<slug>`.
+`main.tsx` mounts `BrowserRouter`:
+
+- `/` renders the landing `App` (scroll page, its own Navbar).
+- `/features`, `/changelog`, `/faq`, `/gallery` render under `SiteLayout` (shared Navbar + Footer, scroll-to-top on change).
+- `/docs` renders `DocsLayout` with nested routes generated from `docs/registry.ts`. First registry entry is the `/docs` index route, the rest are `/docs/<slug>`.
+
+`Navbar` is route-aware: section links scroll on home, but navigate to `/#<id>` from other pages. `App` reads `location.hash` and scrolls to the matching section on load.
 
 ### Adding a docs page
 

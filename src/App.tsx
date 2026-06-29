@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import About from "./components/About.tsx"
 import CTA from "./components/CTA.tsx"
 import Landing from "./components/Landing.tsx"
@@ -7,6 +9,14 @@ import Merge from "./components/Merge.tsx"
 import './App.css'
 
 function App() {
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (!hash) return
+    const el = document.getElementById(hash.slice(1))
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 0)
+  }, [hash])
+
   return (
     <>
       <Navbar />

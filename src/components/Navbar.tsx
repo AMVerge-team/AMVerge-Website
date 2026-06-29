@@ -1,19 +1,36 @@
 import { useState, useEffect } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const sections = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
     { id: "explanation", label: "Why AMVerge" },
-    { id: "merge-section", label: "Merge Feature"},
+    { id: "merge-section", label: "Merge Feature" },
     { id: "download", label: "Download" },
 ];
 
+const pages = [
+    { to: "/features", label: "Features" },
+    { to: "/changelog", label: "Changelog" },
+    { to: "/faq", label: "FAQ" },
+    { to: "/gallery", label: "Gallery" },
+    { to: "/docs", label: "Docs" },
+];
+
 export default function Navbar() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const onHome = location.pathname === "/";
+
     const [active, setActive] = useState("home");
     const [scrolled, setScrolled] = useState(false);
     const [hue, setHue] = useState(120); // lime = 120
 
     useEffect(() => {
+        if (!onHome) {
+            setScrolled(true);
+            return;
+        }
         const onScroll = () => {
             setScrolled(window.scrollY > 50);
 
@@ -28,16 +45,21 @@ export default function Navbar() {
             setActive(current.id);
         };
 
+        onScroll();
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+    }, [onHome]);
 
     useEffect(() => {
         document.documentElement.style.setProperty("--accent", `hsl(${hue}, 100%, 50%)`);
     }, [hue]);
 
-    const scrollTo = (id: string) => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const goSection = (id: string) => {
+        if (onHome) {
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        } else {
+            navigate(`/#${id}`);
+        }
     };
 
     const accentColor = `hsl(${hue}, 100%, 50%)`;
@@ -45,7 +67,7 @@ export default function Navbar() {
     return (
         <nav className={`site-nav ${scrolled ? "nav-scrolled" : ""}`}>
             <div className="nav-content">
-                <span className="nav-logo" onClick={() => scrollTo("home")}>
+                <span className="nav-logo" onClick={() => goSection("home")}>
                     <span>AMV</span>erge
                 </span>
                 <div className="color-slider-wrapper">
@@ -63,11 +85,23 @@ export default function Navbar() {
                     {sections.map(({ id, label }) => (
                         <button
                             key={id}
-                            className={active === id ? "nav-active" : ""}
-                            onClick={() => scrollTo(id)}
+                            className={onHome && active === id ? "nav-active" : ""}
+                            onClick={() => goSection(id)}
                         >
                             {label}
                         </button>
+                    ))}
+                    <span className="nav-divider" />
+                    {pages.map(({ to, label }) => (
+                        <NavLink
+                            key={to}
+                            to={to}
+                            className={({ isActive }) =>
+                                isActive ? "nav-page nav-active" : "nav-page"
+                            }
+                        >
+                            {label}
+                        </NavLink>
                     ))}
                 </div>
             </div>

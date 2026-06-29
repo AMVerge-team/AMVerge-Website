@@ -63,25 +63,43 @@ body {
 
 .nav-links {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: clamp(8px, 1.5vw, 24px);
 }
 
-.nav-links > button {
+.nav-links > button,
+.nav-links > .nav-page {
   font-family: 'Jersey 10', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: clamp(17px, 1vw, 20px);
   color: #888;
   border: none;
   cursor: pointer;
   padding: 4px 0;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.nav-links > button:hover {
+.nav-links > button:hover,
+.nav-links > .nav-page:hover {
   color: white;
 }
 
-.nav-links > button.nav-active {
+.nav-links > button.nav-active,
+.nav-links > .nav-page.nav-active {
   color: var(--accent);
+}
+
+.nav-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 640px) {
+  .nav-divider {
+    display: none;
+  }
 }
 
 /* Color slider */
