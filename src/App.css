@@ -525,14 +525,12 @@ body {
 
 /* badge */
 .hero-badge {
-  font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(10px, 0.7vw, 12px);
   color: var(--accent);
   border: 1px solid var(--accent);
   border-radius: 20px;
   padding: 3px 14px;
   margin-bottom: clamp(10px, 1.5vw, 20px);
-  letter-spacing: 1px;
 }
 
 .download-btn {
@@ -734,9 +732,7 @@ Explanation Section
 }
 
 .explanation-label {
-  font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(10px, 0.7vw, 12px);
-  letter-spacing: 2px;
   margin-bottom: clamp(4px, 0.5vw, 8px);
 }
 
