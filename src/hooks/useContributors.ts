@@ -5,10 +5,19 @@ import type { GithubContributor } from "../services/github";
 // Module-level cache so the hero, section, and footer share a single fetch.
 let cache: Promise<GithubContributor[]> | null = null;
 
+// Project owners, excluded from the contributor lists.
+const OWNERS = ["moongetsu", "crptk"];
+
 export function loadContributors(): Promise<GithubContributor[]> {
     if (!cache) {
         cache = fetchContributors()
-            .then((list) => list.filter((c) => !c.login.endsWith("[bot]")))
+            .then((list) =>
+                list.filter(
+                    (c) =>
+                        !c.login.endsWith("[bot]") &&
+                        !OWNERS.includes(c.login.toLowerCase()),
+                ),
+            )
             .catch(() => []);
     }
     return cache;

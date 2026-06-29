@@ -17,11 +17,13 @@ export default function Contributors() {
 
     return (
         <section id="contributors" className="contrib-section fade-in" ref={ref}>
-            <span className="contrib-eyebrow">Open source</span>
-            <h2 className="contrib-title">Built by the community</h2>
+            <span className="contrib-eyebrow">Thank you</span>
+            <h2 className="contrib-title">
+                AMVerge wouldn't exist <span className="cta-accent">without you</span>
+            </h2>
             <p className="contrib-sub">
-                AMVerge is made by editors and developers volunteering their time.
-                These are the people behind it.
+                Every fix, feature, and idea comes from people giving their own
+                time to make AMVerge better. To everyone below: thank you.
             </p>
 
             <div className="contrib-grid">
