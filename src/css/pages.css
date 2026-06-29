@@ -121,8 +121,7 @@
 
 /* ---- Changelog ---- */
 .changelog-card-logo {
-    height: 20px;
-    flex-shrink: 0;
+    height: 16px;
 }
 
 .changelog-list {
@@ -171,11 +170,14 @@
 }
 
 .changelog-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: 13px;
     color: white;
     background: rgba(255, 255, 255, 0.06);
-    padding: 2px 8px;
+    padding: 2px 8px 2px 4px;
     border-radius: 6px;
 }
 
