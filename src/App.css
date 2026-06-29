@@ -732,7 +732,7 @@ Explanation Section
 }
 
 .explanation-label {
-  font-size: clamp(10px, 0.7vw, 12px);
+  font-size: clamp(16px, 1.3vw, 22px);
   margin-bottom: clamp(4px, 0.5vw, 8px);
 }
 
