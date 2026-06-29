@@ -54,8 +54,6 @@ body {
   align-items: center;
   gap: clamp(12px, 3vw, 40px);
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .nav-logo {
