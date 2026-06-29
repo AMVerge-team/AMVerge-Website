@@ -68,6 +68,9 @@ export default function VideoPlayer({ src, poster }: Props) {
                 onEnded={() => setPlaying(false)}
             />
 
+            {/* AMVerge logo watermark, recolored to --accent via CSS mask */}
+            <div className="amv-watermark" aria-hidden="true" />
+
             {!playing && (
                 <button className="amv-bigplay" onClick={toggle} aria-label="Play">
                     <FiPlay />

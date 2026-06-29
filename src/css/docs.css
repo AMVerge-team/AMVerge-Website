@@ -724,6 +724,27 @@
   opacity: 1;
 }
 
+/* logo watermark, filled with the accent via a mask (recolors any logo) */
+.amv-watermark {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: clamp(78px, 16%, 150px);
+  height: 34px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.55;
+  background: var(--accent);
+  -webkit-mask: url("/LogoAMVergeFull.png") right center / contain no-repeat;
+  mask: url("/LogoAMVergeFull.png") right center / contain no-repeat;
+  transition: opacity 0.2s ease;
+}
+
+/* dim the watermark a touch while playing so it stays subtle */
+.amv-player.playing .amv-watermark {
+  opacity: 0.4;
+}
+
 .docs-content pre {
   position: relative;
 }
