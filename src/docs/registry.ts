@@ -1,10 +1,18 @@
 import type { ComponentType } from 'react'
 import Introduction from './pages/introduction.mdx'
 import Installation from './pages/installation.mdx'
+import AppOverview from './pages/app-overview.mdx'
+import EpisodePanelDoc from './pages/app-episode-panel.mdx'
 import ImportingEpisodes from './pages/importing-episodes.mdx'
 import SelectingClips from './pages/selecting-clips.mdx'
+import GridPreview from './pages/grid-preview.mdx'
 import MergingScenes from './pages/merging-scenes.mdx'
 import Exporting from './pages/exporting.mdx'
+import ExportProfiles from './pages/export-profiles.mdx'
+import SettingsGeneral from './pages/settings-general.mdx'
+import SettingsAppearance from './pages/settings-appearance.mdx'
+import HevcSupport from './pages/hevc-support.mdx'
+import MenuSupport from './pages/menu-support.mdx'
 import Architecture from './pages/architecture.mdx'
 import Contributing from './pages/contributing.mdx'
 import CliOverview from './pages/cli-overview.mdx'
@@ -43,11 +51,44 @@ export const docGroups: DocGroup[] = [
   },
   {
     label: 'Using AMVerge',
-    pages: [
-      { slug: 'importing-episodes', label: 'Importing Episodes', Component: ImportingEpisodes },
-      { slug: 'selecting-clips', label: 'Selecting Clips', Component: SelectingClips },
-      { slug: 'merging-scenes', label: 'Merging Scenes', Component: MergingScenes },
-      { slug: 'exporting', label: 'Exporting', Component: Exporting },
+    subgroups: [
+      {
+        label: 'Getting Around',
+        pages: [
+          { slug: 'app-overview', label: 'Interface Overview', Component: AppOverview },
+          { slug: 'app-episode-panel', label: 'Episode Panel', Component: EpisodePanelDoc },
+        ],
+      },
+      {
+        label: 'Working with Clips',
+        pages: [
+          { slug: 'importing-episodes', label: 'Importing Episodes', Component: ImportingEpisodes },
+          { slug: 'selecting-clips', label: 'Browsing & Selecting', Component: SelectingClips },
+          { slug: 'grid-preview', label: 'Grid Preview', Component: GridPreview },
+          { slug: 'merging-scenes', label: 'Merging Scenes', Component: MergingScenes },
+        ],
+      },
+      {
+        label: 'Exporting',
+        pages: [
+          { slug: 'exporting', label: 'Export Basics', Component: Exporting },
+          { slug: 'export-profiles', label: 'Export Profiles', Component: ExportProfiles },
+        ],
+      },
+      {
+        label: 'Settings',
+        pages: [
+          { slug: 'settings-general', label: 'General Settings', Component: SettingsGeneral },
+          { slug: 'settings-appearance', label: 'Appearance', Component: SettingsAppearance },
+          { slug: 'hevc-support', label: 'HEVC Support', Component: HevcSupport },
+        ],
+      },
+      {
+        label: 'Help',
+        pages: [
+          { slug: 'menu-support', label: 'Menu & Support', Component: MenuSupport },
+        ],
+      },
     ],
   },
   {

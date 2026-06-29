@@ -1,24 +1,38 @@
 # Importing Episodes
 
-Load a video into AMVerge and let it split into scenes automatically.
+Loading a video into AMVerge splits it into individual scenes automatically and
+shows them in the clip grid.
 
-## Supported input
+## Import a video
 
-Any anime episode, movie, or video file. AMVerge feeds it through scene
-detection and builds a clip grid.
-
-## Steps
-
-1. Click **Import Episode** in the top bar.
+1. Click **Import Episode** in the top toolbar (or drag a file onto the window).
 2. Pick a video file.
-3. Wait for detection. Scenes appear in the grid as they finish.
+3. Wait while AMVerge reads the video and builds the clip grid. The button shows
+   **Processing...** during import.
 
-> Tip: keep related episodes in one folder, then use the Episode Panel to
-> jump between them without re-importing.
+## Supported formats
 
-## What happens under the hood
+Common video files work, including `mp4`, `mkv`, `webm`, and more. Anime
+episodes, movies, or any video can be imported.
 
-Detection finds scene cuts (I-frame based), then each scene is cut into its
-own clip and a preview thumbnail is generated.
+## How AMVerge splits episodes
 
-Next: [Selecting Clips](/docs/selecting-clips).
+AMVerge splits videos at **I-Frames (keyframes)**. It does *not* use traditional
+frame-by-frame scene detection.
+
+- **What are I-Frames?** Full image frames placed throughout a video, usually
+  around cuts or major visual changes.
+- **Why use them?** Splitting at keyframes is near-instant and needs no full
+  re-encode, so importing stays fast and clips are a 1:1 copy (no quality loss).
+- **Downside:** Some encodes place I-Frames in odd spots, creating short or
+  duplicate clips. Those can be [merged back together](/docs/merging-scenes).
+
+## Import vs. storage
+
+Importing copies processed clip data into AMVerge's storage so you can reopen
+past imports quickly. It never touches or deletes your original video files.
+
+You can change where this data lives, see Episodes Storage Path in
+[General Settings](/docs/settings-general).
+
+Next: [Browsing & Selecting](/docs/selecting-clips).

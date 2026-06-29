@@ -1,17 +1,35 @@
-# Exporting
+# Export Basics
 
-Write your selected (or merged) clips to disk.
+Write your selected (or merged) clips to disk from the export panel on the right.
 
 ## Steps
 
-1. Set the **export directory** in the path field.
-2. Choose **Merge Clips** on or off.
-3. Click **Export**.
+1. Pick an **Export Profile** from the dropdown (see
+   [Export Profiles](/docs/export-profiles)).
+2. Set a **destination** in the path field, or use the folder button to browse.
+3. Toggle **Merge Clips** on or off.
+4. Click **Export Now**.
 
-## Output
+## Merge Clips
 
-Clips export as MP4. With merge on you get one file, with merge off you get one
-file per selected clip.
+- **On** — selected clips export as one continuous file (you'll be asked to name
+  it). See [Merging Scenes](/docs/merging-scenes).
+- **Off** — each selected clip exports as its own file.
 
-That's the full workflow: import, select, merge, export. For internals, see the
-[Developer](/docs/architecture) section.
+## Preview Language
+
+If a clip has multiple audio tracks, the **Preview Language** selector chooses
+which one plays in the preview panel.
+
+## Open file location after export
+
+Enable this option in the export profile settings to have AMVerge open File
+Explorer and highlight the exported file automatically when the export finishes.
+
+## Quality
+
+Because exports are a 1:1 stream copy by default, clips come out as an exact copy
+of the source, with little to no quality loss. Re-encoding is only used when a
+profile asks for it.
+
+Next: [Export Profiles](/docs/export-profiles).
