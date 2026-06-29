@@ -1,25 +1,14 @@
 import { useEffect, useState } from "react";
-
-type Release = {
-    id: number;
-    name: string | null;
-    tag_name: string;
-    published_at: string;
-    body: string | null;
-    html_url: string;
-};
+import { fetchReleases } from "../services/github";
+import type { GithubRelease } from "../services/github";
 
 export default function Changelog() {
-    const [releases, setReleases] = useState<Release[] | null>(null);
+    const [releases, setReleases] = useState<GithubRelease[] | null>(null);
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        fetch("https://api.github.com/repos/crptk/AMVerge/releases")
-            .then((r) => {
-                if (!r.ok) throw new Error(`GitHub API ${r.status}`);
-                return r.json();
-            })
-            .then((data: Release[]) => setReleases(data))
+        fetchReleases()
+            .then((data) => setReleases(data))
             .catch(() => setError(true));
     }, []);
 

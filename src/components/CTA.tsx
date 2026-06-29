@@ -1,11 +1,16 @@
 import { FiDownload } from "react-icons/fi";
 import { useFadeIn } from "../hooks/useFadeIn";
+import { fetchLatestRelease } from "../services/github";
 
 async function downloadLatest() {
-    const res = await fetch("https://api.github.com/repos/crptk/AMVerge/releases/latest");
-    const data = await res.json();
-    const exe = data.assets?.find((a: { name: string }) => a.name.endsWith(".exe") && !a.name.endsWith(".sig"));
-    if (exe) window.location.href = exe.browser_download_url;
+    try {
+        const { exe } = await fetchLatestRelease();
+        if (exe?.browser_download_url) {
+            window.location.href = exe.browser_download_url;
+        }
+    } catch {
+        // best-effort
+    }
 }
 
 export default function CTA() {
