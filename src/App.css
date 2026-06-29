@@ -967,6 +967,20 @@ CTA Section
   text-transform: uppercase;
   color: var(--accent);
   margin: 0;
+  position: relative;
+  padding-bottom: clamp(4px, 0.5vw, 8px);
+}
+
+.section-eyebrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(24px, 3vw, 40px);
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
 }
 
 /* Groups the eyebrow + title with consistent spacing in every section */
