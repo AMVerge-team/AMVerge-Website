@@ -11,19 +11,20 @@
 
 # AMVerge Website
 
-**Marketing landing page and documentation site for AMVerge.**  
-Built to showcase the app, explain the features, and help editors get started.
+**Marketing landing page and documentation site for AMVerge, the desktop scene selection tool for AMV editors.**
+
+Built with React 19, TypeScript, Vite 8, and MDX.
 
 ---
 
 ## Features
 
-- **Landing page** — Hero video background, pixel-style typography, dynamic accent color
-- **Features page** — Alternating left-right layout with demo video placeholders
-- **Changelog** — Live GitHub releases with dedicated per-version pages and download links
-- **FAQ** — Two-column accordion with animated expand
-- **Docs** — MDX-powered documentation matching the landing aesthetic
-- **Live accent slider** — Hue slider rewrites `--accent` CSS variable globally
+- **Landing page** - Hero video background, pixel-style typography, dynamic accent color
+- **Features page** - Alternating left-right layout with demo video placeholders
+- **Changelog** - Live GitHub releases with dedicated per-version pages and download links
+- **FAQ** - Two-column accordion with animated expand
+- **Docs** - MDX-powered documentation matching the landing aesthetic
+- **Live accent slider** - Hue slider rewrites `--accent` CSS variable globally
 
 ---
 
@@ -35,6 +36,8 @@ cd AMVerge-Website
 npm install
 npm run dev        # http://localhost:5173
 ```
+
+---
 
 ## Build
 
@@ -58,13 +61,14 @@ npm run lint       # eslint
 | Fonts | Jersey 10 (Google Fonts) |
 | Lint | eslint 9 + typescript-eslint |
 
-No backend. Download counts and changelog data read live from the GitHub releases API.
+No backend. Download counts and changelog data read live from the GitHub releases API client-side.
 
 ---
 
-## Repository Structure
+<details>
+<summary><b>Repository Structure</b></summary>
 
-```
+```txt
 src/
 ├── components/
 │   ├── home/          Landing, About, Explanation, Merge, CTA, Contributors
@@ -77,24 +81,39 @@ src/
 └── hooks/             useFadeIn, useContributors
 ```
 
+</details>
+
 ---
 
-## AI Agents
+<details>
+<summary><b>AI Agents</b></summary>
 
 An [AGENTS.md](AGENTS.md) file is included for AI coding assistants (OpenCode, Claude Code, Cursor, etc.).
 
+Using AI without understanding the codebase is not recommended. Read the code, understand the architecture, then use the agents file if it saves you time.
+
+</details>
+
 ---
 
-## License
+<details>
+<summary><b>Credits</b></summary>
 
-AMVerge Website is licensed under the GNU GPL v3.0. See [LICENSE](LICENSE) for the full text.
+Built by [AMVerge-team](https://github.com/AMVerge-team).
+
+AMVerge was created by [Crptk](https://github.com/crptk). All core scene detection and clip management logic originates from the original AMVerge project.
+
+</details>
+
+---
+
+<details>
+<summary><b>License</b></summary>
+
+AMVerge Website is licensed under the GNU GPL v3.0.
 
 Any derivative work must also be open-source under the same license.
 
-Based on AMVerge by [Crptk](https://github.com/crptk).
+See [LICENSE](LICENSE) for the full text.
 
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on reporting issues, submitting PRs, and development setup.
+</details>

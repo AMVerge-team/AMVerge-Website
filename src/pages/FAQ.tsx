@@ -5,7 +5,7 @@ import { FaDiscord } from "react-icons/fa";
 const faqs = [
     {
         q: "What is AMVerge?",
-        a: "A desktop scene selection tool for AMV editors. It splits any video into individual scenes and shows them in a grid so you can find and export clips fast — no timeline scrubbing required.",
+        a: "A desktop scene selection tool for AMV editors. It splits any video into individual scenes and shows them in a grid so you can find and export clips fast - no timeline scrubbing required.",
     },
     {
         q: "Is it free?",
