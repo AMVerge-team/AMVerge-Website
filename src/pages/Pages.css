@@ -227,47 +227,104 @@
 /* ---- Footer ---- */
 .site-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 32px 24px;
-    text-align: center;
+    background: rgba(255, 255, 255, 0.015);
+    padding: clamp(40px, 6vw, 64px) clamp(20px, 5vw, 80px) 24px;
+    text-align: left;
+}
+
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.footer-brandcol {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 14px;
-    align-items: center;
+    max-width: 340px;
 }
 
 .footer-brand {
     font-family: 'Jersey 10', system-ui, sans-serif;
-    font-size: 26px;
+    font-size: 30px;
     color: white;
+    text-decoration: none;
 }
 
 .footer-brand > span {
     color: var(--accent);
 }
 
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
+.footer-tagline {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
 }
 
-.footer-links a {
+.footer-download {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    color: #999;
+    gap: 6px;
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: 16px;
+    color: black;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.footer-download:hover {
+    filter: brightness(1.15);
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-col h4 {
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: 16px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 2px;
+}
+
+.footer-col a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #aaa;
     text-decoration: none;
     font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: 18px;
     transition: color 0.2s ease;
 }
 
-.footer-links a:hover {
+.footer-col a:hover {
     color: var(--accent);
 }
 
-.footer-note {
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    max-width: 1100px;
+    margin: clamp(32px, 5vw, 48px) auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     color: #666;
     font-size: 13px;
 }
