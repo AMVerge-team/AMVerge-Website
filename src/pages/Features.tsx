@@ -1,45 +1,70 @@
-import { FiGrid, FiScissors, FiZap, FiLayers, FiVideo, FiSettings } from "react-icons/fi";
+import {
+    FiGrid,
+    FiScissors,
+    FiEye,
+    FiLayers,
+    FiVideo,
+    FiPackage,
+    FiCpu,
+    FiSend,
+} from "react-icons/fi";
 
 const features = [
     {
-        icon: <FiGrid />,
-        title: "Grid Scene Browsing",
-        text: "Every scene of an episode shown at once. Scan a full episode in seconds instead of scrubbing a timeline.",
-    },
-    {
         icon: <FiScissors />,
         title: "Automatic Scene Detection",
-        text: "I-Frame based cut detection splits any video into clean, individual scenes automatically.",
+        text: "Drop any video. I-Frame detection + PySceneDetect split it into clean individual scenes. No manual cutting.",
     },
     {
-        icon: <FiZap />,
+        icon: <FiGrid />,
+        title: "Visual Grid Browser",
+        text: "Every scene at once in a scrollable grid. Scan a full movie in seconds instead of scrubbing a timeline.",
+    },
+    {
+        icon: <FiEye />,
         title: "Instant Hover Preview",
-        text: "Hover any clip to play it instantly. No waiting, no loading, no guessing.",
+        text: "Hover any clip to preview it live. PyAV-powered thumbnails load instantly, no waiting.",
     },
     {
-        icon: <FiLayers />,
-        title: "Merge Scenes",
-        text: "Extra cuts from fast motion or flashes? Merge selected clips back into one seamless segment.",
+        icon: <FiCpu />,
+        title: "Smart Scene Merging",
+        text: "CLIP similarity detects adjacent scenes that belong together. Merge with one click when fast motion creates extra cuts.",
     },
     {
         icon: <FiVideo />,
-        title: "Automatic MP4 Export",
-        text: "Export selected clips, separately or merged, converted to MP4 ready for your editor.",
+        title: "Multi-Format Export",
+        text: "Export as mp4, mkv, or mov. Customizable codec, bitrate, resolution, and framerate per export profile.",
     },
     {
-        icon: <FiSettings />,
-        title: "Customizable Workflow",
-        text: "Adjust grid size, sorting, and selection to fit how you actually edit.",
+        icon: <FiPackage />,
+        title: "NLE Import",
+        text: "Send clips directly to DaVinci Resolve, After Effects, CapCut, or Premiere Pro. No manual reimport.",
+    },
+    {
+        icon: <FiLayers />,
+        title: "Export Profiles",
+        text: "Save export settings as reusable profiles. Switch between different codecs and resolutions for different projects.",
+    },
+    {
+        icon: <FiSend />,
+        title: "Discord Rich Presence",
+        text: "Show what episode you're editing in Discord. Let your community see your workflow in real time.",
     },
 ];
 
 export default function Features() {
     return (
         <div className="page page-features">
-            <header className="page-header">
-                <h1><span>Features</span></h1>
-                <p>Everything AMVerge does to make scene selection fast.</p>
-            </header>
+            <div className="section-head">
+                <span className="section-eyebrow">What it does</span>
+                <h1 className="page-title">
+                    Built for <span>Editors</span>
+                </h1>
+            </div>
+            <p className="page-sub">
+                Every tool you need to go from raw footage to final export, without
+                opening a timeline until you're ready.
+            </p>
 
             <div className="feature-grid">
                 {features.map((f) => (
@@ -51,5 +76,5 @@ export default function Features() {
                 ))}
             </div>
         </div>
-    );
+    )
 }
