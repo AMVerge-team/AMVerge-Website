@@ -910,10 +910,6 @@ Merge Section
   letter-spacing: 1px;
 }
 
-.merge-info-text > h1 > span {
-  color: var(--accent);
-}
-
 .merge-info-text p {
   color: #ccc;
   font-size: clamp(16px, 1.4vw, 24px);

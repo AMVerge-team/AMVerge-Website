@@ -8,7 +8,7 @@ export default function Merge() {
                 <div className="section-head">
                     <span className="section-eyebrow">Stay in control</span>
                     <h1>
-                        <span>Merge</span> Scenes, Stay in Control.
+                        Merge Scenes, Stay in Control.
                     </h1>
                 </div>
                 <p>
