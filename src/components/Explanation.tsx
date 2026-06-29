@@ -24,12 +24,19 @@ export default function Explanation() {
                 </div>
             </div>
             <div className="explanation-text">
-                <h1>Why use <span>AMV</span>erge?</h1>
-                <p>Scrubbing through long episodes is slow and inefficient. Instead 
-                    of relying on single-frame previews, AMVerge displays every scene in a grid, 
-                    letting you scan an entire episode in seconds and find exactly what you need. 
-                    What might take 30 minutes in a traditional editor can be done in under 5 with 
-                    this tool.
+                <h1>
+                    <span>Scenes,</span> Not Timelines.
+                </h1>
+                <div className="explanation-stat">
+                    <span>30 min</span>
+                    <span className="explanation-stat-arrow">&rarr;</span>
+                    <span>5 min</span>
+                </div>
+                <p>
+                    Traditional editing means scrubbing back and forth through a timeline.
+                    <span>AMV</span>erge lays out every scene in a visual grid so
+                    you can scan an entire episode in seconds and find exactly what
+                    you need.
                 </p>
             </div>
         </div>
