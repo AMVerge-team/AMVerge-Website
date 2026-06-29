@@ -310,8 +310,34 @@
 .docs-article-anim > *:nth-child(n + 7) { animation-delay: 0.26s; }
 
 /* expanding group / subgroup lists */
+@keyframes docsSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
 .docs-group-items {
-  animation: docsFadeIn 0.2s ease both;
+  animation: docsSlideDown 0.22s ease both;
+}
+
+/* stagger links as a group expands */
+.docs-group-items > .docs-link,
+.docs-subgroup > .docs-link {
+  animation: docsSlideDown 0.24s ease both;
+}
+.docs-group-items > .docs-link:nth-child(1),
+.docs-subgroup > .docs-link:nth-child(2) { animation-delay: 0.02s; }
+.docs-group-items > .docs-link:nth-child(2),
+.docs-subgroup > .docs-link:nth-child(3) { animation-delay: 0.05s; }
+.docs-group-items > .docs-link:nth-child(3),
+.docs-subgroup > .docs-link:nth-child(4) { animation-delay: 0.08s; }
+.docs-group-items > .docs-link:nth-child(4),
+.docs-subgroup > .docs-link:nth-child(5) { animation-delay: 0.11s; }
+.docs-group-items > .docs-link:nth-child(n + 5),
+.docs-subgroup > .docs-link:nth-child(n + 6) { animation-delay: 0.14s; }
+
+/* subgroup block itself fades in when its parent group expands */
+.docs-group-items > .docs-subgroup {
+  animation: docsSlideDown 0.24s ease both;
 }
 
 /* sidebar link micro-interaction */
@@ -319,7 +345,17 @@
   transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
 }
 .docs-link:hover {
-  transform: translateX(2px);
+  transform: translateX(3px);
+}
+
+/* group / subgroup header press feedback */
+.docs-group-header,
+.docs-subgroup-label {
+  transition: color 0.2s ease;
+}
+.docs-group-header:active,
+.docs-subgroup-label:active {
+  transform: scale(0.99);
 }
 
 /* TOC items fade/slide in */
@@ -342,6 +378,9 @@
   .docs-article-anim,
   .docs-article-anim > *,
   .docs-group-items,
+  .docs-group-items > .docs-link,
+  .docs-group-items > .docs-subgroup,
+  .docs-subgroup > .docs-link,
   .docs-toc-item,
   .docs-search-overlay,
   .docs-search-modal {

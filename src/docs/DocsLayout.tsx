@@ -55,9 +55,27 @@ export default function DocsLayout() {
     (p) => location.pathname === docHref(p.slug),
   )
 
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
+  // Everything starts collapsed except the section holding the page you
+  // landed on. Seeded once on mount so navigation never re-forces groups open.
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() => {
+    const init: Record<string, boolean> = {}
+    const here = window.location.pathname
+    for (const g of docGroups) {
+      const gPages = [
+        ...(g.pages ?? []),
+        ...(g.subgroups?.flatMap((s) => s.pages) ?? []),
+      ]
+      init[g.label] = !gPages.some((p) => here === docHref(p.slug))
+      g.subgroups?.forEach((sg) => {
+        init[`${g.label}/${sg.label}`] = !sg.pages.some(
+          (p) => here === docHref(p.slug),
+        )
+      })
+    }
+    return init
+  })
   const isOpen = (label: string) =>
-    collapsed[label] === undefined ? true : !collapsed[label]
+    collapsed[label] === undefined ? false : !collapsed[label]
   const toggle = (label: string) =>
     setCollapsed((c) => ({ ...c, [label]: isOpen(label) }))
 
@@ -130,15 +148,7 @@ export default function DocsLayout() {
 
         <nav className="docs-tree">
           {docGroups.map((group) => {
-            const allPages = [
-              ...(group.pages ?? []),
-              ...(group.subgroups?.flatMap((s) => s.pages) ?? []),
-            ];
-            const open =
-              group === activeGroup ||
-              allPages.some((p) => location.pathname === docHref(p.slug))
-                ? true
-                : isOpen(group.label);
+            const open = isOpen(group.label)
 
             return (
               <div key={group.label} className="docs-group">
@@ -168,10 +178,7 @@ export default function DocsLayout() {
                     ))}
                     {group.subgroups?.map((sg) => {
                       const sgKey = `${group.label}/${sg.label}`
-                      const sgActive = sg.pages.some(
-                        (p) => location.pathname === docHref(p.slug),
-                      )
-                      const sgOpen = sgActive ? true : isOpen(sgKey)
+                      const sgOpen = isOpen(sgKey)
                       return (
                         <div key={sg.label} className="docs-subgroup">
                           <button
