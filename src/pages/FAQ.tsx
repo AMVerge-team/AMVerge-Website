@@ -55,7 +55,7 @@ export default function FAQ() {
                 </a>
             </p>
 
-            <div className="faq-list">
+            <div className="faq-list fade-in-children">
                 {faqs.map((item, i) => {
                     const isOpen = open === i;
                     return (
