@@ -2,7 +2,7 @@
 // Swap these for real community AMVs / demo videos later.
 const clips = Array.from({ length: 18 }).map((_, i) => {
     const num = String(i + 109).padStart(4, "0");
-    return `/clips/Sousou no Frieren - 01_${num}.gif`;
+    return `/gifs/Sousou no Frieren - 01_${num}.gif`;
 });
 
 export default function Gallery() {

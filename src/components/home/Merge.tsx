@@ -28,7 +28,7 @@ export default function Merge() {
                     return (
                         <div key={i} className="clip-cell">
                             <img
-                                src={`/clips/Sousou no Frieren - 01_${num}.gif`}
+                                src={`/gifs/Sousou no Frieren - 01_${num}.gif`}
                                 alt={`clip ${num}`}
                             />
                         </div>

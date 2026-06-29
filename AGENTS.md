@@ -175,7 +175,7 @@ Single long page. Each section is a `<div id="...">` matching the `sections` lis
 | `src/index.css` | `#root { text-align: center }` and `width: 80%`. Docs override both (`.docs-root { text-align: left }` + viewport breakout). Do not assume content is left-aligned by default. |
 | `src/css/docs.css` | `.docs-root` breaks out of `#root`'s 80% width via `width: 100vw; margin-left: calc(-50vw + 50%)` to fill screen. Docs reuse the landing look (black bg, Jersey font, `--accent`). |
 | `counter-server.cjs` | CORS `origin` list is hardcoded (localhost + a placeholder vercel domain). Update it for real deploys. Needs `DATABASE_URL`, SSL `rejectUnauthorized: false`. |
-| `src/components/MiniUI.tsx` / `Explanation.tsx` | Both render a 35-cell clip grid from `/clips/Sousou no Frieren - 01_0109..0143.gif`. Those gif files must exist in `public/clips/`. |
+| `src/components/MiniUI.tsx` / `Explanation.tsx` | Both render a 35-cell clip grid from `/gifs/Sousou no Frieren - 01_0109..0143.gif`. Those gif files must exist in `public/gifs/`. |
 | Prod deep links | Vite dev serves `/docs/installation` fine, but a static build needs SPA fallback to `index.html` or refreshing a subroute 404s. Not configured yet. |
 
 ## Origin

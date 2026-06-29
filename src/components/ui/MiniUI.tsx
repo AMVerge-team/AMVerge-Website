@@ -18,7 +18,7 @@ const episodes = Array.from({ length: 12 }).map((_, i) => `Frieren S1E${i + 1}`)
 
 export default function MiniUI() {
     const [previewSrc, setPreviewSrc] = useState(
-        "/clips/Sousou no Frieren - 01_0109.gif",
+        "/gifs/Sousou no Frieren - 01_0109.gif",
     );
 
     return (
@@ -99,7 +99,7 @@ export default function MiniUI() {
                     <div className="am-grid">
                         {Array.from({ length: 35 }).map((_, i) => {
                             const num = String(i + 109).padStart(4, "0");
-                            const src = `/clips/Sousou no Frieren - 01_${num}.gif`;
+                            const src = `/gifs/Sousou no Frieren - 01_${num}.gif`;
                             return (
                                 <div
                                     key={i}
