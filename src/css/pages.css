@@ -123,57 +123,166 @@
 .changelog-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
+    text-align: left;
 }
 
 .changelog-entry {
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 20px 22px;
+    border-radius: 14px;
+    padding: 24px 28px;
+    background: rgba(255, 255, 255, 0.015);
+    transition: border-color 0.25s ease;
+}
+
+.changelog-latest {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.025);
 }
 
 .changelog-head {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.changelog-head h2 {
-    font-family: 'Jersey 10', system-ui, sans-serif;
-    font-size: 26px;
-    color: white;
-    margin: 0;
+.changelog-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .changelog-tag {
-    font-family: ui-monospace, Consolas, monospace;
-    font-size: 12px;
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: 15px;
+    color: white;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+
+.changelog-latest .changelog-tag {
     color: var(--accent);
-    background: var(--accent-bg, rgba(255, 255, 255, 0.08));
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.changelog-badge {
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: 11px;
+    color: black;
+    background: var(--accent);
     padding: 2px 8px;
     border-radius: 4px;
+    letter-spacing: 0.5px;
 }
 
 .changelog-head time {
-    margin-left: auto;
-    color: #888;
-    font-size: 13px;
+    color: #777;
+    font-size: 14px;
+}
+
+.changelog-name {
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: clamp(22px, 1.6vw, 30px);
+    color: white;
+    font-weight: normal;
+    margin: 0 0 14px;
+}
+
+.changelog-body-wrap {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.changelog-body-wrap.open {
+    max-height: 2000px;
 }
 
 .changelog-body {
     font-family: system-ui, sans-serif;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
     color: #b8b8c0;
     white-space: pre-wrap;
     word-break: break-word;
-    margin: 0 0 12px;
+    margin: 0 0 16px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
 }
 
-.changelog-link {
+.changelog-expand {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: 14px;
+    padding: 0;
+    margin-bottom: 16px;
+    transition: color 0.2s ease;
+}
+
+.changelog-expand:hover {
+    color: var(--accent);
+}
+
+.changelog-expand-icon {
+    transition: transform 0.25s ease;
+}
+
+.changelog-expand-icon.open {
+    transform: rotate(180deg);
+}
+
+.changelog-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.changelog-dl {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: 15px;
+    color: white;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.changelog-dl:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.changelog-gh {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.changelog-gh:hover {
+    color: var(--accent);
 }
 
 /* ---- FAQ ---- */
