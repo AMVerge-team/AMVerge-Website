@@ -7,6 +7,10 @@ import MergingScenes from './pages/merging-scenes.mdx'
 import Exporting from './pages/exporting.mdx'
 import Architecture from './pages/architecture.mdx'
 import Contributing from './pages/contributing.mdx'
+import CliOverview from './pages/cli-overview.mdx'
+import CliInstallation from './pages/cli-installation.mdx'
+import CliReference from './pages/cli-reference.mdx'
+import CliDetection from './pages/cli-detection.mdx'
 
 export type DocPage = {
   slug: string
@@ -43,6 +47,15 @@ export const docGroups: DocGroup[] = [
     pages: [
       { slug: 'architecture', label: 'Architecture', Component: Architecture },
       { slug: 'contributing', label: 'Contributing', Component: Contributing },
+    ],
+  },
+  {
+    label: 'AMVerge CLI',
+    pages: [
+      { slug: 'cli-overview', label: 'Overview', Component: CliOverview },
+      { slug: 'cli-installation', label: 'Installation', Component: CliInstallation },
+      { slug: 'cli-reference', label: 'CLI Reference', Component: CliReference },
+      { slug: 'cli-detection', label: 'Detection Methods', Component: CliDetection },
     ],
   },
 ]
