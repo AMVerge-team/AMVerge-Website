@@ -73,33 +73,30 @@ export default function Navbar() {
 
     return (
         <nav className={`site-nav ${scrolled || menuOpen ? "nav-scrolled" : ""}`}>
-            {/* top row: brand + actions */}
             <div className="nav-content">
                 <NavLink to="/" end className="nav-logo">
                     <span>AMV</span>erge
                 </NavLink>
 
-                <div className="nav-actions">
-                    {slider}
-                    <button className="nav-download" onClick={downloadLatestExe}>
-                        <FiDownload /> Download
+                <div className="nav-links">{links}</div>
+
+                <div className="nav-right">
+                    <div className="nav-actions">
+                        {slider}
+                        <button className="nav-download" onClick={downloadLatestExe}>
+                            <FiDownload /> Download
+                        </button>
+                    </div>
+                    <button
+                        className="nav-toggle"
+                        onClick={() => setMenuOpen((v) => !v)}
+                        aria-label="Toggle menu"
+                    >
+                        {menuOpen ? <FiX /> : <FiMenu />}
                     </button>
                 </div>
-
-                {/* mobile hamburger */}
-                <button
-                    className="nav-toggle"
-                    onClick={() => setMenuOpen((v) => !v)}
-                    aria-label="Toggle menu"
-                >
-                    {menuOpen ? <FiX /> : <FiMenu />}
-                </button>
             </div>
 
-            {/* second row: centered links (desktop) */}
-            <div className="nav-row">{links}</div>
-
-            {/* mobile dropdown panel */}
             {menuOpen && (
                 <div className="nav-mobile">
                     <div className="nav-mobile-links">{links}</div>
