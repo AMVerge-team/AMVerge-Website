@@ -1014,19 +1014,19 @@ CTA Section
   gap: 8px;
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(20px, 1.5vw, 26px);
-  color: black;
-  background: var(--accent);
-  border: none;
+  color: white;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
   padding: clamp(12px, 1.1vw, 18px) clamp(32px, 3.5vw, 56px);
   cursor: pointer;
-  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .cta-download:hover {
-  filter: brightness(1.12);
+  border-color: var(--accent);
+  color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
 .cta-secondary {
