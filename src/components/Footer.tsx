@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FiGithub, FiDownload } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
 import { downloadLatestExe } from "../utils/download";
+import ContributorAvatars from "./ContributorAvatars";
 
 export default function Footer() {
     return (
@@ -49,6 +50,11 @@ export default function Footer() {
                     >
                         <FaDiscord /> Discord
                     </a>
+                </div>
+
+                <div className="footer-col footer-contrib-col">
+                    <h4>Contributors</h4>
+                    <ContributorAvatars limit={6} />
                 </div>
             </div>
 

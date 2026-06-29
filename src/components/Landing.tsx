@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FiDownload, FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
+import ContributorAvatars from "./ContributorAvatars";
 import {
   fetchLatestRelease,
   fetchReleases,
@@ -146,6 +147,10 @@ export default function Landing() {
               >
                 <FaDiscord /> Discord
               </a>
+            </div>
+            <div className="hero-contrib">
+              <ContributorAvatars limit={5} />
+              <span>Built by the community</span>
             </div>
           </div>
         </div>

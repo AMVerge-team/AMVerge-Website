@@ -415,6 +415,65 @@ body {
   color: #5865f2;
 }
 
+.hero-contrib {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.hero-contrib > span {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(13px, 0.9vw, 16px);
+  color: #888;
+}
+
+/* ---- Compact contributor avatar row (hero + footer) ---- */
+.contrib-avatars {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.contrib-avatars-row {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ca-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #0a0a0a;
+  object-fit: cover;
+  background: #222;
+  margin-left: -9px;
+  transition: transform 0.2s ease;
+}
+
+.ca-dot:first-child {
+  margin-left: 0;
+}
+
+.contrib-avatars:hover .ca-dot {
+  border-color: var(--accent);
+}
+
+.ca-dot.skeleton {
+  animation: contribPulse 1.4s ease-in-out infinite;
+}
+
+.ca-more {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: 15px;
+  color: #aaa;
+}
+
+.contrib-avatars:hover .ca-more {
+  color: var(--accent);
+}
+
 /* decorative background grid */
 .hero-grid {
   position: absolute;

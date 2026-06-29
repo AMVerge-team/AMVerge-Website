@@ -1,26 +1,16 @@
-import { useEffect, useState } from "react";
 import { FiGithub } from "react-icons/fi";
 import { useFadeIn } from "../hooks/useFadeIn";
-import { fetchContributors } from "../services/github";
-import type { GithubContributor } from "../services/github";
+import { useContributors } from "../hooks/useContributors";
 
 const REPO_URL = "https://github.com/AMVerge-team/AMVerge";
 const MAX_SHOWN = 14;
 
 export default function Contributors() {
     const ref = useFadeIn<HTMLElement>();
-    const [contributors, setContributors] = useState<GithubContributor[] | null>(null);
-    const [error, setError] = useState(false);
+    const contributors = useContributors();
 
-    useEffect(() => {
-        fetchContributors()
-            // drop bots (e.g. dependabot[bot])
-            .then((list) => setContributors(list.filter((c) => !c.login.endsWith("[bot]"))))
-            .catch(() => setError(true));
-    }, []);
-
-    // Hide the whole band if it can't load anything
-    if (error) return null;
+    // Hide the whole band if it loaded but is empty/failed
+    if (contributors && contributors.length === 0) return null;
 
     const shown = contributors?.slice(0, MAX_SHOWN) ?? [];
     const extra = (contributors?.length ?? 0) - shown.length;
