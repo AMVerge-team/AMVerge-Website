@@ -303,17 +303,6 @@ body {
   padding: 0 clamp(20px, 4vw, 40px);
 }
 
-.hero-badge {
-  font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(11px, 0.8vw, 14px);
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 20px;
-  padding: 4px 16px;
-  margin-bottom: clamp(16px, 2vw, 28px);
-  letter-spacing: 1px;
-}
-
 .hero-title {
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(3rem, 7vw, 7rem);
@@ -374,6 +363,133 @@ body {
   font-size: clamp(13px, 0.9vw, 16px);
   color: #666;
   margin: 0;
+}
+
+/* decorative background grid */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: radial-gradient(circle, var(--accent) 1px, transparent 1px);
+  background-size: clamp(24px, 2vw, 40px) clamp(24px, 2vw, 40px);
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 70%);
+}
+
+/* floating particles */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-particles::before,
+.hero-particles::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: floatUp linear infinite;
+}
+
+.hero-particles::before {
+  opacity: 0.4;
+  animation-duration: 10s;
+  box-shadow:
+    10vw 90vh 0 0 var(--accent),
+    25vw 30vh 0 0 var(--accent),
+    40vw 70vh 0 0 var(--accent),
+    55vw 20vh 0 0 var(--accent),
+    70vw 85vh 0 0 var(--accent),
+    85vw 40vh 0 0 var(--accent),
+    15vw 55vh 0 0 var(--accent),
+    50vw 50vh 0 0 var(--accent),
+    75vw 15vh 0 0 var(--accent),
+    35vw 80vh 0 0 var(--accent),
+    90vw 60vh 0 0 var(--accent),
+    5vw 45vh 0 0 var(--accent);
+}
+
+.hero-particles::after {
+  opacity: 0.25;
+  animation-duration: 14s;
+  animation-delay: -3s;
+  box-shadow:
+    20vw 95vh 0 0 var(--accent),
+    45vw 25vh 0 0 var(--accent),
+    60vw 75vh 0 0 var(--accent),
+    80vw 35vh 0 0 var(--accent),
+    8vw 65vh 0 0 var(--accent),
+    30vw 10vh 0 0 var(--accent),
+    65vw 55vh 0 0 var(--accent),
+    95vw 20vh 0 0 var(--accent),
+    42vw 45vh 0 0 var(--accent),
+    18vw 85vh 0 0 var(--accent),
+    55vw 5vh 0 0 var(--accent),
+    88vw 70vh 0 0 var(--accent);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+/* animated accent line under title */
+.hero-accent-line {
+  width: clamp(60px, 8vw, 120px);
+  height: 2px;
+  background: var(--accent);
+  margin: 0 auto clamp(18px, 2vw, 28px);
+  animation: accentLineIn 0.8s ease-out forwards;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+@keyframes accentLineIn {
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* badge pulse */
+.hero-badge {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(11px, 0.8vw, 14px);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  padding: 4px 16px;
+  margin-bottom: clamp(16px, 2vw, 28px);
+  letter-spacing: 1px;
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    border-color: white;
+    box-shadow: 0 0 12px 0 var(--accent);
+  }
 }
 
 .download-btn {

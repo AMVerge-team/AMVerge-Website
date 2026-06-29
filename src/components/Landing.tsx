@@ -61,6 +61,7 @@ async function getCumulativeDownloadCount(): Promise<number> {
 export default function Landing() {
   const [version, setVersion] = useState("");
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
+  const [displayCount, setDisplayCount] = useState(0);
   const [downloading, setDownloading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(true);
@@ -69,6 +70,23 @@ export default function Landing() {
     getLatestRelease().then(({ version: v }) => setVersion(v));
     getCumulativeDownloadCount().then(setDownloadCount);
   }, []);
+
+  useEffect(() => {
+    if (downloadCount === null) return;
+    let start = 0;
+    const duration = 1500;
+    const step = Math.max(1, Math.ceil(downloadCount / (duration / 16)));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= downloadCount) {
+        setDisplayCount(downloadCount);
+        clearInterval(timer);
+      } else {
+        setDisplayCount(start);
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [downloadCount]);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 50);
@@ -105,11 +123,14 @@ export default function Landing() {
   return (
     <div id="home" className={`landing-fade ${loaded ? "visible" : ""}`}>
       <section className="hero">
+        <div className="hero-particles" />
+        <div className="hero-grid" />
         <div className="hero-content">
           {version && <p className="hero-badge">v{version} · Windows</p>}
           <h1 className="hero-title">
             <span>AMV</span>erge
           </h1>
+          <div className="hero-accent-line" />
           <p className="hero-subtitle">
             Turn hours of footage into a browsable scene grid.
             Find, preview, and export the shots you need — in seconds.
@@ -126,7 +147,7 @@ export default function Landing() {
             <p className="hero-count">
               {downloadCount === null
                 ? "Loading..."
-                : `${downloadCount.toLocaleString()}+ downloads`}
+                : `${displayCount.toLocaleString()}+ downloads`}
             </p>
           </div>
         </div>
