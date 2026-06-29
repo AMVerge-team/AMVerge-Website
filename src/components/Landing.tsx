@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiDownload } from "react-icons/fi";
 
 type GithubAsset = {
@@ -59,6 +59,7 @@ async function getCumulativeDownloadCount(): Promise<number> {
 }
 
 export default function Landing() {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [version, setVersion] = useState("");
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
   const [displayCount, setDisplayCount] = useState(0);
@@ -102,6 +103,22 @@ export default function Landing() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const attemptPlay = () => {
+      video.currentTime = 0;
+      video.play().catch(() => {
+        video.muted = true;
+        video.play().catch(() => {
+          console.error("Hero video: all play attempts failed");
+        });
+      });
+    };
+    const timer = setTimeout(attemptPlay, 150);
+    return () => clearTimeout(timer);
+  }, []);
+
   async function handleDownload() {
     if (downloading) return;
     setDownloading(true);
@@ -124,12 +141,12 @@ export default function Landing() {
     <div id="home" className={`landing-fade ${loaded ? "visible" : ""}`}>
       <section className="hero">
         <video
+          ref={videoRef}
           className="hero-video"
-          autoPlay
           muted
           loop
           playsInline
-          poster=""
+          preload="auto"
         >
           <source src="/clips/AMVerge-Video.mp4" type="video/mp4" />
         </video>
