@@ -207,7 +207,8 @@
 }
 
 .release-header {
-    margin-bottom: clamp(24px, 3vw, 40px);
+    text-align: left;
+    margin-bottom: clamp(28px, 4vw, 48px);
 }
 
 .release-meta {
@@ -215,7 +216,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .release-meta time {
@@ -232,6 +233,20 @@
     margin: 0;
 }
 
+.release-body-section {
+    text-align: left;
+    margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.release-section-title {
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: clamp(18px, 1.3vw, 24px);
+    color: #888;
+    font-weight: normal;
+    margin: 0 0 14px;
+    letter-spacing: 0.5px;
+}
+
 .release-body {
     font-family: system-ui, sans-serif;
     font-size: 15px;
@@ -239,40 +254,76 @@
     color: #bbb;
     white-space: pre-wrap;
     word-break: break-word;
-    margin: 0 0 clamp(28px, 4vw, 44px);
+    margin: 0;
     padding: 24px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 12px;
 }
 
-.release-actions {
+.release-downloads {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.release-dl-card {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     gap: 14px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 16px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    background: rgba(255, 255, 255, 0.015);
+    transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.release-dl {
-    display: inline-flex;
+.release-dl-card:hover {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.release-dl-icon {
+    display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 20px;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.release-dl-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.release-dl-label {
     font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: clamp(16px, 1.1vw, 20px);
-    color: white;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.release-dl:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+.release-dl-size {
+    font-size: 12px;
+    color: #666;
+}
+
+.release-dl-card > svg:last-child {
+    color: #555;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.release-footer {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .release-gh {

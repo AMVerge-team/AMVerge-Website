@@ -16,7 +16,9 @@ export async function ghFetch<T>(path: string): Promise<T> {
 }
 
 export interface GithubAsset {
+  id: number;
   name: string;
+  size: number;
   browser_download_url: string;
   download_count: number;
 }
