@@ -25,7 +25,6 @@ function App() {
       <Navbar />
       <main>
         <Landing />
-        <SectionDivider />
         <About />
         <SectionDivider />
         <Explanation />

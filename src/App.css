@@ -17,12 +17,19 @@ body {
   margin: 0;
 }
 
-/* Thin centered divider line between sections */
+/* Thin gradient divider line between sections */
 .section-divider {
   width: min(1100px, 88%);
   height: 1px;
-  background: rgba(255, 255, 255, 0.08);
   margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 20%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 80%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
