@@ -120,6 +120,11 @@
 }
 
 /* ---- Changelog ---- */
+.changelog-card-logo {
+    height: 20px;
+    flex-shrink: 0;
+}
+
 .changelog-list {
     display: flex;
     flex-direction: column;
@@ -172,12 +177,6 @@
     background: rgba(255, 255, 255, 0.06);
     padding: 2px 8px;
     border-radius: 6px;
-}
-
-.changelog-logo {
-    color: var(--accent);
-    margin-right: 4px;
-    font-size: 11px;
 }
 
 .changelog-latest .changelog-tag {
