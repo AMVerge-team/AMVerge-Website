@@ -940,16 +940,18 @@ UI Section
   align-items: center;
   justify-content: center;
   width: 30px;
-  height: 24px;
+  height: 26px;
   font-size: 14px;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 6px;
+  color: white;
+  background: rgba(15, 0, 0, 0.1);
+  border: 1px solid color-mix(in srgb, var(--accent) 90%, transparent);
+  border-radius: 10px;
 }
 
 .ah-icon.active {
-  background: var(--accent);
-  color: black;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .ah-back {
@@ -985,13 +987,13 @@ UI Section
 }
 
 .ah-step {
-  width: 18px;
-  height: 18px;
-  border: 1px solid var(--accent);
-  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
   color: var(--accent);
-  background: none;
-  font-size: 12px;
+  background: black;
+  font-size: 13px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1089,13 +1091,13 @@ UI Section
 .am-import {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 10px;
+  gap: 5px;
+  font-size: 11px;
   color: white;
-  border: 1px solid var(--accent);
-  border-radius: 5px;
-  padding: 3px 8px;
-  background: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 90%, transparent);
+  border-radius: 10px;
+  padding: 4px 12px;
+  background: rgba(15, 0, 0, 0.1);
 }
 
 .am-check {
@@ -1107,10 +1109,10 @@ UI Section
 }
 
 .am-box {
-  width: 11px;
-  height: 11px;
-  border: 1.5px solid #888;
-  border-radius: 2px;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid white;
+  border-radius: 4px;
   display: inline-block;
   flex-shrink: 0;
 }
