@@ -868,8 +868,8 @@ Merge Section
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: clamp(28px, 4vw, 48px);
-  padding: clamp(80px, 12vh, 120px) clamp(20px, 4vw, 48px);
+  gap: clamp(20px, 3vw, 36px);
+  padding: clamp(48px, 7vh, 80px) clamp(20px, 4vw, 48px);
   box-sizing: border-box;
 }
 
@@ -929,7 +929,7 @@ CTA Section
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: clamp(80px, 12vh, 140px) clamp(20px, 5vw, 60px);
+  padding: clamp(48px, 7vh, 100px) clamp(20px, 5vw, 60px);
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -1075,7 +1075,7 @@ CTA Section
   align-items: center;
   text-align: center;
   gap: clamp(12px, 1.6vw, 18px);
-  padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 60px);
+  padding: clamp(40px, 5vw, 80px) clamp(20px, 5vw, 60px);
 }
 
 .contrib-title {
