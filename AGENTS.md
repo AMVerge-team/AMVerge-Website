@@ -78,6 +78,13 @@ AMVerge-Website/
 │   ├── hooks/
 │   │   └── useFadeIn.ts      IntersectionObserver -> adds .visible class on scroll
 │   │
+│   ├── services/
+│   │   └── github/
+│   │       ├── index.ts       re-exports all public API
+│   │       ├── client.ts      ghFetch wrapper, headers, base types
+│   │       ├── releases.ts    fetchLatestRelease, fetchReleases, cumulativeDownloadCount
+│   │       └── contributors.ts fetchContributors
+│   │
 │   ├── docs/
 │   │   ├── DocsLayout.tsx    docs shell: header, sidebar (from registry), <Outlet/>
 │   │   ├── Docs.css          docs styling, matches landing (black/Jersey/--accent)
