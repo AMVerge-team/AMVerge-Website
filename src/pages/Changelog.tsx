@@ -90,7 +90,7 @@ export default function Changelog() {
                                 <div className="changelog-entry-inner">
                                     <div className="changelog-left">
                                         <div className="changelog-head">
-                                            <span className="changelog-tag">{rel.tag_name}</span>
+                                            <span className="changelog-tag"><span className="changelog-logo">AMV</span>{rel.tag_name}</span>
                                             {isLatest && (
                                                 <span className="changelog-badge">Latest</span>
                                             )}
