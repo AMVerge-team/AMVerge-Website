@@ -166,23 +166,40 @@ export default function DocsLayout() {
                         {page.label}
                       </NavLink>
                     ))}
-                    {group.subgroups?.map((sg) => (
-                      <div key={sg.label} className="docs-subgroup">
-                        <div className="docs-subgroup-label">{sg.label}</div>
-                        {sg.pages.map((page) => (
-                          <NavLink
-                            key={page.slug}
-                            to={docHref(page.slug)}
-                            end
-                            className={({ isActive }) =>
-                              isActive ? 'docs-link active' : 'docs-link'
-                            }
+                    {group.subgroups?.map((sg) => {
+                      const sgKey = `${group.label}/${sg.label}`
+                      const sgActive = sg.pages.some(
+                        (p) => location.pathname === docHref(p.slug),
+                      )
+                      const sgOpen = sgActive ? true : isOpen(sgKey)
+                      return (
+                        <div key={sg.label} className="docs-subgroup">
+                          <button
+                            className="docs-subgroup-label"
+                            onClick={() => toggle(sgKey)}
+                            aria-expanded={sgOpen}
                           >
-                            {page.label}
-                          </NavLink>
-                        ))}
-                      </div>
-                    ))}
+                            {sg.label}
+                            <FiChevronRight
+                              className={`docs-chevron ${sgOpen ? 'open' : ''}`}
+                            />
+                          </button>
+                          {sgOpen &&
+                            sg.pages.map((page) => (
+                              <NavLink
+                                key={page.slug}
+                                to={docHref(page.slug)}
+                                end
+                                className={({ isActive }) =>
+                                  isActive ? 'docs-link active' : 'docs-link'
+                                }
+                              >
+                                {page.label}
+                              </NavLink>
+                            ))}
+                        </div>
+                      )
+                    })}
                   </div>
                 )}
               </div>
