@@ -56,14 +56,28 @@ AMVerge-Website/
 │   ├── mdx.d.ts              type decl for importing *.mdx as components
 │   │
 │   ├── components/
-│   │   ├── Navbar.tsx        3-zone nav: brand | page links | actions (hue slider + Download), mobile dropdown
-│   │   ├── Footer.tsx        shared footer (page links + GitHub), used by SiteLayout
-│   │   ├── Landing.tsx       hero, download btn (GitHub latest .exe), cumulative dl count
-│   │   ├── About.tsx         feature list + MiniUI mock
-│   │   ├── MiniUI.tsx        fake app UI mockup, clip grid + preview pane (Frieren gifs)
-│   │   ├── Explanation.tsx   "Why AMVerge" scrolling clip grid
-│   │   ├── Merge.tsx         merge-feature copy block
-│   │   └── CTA.tsx           closing call-to-action + download btn
+│   │   ├── home/
+│   │   │   ├── Landing.tsx       hero, download btn, cumulative dl count
+│   │   │   ├── About.tsx         feature text + MiniUI mock
+│   │   │   ├── Explanation.tsx   "Hours vs Minutes" split comparison + clip grid
+│   │   │   ├── Merge.tsx         merge-feature copy block
+│   │   │   ├── CTA.tsx           closing call-to-action + download btn
+│   │   │   └── Contributors.tsx  GitHub contributors grid section
+│   │   │
+│   │   ├── ui/
+│   │   │   ├── Navbar.tsx        brand | nav links | hue slider + Download
+│   │   │   ├── Footer.tsx        shared footer (links + GitHub + contributors)
+│   │   │   ├── MiniUI.tsx        fake app UI mockup (clip grid + preview pane)
+│   │   │   ├── SectionDivider.tsx accent gradient separator between sections
+│   │   │   └── ContributorAvatars.tsx compact overlapping avatar row
+│   │   │
+│   │   └── features/
+│   │       ├── clipFrames.ts     shared clip frame source list
+│   │       ├── DetectSection.tsx scene detection feature section
+│   │       ├── BrowseSection.tsx grid browser feature section
+│   │       ├── MergeFeatureSection.tsx smart merge feature section
+│   │       ├── ExportSection.tsx multi-format export + NLE import section
+│   │       └── FeatureCTA.tsx    bottom download CTA
 │   │
 │   ├── layouts/
 │   │   └── SiteLayout.tsx    Navbar + <Outlet/> + Footer for the multi-page routes

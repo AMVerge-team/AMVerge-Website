@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../components/ui/Navbar";
+import Footer from "../components/ui/Footer";
 import "../pages/Pages.css";
 
 export default function SiteLayout() {

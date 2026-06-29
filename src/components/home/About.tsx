@@ -1,5 +1,5 @@
-import MiniUI from "./MiniUI";
-import { useFadeIn } from "../hooks/useFadeIn";
+import MiniUI from "../ui/MiniUI";
+import { useFadeIn } from "../../hooks/useFadeIn";
 
 export default function About() {
     const ref = useFadeIn<HTMLDivElement>();

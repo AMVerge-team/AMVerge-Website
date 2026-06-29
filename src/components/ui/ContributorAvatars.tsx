@@ -1,4 +1,4 @@
-import { useContributors } from "../hooks/useContributors";
+import { useContributors } from "../../hooks/useContributors";
 
 const REPO_URL = "https://github.com/AMVerge-team/AMVerge";
 

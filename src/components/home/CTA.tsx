@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { FiDownload, FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
-import { useFadeIn } from "../hooks/useFadeIn";
+import { useFadeIn } from "../../hooks/useFadeIn";
 import {
     fetchLatestRelease,
     fetchReleases,
     cumulativeDownloadCount,
-} from "../services/github";
+} from "../../services/github";
 
 async function downloadLatest() {
     try {

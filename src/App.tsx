@@ -1,14 +1,14 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import About from "./components/About.tsx"
-import CTA from "./components/CTA.tsx"
-import Landing from "./components/Landing.tsx"
-import Explanation from "./components/Explanation.tsx"
-import Navbar from "./components/Navbar.tsx"
-import Merge from "./components/Merge.tsx"
-import Contributors from "./components/Contributors.tsx"
-import Footer from "./components/Footer.tsx"
-import SectionDivider from "./components/SectionDivider.tsx"
+import About from "./components/home/About.tsx"
+import CTA from "./components/home/CTA.tsx"
+import Landing from "./components/home/Landing.tsx"
+import Explanation from "./components/home/Explanation.tsx"
+import Navbar from "./components/ui/Navbar.tsx"
+import Merge from "./components/home/Merge.tsx"
+import Contributors from "./components/home/Contributors.tsx"
+import Footer from "./components/ui/Footer.tsx"
+import SectionDivider from "./components/ui/SectionDivider.tsx"
 import './App.css'
 
 function App() {

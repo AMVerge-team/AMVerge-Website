@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiDownload, FiMenu, FiX, FiGithub } from "react-icons/fi";
-import { downloadLatestExe } from "../utils/download";
+import { downloadLatestExe } from "../../utils/download";
 
 const pages = [
     { to: "/", label: "Home", end: true },

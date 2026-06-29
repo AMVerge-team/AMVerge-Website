@@ -1,6 +1,6 @@
 import { FiGithub } from "react-icons/fi";
-import { useFadeIn } from "../hooks/useFadeIn";
-import { useContributors } from "../hooks/useContributors";
+import { useFadeIn } from "../../hooks/useFadeIn";
+import { useContributors } from "../../hooks/useContributors";
 
 const REPO_URL = "https://github.com/AMVerge-team/AMVerge";
 const MAX_SHOWN = 14;

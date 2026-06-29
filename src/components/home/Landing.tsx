@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { FiDownload, FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
-import ContributorAvatars from "./ContributorAvatars";
+import ContributorAvatars from "../ui/ContributorAvatars";
 import {
   fetchLatestRelease,
   fetchReleases,
   cumulativeDownloadCount,
-} from "../services/github";
+} from "../../services/github";
 
 export default function Landing() {
   const videoRef = useRef<HTMLVideoElement>(null);

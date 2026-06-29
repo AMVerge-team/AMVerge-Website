@@ -1,4 +1,4 @@
-import { useFadeIn } from "../hooks/useFadeIn";
+import { useFadeIn } from "../../hooks/useFadeIn";
 
 export default function Merge() {
     const ref = useFadeIn<HTMLDivElement>();
