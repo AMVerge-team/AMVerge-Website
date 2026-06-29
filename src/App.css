@@ -592,44 +592,117 @@ Explanation Section
   display: flex;
   width: 100%;
   height: 100vh;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.explanation-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 80px);
+  box-sizing: border-box;
+}
+
+.explanation-old {
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.explanation-divider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(48px, 5vw, 72px);
+  height: clamp(48px, 5vw, 72px);
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(40px, 6vw, 100px);
-  padding: 0 clamp(20px, 5vw, 80px);
-  box-sizing: border-box;
-  margin: 0 auto;
-  max-width: 1400px;
+  z-index: 2;
 }
 
-.explanation-ui-wrapper {
-  flex: 1;
-  max-width: 600px;
+.explanation-divider span {
+  font-size: clamp(22px, 2vw, 32px);
+  color: black;
+  font-weight: bold;
+  line-height: 1;
 }
 
-.explanation-ui-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 12px;
-  pointer-events: none;
-  user-select: none;
+.explanation-label {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(11px, 0.8vw, 14px);
+  letter-spacing: 2px;
+  margin-bottom: clamp(8px, 1vw, 14px);
 }
 
-.explanation-grid {
+.explanation-old .explanation-label {
+  color: #555;
+}
+
+.explanation-new .explanation-label {
+  color: var(--accent);
+}
+
+.explanation-new .explanation-label span {
+  color: var(--accent);
+}
+
+.explanation-pane h2 {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(48px, 6vw, 96px);
+  font-weight: normal;
+  margin: 0 0 clamp(12px, 1.5vw, 20px);
+  line-height: 0.85;
+}
+
+.explanation-old h2 {
+  color: #333;
+}
+
+.explanation-new h2 {
+  color: var(--accent);
+}
+
+.explanation-pane p {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(14px, 1vw, 18px);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 380px;
+}
+
+.explanation-old p {
+  color: #555;
+}
+
+.explanation-new p {
+  color: #999;
+}
+
+.explanation-clip-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-  padding: 10px;
+  gap: 4px;
+  max-width: 340px;
+  margin-bottom: clamp(16px, 2vw, 28px);
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
-.explanation-grid .clip-cell {
+.explanation-clip-grid .clip-cell {
   aspect-ratio: 4 / 3;
-  border: 1.5px solid transparent;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
-.explanation-grid .clip-cell img {
+.explanation-clip-grid .clip-cell img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -646,85 +719,24 @@ Explanation Section
 }
 
 .explanation-fade-top {
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, black 0%, transparent 100%);
+  top: 0; left: 0; right: 0;
+  height: 50px;
+  background: linear-gradient(to bottom, #080808, transparent);
 }
-
 .explanation-fade-bottom {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to top, black 0%, transparent 100%);
+  bottom: 0; left: 0; right: 0;
+  height: 50px;
+  background: linear-gradient(to top, #080808, transparent);
 }
-
 .explanation-fade-left {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  background: linear-gradient(to right, black 0%, transparent 100%);
+  top: 0; bottom: 0; left: 0;
+  width: 40px;
+  background: linear-gradient(to right, #080808, transparent);
 }
-
 .explanation-fade-right {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 60px;
-  background: linear-gradient(to left, black 0%, transparent 100%);
-}
-
-.explanation-text {
-  flex: 1;
-  max-width: 500px;
-  text-align: left;
-}
-
-.explanation-text h1 {
-  font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(36px, 3.5vw, 56px);
-  color: white;
-  font-weight: normal;
-  margin: 0 0 clamp(16px, 2vw, 24px);
-  line-height: 1.1;
-  text-align: left;
-}
-
-.explanation-text h1 span {
-  color: var(--accent);
-}
-
-.explanation-stat {
-  display: flex;
-  align-items: center;
-  gap: clamp(12px, 1.5vw, 20px);
-  margin-bottom: clamp(16px, 2vw, 24px);
-}
-
-.explanation-stat > span {
-  font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(28px, 2.5vw, 40px);
-  color: #666;
-}
-
-.explanation-stat-arrow {
-  color: var(--accent) !important;
-  font-size: clamp(20px, 1.8vw, 28px) !important;
-}
-
-.explanation-text p {
-  color: #aaa;
-  font-size: clamp(16px, 1.3vw, 22px);
-  line-height: 1.5;
-  margin: 0;
-  text-align: left;
-}
-
-.explanation-text p span {
-  color: var(--accent);
+  top: 0; bottom: 0; right: 0;
+  width: 40px;
+  background: linear-gradient(to left, #080808, transparent);
 }
 
 /*
@@ -1218,7 +1230,7 @@ UI Section
   line-height: 1.4;
 }
 
-.about-section, .explanation-section, .CTA-Wrapper {
+.about-section, .CTA-Wrapper {
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -1272,17 +1284,28 @@ Responsive
     flex-direction: column;
     height: auto;
     min-height: 100vh;
-    padding: 80px 20px;
   }
 
-  .explanation-ui-wrapper {
-    width: 100%;
-    max-width: 500px;
+  .explanation-pane {
+    flex: none;
+    padding: 60px clamp(20px, 5vw, 40px);
   }
 
-  .explanation-text {
+  .explanation-divider {
+    position: static;
+    transform: none;
+    border-radius: 0;
     width: 100%;
-    max-width: 500px;
+    height: 2px;
+    margin: 0;
+  }
+
+  .explanation-divider span {
+    display: none;
+  }
+
+  .explanation-clip-grid {
+    max-width: 400px;
   }
 }
 
@@ -1305,14 +1328,6 @@ Responsive
   .right-pane {
     width: 120px;
     min-width: 120px;
-  }
-
-  .explanation-ui-wrapper {
-    width: 100%;
-  }
-
-  .explanation-text {
-    width: 100%;
   }
 
   .CTA-Wrapper {
