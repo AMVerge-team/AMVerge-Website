@@ -37,12 +37,14 @@ export default function CTA() {
         <section id="download" className="cta-section fade-in section-divider" ref={ref}>
             <div className="cta-glow" />
             <div className="cta-inner">
-                <span className="cta-eyebrow">Ready when you are</span>
-                <h2 className="cta-title">
-                    Stop <span className="cta-strike">Scrubbing.</span>
-                    <br />
-                    Start <span className="cta-accent">Selecting.</span>
-                </h2>
+                <div className="section-head">
+                    <span className="section-eyebrow">Ready when you are</span>
+                    <h2 className="cta-title">
+                        Stop <span className="cta-strike">Scrubbing.</span>
+                        <br />
+                        Start <span className="cta-accent">Selecting.</span>
+                    </h2>
+                </div>
                 <p className="cta-sub">
                     Turn hours of timeline scrubbing into seconds of browsing.
                     Free, open source, built for editors.

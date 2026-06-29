@@ -966,12 +966,23 @@ CTA Section
   max-width: 720px;
 }
 
-.cta-eyebrow {
+/* Shared little heading (eyebrow) used above section titles */
+.section-eyebrow {
+  display: block;
   font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(14px, 1vw, 18px);
+  font-size: clamp(13px, 1vw, 17px);
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--accent);
+  margin: 0;
+}
+
+/* Groups the eyebrow + title with consistent spacing in every section */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1vw, 14px);
 }
 
 .cta-title {
@@ -1060,14 +1071,6 @@ CTA Section
   text-align: center;
   gap: clamp(12px, 1.6vw, 18px);
   padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 60px);
-}
-
-.contrib-eyebrow {
-  font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(13px, 1vw, 17px);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent);
 }
 
 .contrib-title {

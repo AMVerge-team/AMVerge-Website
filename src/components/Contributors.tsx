@@ -17,10 +17,12 @@ export default function Contributors() {
 
     return (
         <section id="contributors" className="contrib-section fade-in section-divider" ref={ref}>
-            <span className="contrib-eyebrow">Thank you</span>
-            <h2 className="contrib-title">
-                AMVerge wouldn't exist <span className="cta-accent">without you</span>
-            </h2>
+            <div className="section-head">
+                <span className="section-eyebrow">Thank you</span>
+                <h2 className="contrib-title">
+                    AMVerge wouldn't exist <span className="cta-accent">without you</span>
+                </h2>
+            </div>
             <p className="contrib-sub">
                 Every fix, feature, and idea comes from people giving their own
                 time to make AMVerge better. To everyone below: thank you.

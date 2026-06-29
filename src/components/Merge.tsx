@@ -5,9 +5,12 @@ export default function Merge() {
     return (
         <div id="merge-section" className="merge-info-section fade-in section-divider" ref={ref}>
             <div className="merge-info-text">
-                <h1>
-                    <span>Merge</span> Scenes, Stay in Control.
-                </h1>
+                <div className="section-head">
+                    <span className="section-eyebrow">Stay in control</span>
+                    <h1>
+                        <span>Merge</span> Scenes, Stay in Control.
+                    </h1>
+                </div>
                 <p>
                     No scene detection system is perfect, and AMVerge is built with that in mind.
                     Fast motion, flashes, camera shakes, or intense fight sequences can sometimes create
