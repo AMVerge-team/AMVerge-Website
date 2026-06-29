@@ -11,6 +11,7 @@ import {
 import { docGroups, docHref } from './registry'
 import { useToc } from './useToc'
 import SearchModal from './SearchModal'
+import CopyCodeButton from './CopyCodeButton'
 import '../css/docs.css'
 import 'highlight.js/styles/github-dark.css'
 
@@ -185,6 +186,7 @@ export default function DocsLayout() {
           )}
           <article>
             <Outlet />
+            <CopyCodeButton />
           </article>
         </div>
       </main>
