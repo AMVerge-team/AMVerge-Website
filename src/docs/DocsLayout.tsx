@@ -236,7 +236,7 @@ export default function DocsLayout() {
               )}
             </div>
           )}
-          <article>
+          <article key={location.pathname} className="docs-article-anim">
             <Outlet />
             <CopyCodeButton />
             <CodeBlockHeader />

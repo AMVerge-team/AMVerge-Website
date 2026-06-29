@@ -274,6 +274,84 @@
   margin: 0 auto;
 }
 
+/* =====================================================
+   Animations
+   ===================================================== */
+@keyframes docsFadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes docsFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes docsModalIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+/* content entrance, replays on each route change (article is keyed) */
+.docs-article-anim {
+  animation: docsFadeUp 0.4s ease both;
+}
+
+/* stagger the top-level blocks of the article */
+.docs-article-anim > :is(h1, h2, h3, p, ul, ol, pre, table, blockquote) {
+  animation: docsFadeUp 0.45s ease both;
+}
+.docs-article-anim > *:nth-child(1) { animation-delay: 0.02s; }
+.docs-article-anim > *:nth-child(2) { animation-delay: 0.06s; }
+.docs-article-anim > *:nth-child(3) { animation-delay: 0.10s; }
+.docs-article-anim > *:nth-child(4) { animation-delay: 0.14s; }
+.docs-article-anim > *:nth-child(5) { animation-delay: 0.18s; }
+.docs-article-anim > *:nth-child(6) { animation-delay: 0.22s; }
+.docs-article-anim > *:nth-child(n + 7) { animation-delay: 0.26s; }
+
+/* expanding group / subgroup lists */
+.docs-group-items {
+  animation: docsFadeIn 0.2s ease both;
+}
+
+/* sidebar link micro-interaction */
+.docs-link {
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+.docs-link:hover {
+  transform: translateX(2px);
+}
+
+/* TOC items fade/slide in */
+.docs-toc-item {
+  animation: docsFadeUp 0.4s ease both;
+}
+
+/* search modal */
+.docs-search-overlay {
+  animation: docsFadeIn 0.15s ease both;
+}
+.docs-search-modal {
+  animation: docsModalIn 0.18s ease both;
+}
+.docs-search-result {
+  transition: background 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-article-anim,
+  .docs-article-anim > *,
+  .docs-group-items,
+  .docs-toc-item,
+  .docs-search-overlay,
+  .docs-search-modal {
+    animation: none;
+  }
+  .docs-link:hover {
+    transform: none;
+  }
+}
+
 .docs-breadcrumb {
   display: flex;
   align-items: center;
