@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FiChevronDown, FiMessageCircle } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
+import { FaDiscord } from "react-icons/fa";
 
 const faqs = [
     {
@@ -73,7 +74,7 @@ export default function FAQ() {
             </div>
 
             <div className="faq-footer">
-                <FiMessageCircle />
+                <FaDiscord />
                 <p>
                     Still have questions?{" "}
                     <a href="https://discord.com/invite/bmXjTgsAaN" target="_blank" rel="noopener noreferrer">
