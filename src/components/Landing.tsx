@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FiDownload, FiGithub } from "react-icons/fi";
+import { FiDownload } from "react-icons/fi";
 
 type GithubAsset = {
   name: string;
@@ -8,36 +8,42 @@ type GithubAsset = {
 };
 
 type GithubRelease = {
+  tag_name: string;
   assets?: GithubAsset[];
 };
 
-async function getLatestExeAsset(): Promise<GithubAsset | null> {
+type LatestRelease = {
+  exe: GithubAsset | null;
+  version: string;
+};
+
+async function getLatestRelease(): Promise<LatestRelease> {
   try {
-    const res = await fetch("https://api.github.com/repos/crptk/AMVerge/releases/latest");
-    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-
-    const data = await res.json();
-
-    const exe = data.assets?.find(
-      (a: GithubAsset) => a.name.endsWith(".exe") && !a.name.endsWith(".sig")
+    const res = await fetch(
+      "https://api.github.com/repos/crptk/AMVerge/releases/latest",
     );
-
-    return exe ?? null;
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    const data: GithubRelease = await res.json();
+    const exe =
+      data.assets?.find(
+        (a: GithubAsset) =>
+          a.name.endsWith(".exe") && !a.name.endsWith(".sig"),
+      ) ?? null;
+    return { exe, version: data.tag_name };
   } catch (err) {
-    console.error("Failed to fetch latest release asset:", err);
-    return null;
+    console.error("Failed to fetch latest release:", err);
+    return { exe: null, version: "" };
   }
 }
 
 async function getCumulativeDownloadCount(): Promise<number> {
   try {
-    const res = await fetch("https://api.github.com/repos/crptk/AMVerge/releases");
+    const res = await fetch(
+      "https://api.github.com/repos/crptk/AMVerge/releases",
+    );
     if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-
     const releases: GithubRelease[] = await res.json();
-
     let total = 0;
-
     for (const release of releases) {
       for (const asset of release.assets ?? []) {
         if (asset.name.endsWith(".exe") && !asset.name.endsWith(".sig")) {
@@ -45,7 +51,6 @@ async function getCumulativeDownloadCount(): Promise<number> {
         }
       }
     }
-
     return total;
   } catch (err) {
     console.error("Failed to fetch cumulative download count:", err);
@@ -54,12 +59,14 @@ async function getCumulativeDownloadCount(): Promise<number> {
 }
 
 export default function Landing() {
-  const [showMoreInfo, setShowMoreInfo] = useState(true);
+  const [version, setVersion] = useState("");
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(true);
 
   useEffect(() => {
+    getLatestRelease().then(({ version: v }) => setVersion(v));
     getCumulativeDownloadCount().then(setDownloadCount);
   }, []);
 
@@ -70,28 +77,22 @@ export default function Landing() {
 
   useEffect(() => {
     function handleScroll() {
-      setShowMoreInfo(window.scrollY < 80);
+      setShowScrollHint(window.scrollY < 80);
     }
-
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   async function handleDownload() {
     if (downloading) return;
-
     setDownloading(true);
-
     try {
-      const exe = await getLatestExeAsset();
-
+      const { exe } = await getLatestRelease();
       if (!exe?.browser_download_url) {
         alert("Could not find the latest .exe download.");
         return;
       }
-
       window.location.href = exe.browser_download_url;
     } catch (err) {
       console.error("Download failed:", err);
@@ -103,40 +104,39 @@ export default function Landing() {
 
   return (
     <div id="home" className={`landing-fade ${loaded ? "visible" : ""}`}>
-      <section>
-        <div className="title-wrapper">
-          <h1 className="AMVerge-title">
+      <section className="hero">
+        <div className="hero-content">
+          {version && <p className="hero-badge">v{version} · Windows</p>}
+          <h1 className="hero-title">
             <span>AMV</span>erge
           </h1>
-          <h1 className="AMVerge-subtitle">Scene selection made easy.</h1>
-
-          <button
-            className="download-btn landing-download"
-            onClick={handleDownload}
-            disabled={downloading}
-          >
-            <FiDownload /> {downloading ? "Downloading..." : "Download"}
-          </button>
-
-          <div style={{ color: "#888", fontSize: 14, marginTop: 4, marginBottom: 8 }}>
-            {downloadCount === null ? "..." : `${downloadCount}+ downloads`}
+          <p className="hero-subtitle">
+            Turn hours of footage into a browsable scene grid.
+            Find, preview, and export the shots you need — in seconds.
+          </p>
+          <div className="hero-actions">
+            <button
+              className="hero-download"
+              onClick={handleDownload}
+              disabled={downloading}
+            >
+              <FiDownload />{" "}
+              {downloading ? "Downloading..." : "Download for Windows"}
+            </button>
+            <p className="hero-count">
+              {downloadCount === null
+                ? "Loading..."
+                : `${downloadCount.toLocaleString()}+ downloads`}
+            </p>
           </div>
-
-          <a
-            className="view-source-btn"
-            href="https://github.com/crptk/AMVerge"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FiGithub /> View Source
-          </a>
-
-          <div className={`more-info ${showMoreInfo ? "visible" : "hidden"}`}>
-            <span>More Info</span>
-            <div className="bounce-arrows">
-              <span>&#x25BC;</span>
-              <span>&#x25BC;</span>
-            </div>
+        </div>
+        <div
+          className={`scroll-hint ${showScrollHint ? "visible" : "hidden"}`}
+        >
+          <span>Scroll to explore</span>
+          <div className="bounce-arrows">
+            <span>&#x25BC;</span>
+            <span>&#x25BC;</span>
           </div>
         </div>
       </section>
