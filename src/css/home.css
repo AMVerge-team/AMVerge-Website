@@ -150,18 +150,19 @@ body {
   gap: 6px;
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: 18px;
-  color: black;
-  background: var(--accent);
-  border: none;
+  color: white;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 8px;
   padding: 7px 16px;
   cursor: pointer;
   white-space: nowrap;
-  transition: filter 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .nav-download:hover {
-  filter: brightness(1.15);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* mobile hamburger (hidden on desktop) */
@@ -378,22 +379,23 @@ body {
   gap: 8px;
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(18px, 1.3vw, 24px);
-  color: black;
-  background: var(--accent);
-  border: none;
+  color: white;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
   padding: clamp(10px, 1vw, 16px) clamp(28px, 3vw, 48px);
   cursor: pointer;
-  transition: filter 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .hero-download:hover {
-  filter: brightness(1.15);
+  border-color: var(--accent);
+  color: var(--accent);
   transform: scale(1.03);
 }
 
 .hero-download:disabled {
-  opacity: 0.7;
+  opacity: 0.4;
   cursor: not-allowed;
   transform: none;
 }
@@ -537,34 +539,20 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-family: 'Jersey 10', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(23px, 1.2vw, 20px);
   color: white;
   background: transparent;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  position: relative;
   padding: clamp(10px, 0.6vw, 12px) clamp(30px, 2vw, 40px);
   border-radius: 28px;
-  /* background:  */
-}
-
-
-.download-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 28px;
-  padding: 1px;
-  background: linear-gradient(140deg, rgba(0, 0, 0, 0), var(--accent));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .download-btn:hover {
-  background: linear-gradient(140deg, rgba(92, 92, 92, 0), var(--accent));
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .scroll-hint {
   position: absolute;

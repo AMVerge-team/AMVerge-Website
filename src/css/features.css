@@ -119,18 +119,19 @@
     gap: 8px;
     font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: clamp(17px, 1.2vw, 22px);
-    color: black;
-    background: var(--accent);
-    border: none;
+    color: white;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 10px;
     padding: clamp(8px, 1vw, 14px) clamp(24px, 3vw, 44px);
     cursor: pointer;
     text-decoration: none;
-    transition: filter 0.2s ease, transform 0.2s ease;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .feat-download-btn:hover {
-    filter: brightness(1.15);
+    border-color: var(--accent);
+    color: var(--accent);
     transform: scale(1.03);
 }
 
