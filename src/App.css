@@ -975,6 +975,123 @@ CTA Section
   margin: 0;
 }
 
+/* ---- Contributors ---- */
+.contrib-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(12px, 1.6vw, 18px);
+  padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 60px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.contrib-eyebrow {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(13px, 1vw, 17px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.contrib-title {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(34px, 4.5vw, 64px);
+  color: white;
+  font-weight: normal;
+  margin: 0;
+  line-height: 1.05;
+}
+
+.contrib-sub {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(15px, 1.3vw, 20px);
+  color: #999;
+  line-height: 1.5;
+  max-width: 540px;
+  margin: 0;
+}
+
+.contrib-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(14px, 1.6vw, 22px);
+  max-width: 760px;
+  margin-top: clamp(10px, 1.5vw, 18px);
+}
+
+.contrib-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 64px;
+  text-decoration: none;
+}
+
+.contrib-avatar img,
+.contrib-avatar.skeleton {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  object-fit: cover;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.contrib-avatar:hover img {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.contrib-avatar.skeleton {
+  background: rgba(255, 255, 255, 0.06);
+  animation: contribPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes contribPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.contrib-name {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: 12px;
+  color: #888;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contrib-more {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(13px, 1vw, 16px);
+  color: #777;
+  margin: 4px 0 0;
+}
+
+.contrib-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(8px, 1.2vw, 16px);
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(16px, 1.1vw, 19px);
+  color: white;
+  text-decoration: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  border-radius: 10px;
+  padding: 9px 20px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contrib-cta:hover {
+  background: var(--accent);
+  color: black;
+}
+
 
 /*
 ====================

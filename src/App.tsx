@@ -6,6 +6,7 @@ import Landing from "./components/Landing.tsx"
 import Explanation from "./components/Explanation.tsx"
 import Navbar from "./components/Navbar.tsx"
 import Merge from "./components/Merge.tsx"
+import Contributors from "./components/Contributors.tsx"
 import Footer from "./components/Footer.tsx"
 import './App.css'
 
@@ -27,6 +28,7 @@ function App() {
         <Explanation />
         <Merge />
         <CTA />
+        <Contributors />
       </main>
       <Footer />
     </>

@@ -1,0 +1,71 @@
+import { useEffect, useState } from "react";
+import { FiGithub } from "react-icons/fi";
+import { useFadeIn } from "../hooks/useFadeIn";
+import { fetchContributors } from "../services/github";
+import type { GithubContributor } from "../services/github";
+
+const REPO_URL = "https://github.com/AMVerge-team/AMVerge";
+const MAX_SHOWN = 14;
+
+export default function Contributors() {
+    const ref = useFadeIn<HTMLElement>();
+    const [contributors, setContributors] = useState<GithubContributor[] | null>(null);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        fetchContributors()
+            // drop bots (e.g. dependabot[bot])
+            .then((list) => setContributors(list.filter((c) => !c.login.endsWith("[bot]"))))
+            .catch(() => setError(true));
+    }, []);
+
+    // Hide the whole band if it can't load anything
+    if (error) return null;
+
+    const shown = contributors?.slice(0, MAX_SHOWN) ?? [];
+    const extra = (contributors?.length ?? 0) - shown.length;
+
+    return (
+        <section id="contributors" className="contrib-section fade-in" ref={ref}>
+            <span className="contrib-eyebrow">Open source</span>
+            <h2 className="contrib-title">Built by the community</h2>
+            <p className="contrib-sub">
+                AMVerge is made by editors and developers volunteering their time.
+                These are the people behind it.
+            </p>
+
+            <div className="contrib-grid">
+                {contributors === null
+                    ? Array.from({ length: MAX_SHOWN }).map((_, i) => (
+                          <span key={i} className="contrib-avatar skeleton" />
+                      ))
+                    : shown.map((c) => (
+                          <a
+                              key={c.login}
+                              className="contrib-avatar"
+                              href={c.html_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={`${c.login} · ${c.contributions} commits`}
+                          >
+                              <img src={c.avatar_url} alt={c.login} loading="lazy" />
+                              <span className="contrib-name">{c.login}</span>
+                          </a>
+                      ))}
+            </div>
+
+            {extra > 0 && (
+                <p className="contrib-more">+ {extra} more contributors</p>
+            )}
+
+            <a
+                className="contrib-cta"
+                href={`${REPO_URL}/graphs/contributors`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <FiGithub /> Contribute on GitHub
+            </a>
+        </section>
+    );
+}
