@@ -593,6 +593,137 @@
   text-align: center;
 }
 
+/* ---- Custom AMVerge video player ---- */
+.amv-player {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  line-height: 0;
+}
+
+.amv-player video {
+  width: 100%;
+  display: block;
+  border: none;
+  border-radius: 0;
+  background: #000;
+  cursor: pointer;
+}
+
+/* big center play button (paused state) */
+.amv-bigplay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #000;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 45%, transparent);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.amv-bigplay:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  filter: brightness(1.1);
+}
+
+/* control bar */
+.amv-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+}
+
+.amv-player:hover .amv-controls,
+.amv-player:not(.playing) .amv-controls {
+  opacity: 1;
+}
+
+.amv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.amv-btn:hover {
+  color: var(--accent);
+}
+
+.amv-time {
+  flex: 0 0 auto;
+  font-family: 'Jersey 10', ui-monospace, monospace;
+  font-size: 15px;
+  color: #ccc;
+  white-space: nowrap;
+}
+
+/* seek bar */
+.amv-seek {
+  position: relative;
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.amv-seek-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.amv-seek-knob {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.amv-seek:hover .amv-seek-knob {
+  opacity: 1;
+}
+
 .docs-content pre {
   position: relative;
 }

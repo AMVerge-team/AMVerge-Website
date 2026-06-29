@@ -1,3 +1,5 @@
+import VideoPlayer from "./VideoPlayer";
+
 type MediaProps = {
     src: string;
     alt?: string;
@@ -7,7 +9,6 @@ type MediaProps = {
     poster?: string;
     /** gif-style: autoplay + loop + muted, no controls */
     gif?: boolean;
-    controls?: boolean;
     width?: number | string;
 };
 
@@ -24,7 +25,6 @@ export default function Media({
     video,
     poster,
     gif,
-    controls,
     width,
 }: MediaProps) {
     const isVideo = video ?? VIDEO_RE.test(src);
@@ -33,16 +33,12 @@ export default function Media({
     return (
         <figure className="docs-media" style={style}>
             {isVideo ? (
-                <video
-                    src={src}
-                    poster={poster}
-                    autoPlay={gif}
-                    loop={gif}
-                    muted={gif}
-                    playsInline
-                    controls={controls ?? !gif}
-                    preload="metadata"
-                />
+                gif ? (
+                    // gif-style: bare looping autoplay video, no chrome
+                    <video src={src} poster={poster} autoPlay loop muted playsInline preload="metadata" />
+                ) : (
+                    <VideoPlayer src={src} poster={poster} />
+                )
             ) : (
                 <img src={src} alt={alt || caption || ""} loading="lazy" />
             )}

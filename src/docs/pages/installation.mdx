@@ -1,33 +1,42 @@
 # Installation
 
-Get AMVerge running locally in a few steps.
+AMVerge is a desktop app. Download a build and run it, no setup required.
 
-## Prerequisites
+## Download
 
-- Node.js 18+
-- A modern browser
+Grab the latest release from the home page or directly from GitHub:
 
-## Install
+- [Download from the AMVerge site](/#download)
+- [GitHub Releases](https://github.com/AMVerge-team/AMVerge/releases)
 
-```bash
-git clone https://github.com/your-org/amverge.git
-cd amverge
-npm install
-```
+AMVerge is **free and open source**.
 
-## Run dev server
+## Platforms
 
-```bash
-npm run dev
-```
+| Platform | Notes |
+|---|---|
+| **Windows 10/11** | `.exe` installer |
+| **macOS** | `.dmg` installer |
 
-Open `http://localhost:5173` and you are live.
+## First run
 
-## Build
+1. Install and open AMVerge.
+2. Click **Import Episode** (or drag a video onto the window).
+3. Wait for the scene grid to build, then start browsing.
 
-```bash
-npm run build
-npm run preview
-```
+See [Interface Overview](/docs/app-overview) for a tour of the workspace.
 
-That's it. Back to [Introduction](/docs).
+## Recommended: HEVC support (Windows)
+
+Many modern encodes use H.265 / HEVC. Installing the official **Microsoft HEVC
+Video Extension** makes previews for those videos load much faster. The app's
+top bar shows your HEVC status.
+
+More detail: [HEVC Support](/docs/hevc-support).
+
+## Building from source
+
+For development setup (frontend, Tauri, and the Python backend), see the
+[Developer](/docs/architecture) section.
+
+Next: [Interface Overview](/docs/app-overview).

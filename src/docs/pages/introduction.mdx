@@ -1,27 +1,32 @@
-# <span>AMV</span>erge Docs
+import Media from '../Media'
 
-Welcome to the AMVerge documentation. AMVerge turns scrubbing through long
-episodes into seconds. Every scene shown in a grid so you find the exact
-frame fast.
+# Introduction
 
-> Built for AMV editors who hate single-frame scrubbing.
+AMVerge turns scrubbing through long episodes into seconds. It splits any video
+into individual scenes and lays them out as a grid, so you find the exact shot
+fast, no timeline scrubbing required.
+
+<Media src="/clips/AMVerge-Video.mp4" caption="AMVerge in action: an episode split into a browsable scene grid." />
 
 ## What it does
 
 Instead of dragging across a timeline, AMVerge renders an entire episode as a
-clip grid. Scan, click, cut. What took 30 minutes drops under 5.
+clip grid. Scan, click, export. What might take 30 minutes in a traditional
+editor drops to under 5.
 
-## Sections
+- **Browse visually** — every scene as a tile, not a thin timeline.
+- **Zero quality loss** — clips export as a 1:1 copy of the source.
+- **Stay organized** — folders, saved imports, and merge to clean up cuts.
 
-- **Introduction**: you are here.
-- **Installation**: get it running locally.
+## Who it's for
 
-## Quick taste
+AMVerge is built for AMV editors and anyone who needs to pull clips out of video
+quickly: finding a specific scene, skimming an episode, or building a montage.
 
-```ts
-import { mergeClips } from 'amverge'
+## How this guide is organized
 
-const out = mergeClips(['01_0109.gif', '01_0110.gif'])
-```
+- **Getting Started** — install AMVerge and learn the basics (you're here).
+- **Using AMVerge** — the full app guide: importing, selecting, merging, exporting, and settings.
+- **Python Library** and **AMVerge CLI** — for developers automating the workflow.
 
-Next: head to [Installation](/docs/installation).
+Next: [Installation](/docs/installation).
