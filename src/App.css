@@ -968,7 +968,7 @@ CTA Section
   color: var(--accent);
   margin: 0;
   position: relative;
-  padding-bottom: clamp(4px, 0.5vw, 8px);
+  padding-bottom: clamp(2px, 0.3vw, 5px);
 }
 
 .section-eyebrow::after {
