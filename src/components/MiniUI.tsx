@@ -1,97 +1,176 @@
 import { useState } from "react";
-import { FaFolderOpen } from "react-icons/fa";
+import {
+    FiHome,
+    FiMenu,
+    FiSettings,
+    FiChevronLeft,
+    FiChevronDown,
+    FiChevronUp,
+    FiFolder,
+    FiEdit2,
+    FiHelpCircle,
+    FiFilePlus,
+} from "react-icons/fi";
+import { FaDiscord, FaWindows, FaApple, FaRegTrashAlt } from "react-icons/fa";
+import { LuArrowDownUp, LuFolderPlus } from "react-icons/lu";
+
+const episodes = Array.from({ length: 12 }).map((_, i) => `Frieren S1E${i + 1}`);
+
 export default function MiniUI() {
-    const [previewSrc, setPreviewSrc] = useState("/clips/Sousou no Frieren - 01_0109.gif");
+    const [previewSrc, setPreviewSrc] = useState(
+        "/clips/Sousou no Frieren - 01_0109.gif",
+    );
+
     return (
         <div className="mini-ui">
-            <div className="side-panel">
-                <button>Home</button>
-                <button>Settings</button>
-                <div className="episode-panel">
-                    <h3>Episode Panel</h3>
-                    <div className="episode-btn-row">
-                        <button>Sort A-Z</button>
-                        <button>New folder</button>
-                        <button>Clear</button>
-                    </div>
-                    <div className="episode-list">
-                        <h3>Frieren S1E1</h3>
-                        <h3>Frieren S1E2</h3>
-                        <h3>Frieren S1E3</h3>
-                        <h3>Frieren S1E4</h3>
-                        <h3>Frieren S1E5</h3>
-                        <h3>Frieren S1E6</h3>
-                        <h3>Frieren S1E7</h3>
-                        <h3>Frieren S1E8</h3>
-                        <h3>Frieren S1E9</h3>
-                        <h3>Frieren S1E10</h3>
-                        <h3>Frieren S1E11</h3>
-                        <h3>Frieren S1E12</h3>
-                    </div>
+            {/* OS title bar */}
+            <div className="app-titlebar">
+                <span className="tb-title">
+                    <span>AMV</span>erge
+                </span>
+                <div className="tb-winbtns">
+                    <span className="tb-dot" />
+                    <span className="tb-dot" />
+                    <span className="tb-dot tb-close" />
                 </div>
             </div>
-            <div className="main-content">
-                <div className="ui-navbar">
-                    <div className="arrow">&gt;</div>
-                    <h1><span>AMV</span>erge</h1>
+
+            {/* App header */}
+            <div className="app-header">
+                <div className="ah-left">
+                    <span className="ah-icon active"><FiHome /></span>
+                    <span className="ah-icon"><FiMenu /></span>
+                    <span className="ah-icon"><FiSettings /></span>
+                    <FiChevronLeft className="ah-back" />
+                    <span className="ah-logo">
+                        <span>AMV</span>erge
+                    </span>
+                    <FaDiscord className="ah-discord" />
                 </div>
-                <div className="import-buttons">
-                    <button className="import-button">Import Episode</button>
-                    <div className="checkbox"></div>
-                    <h3 className="grid-preview">Grid Preview</h3>
-                    <div className="grey-checkbox"></div>
-                    <h3 className="selected-count">0 selected</h3>
-                    <div className="size-btns">
-                        <p>Size: 95px</p>
-                        <div>
-                            <button className="size-minus">-</button>
-                            <button className="size-plus">+</button>
+                <div className="ah-right">
+                    <span className="ah-grid">Grid: 6 columns</span>
+                    <button className="ah-step">-</button>
+                    <button className="ah-step">+</button>
+                </div>
+            </div>
+
+            {/* Body: sidebar | main | right */}
+            <div className="app-body">
+                {/* Sidebar */}
+                <aside className="app-sidebar">
+                    <div className="sb-head">
+                        <span>Episode Panel</span>
+                        <div className="sb-head-icons">
+                            <LuArrowDownUp />
+                            <LuFolderPlus />
+                            <FaRegTrashAlt />
                         </div>
                     </div>
-                </div>
-                <div className="main-window">
-                    <div className="left-pane">
-                        <div className="clips-grid">
-                            {Array.from({ length: 35}).map((_, i) => {
-                                const num = String(i + 109).padStart(4, '0');
-                                const src = `/clips/Sousou no Frieren - 01_${num}.gif`;
-                                return (
-                                    <div key={i} className={`clip-cell${previewSrc === src ? ' active' : ''}`} onClick={() => setPreviewSrc(src)}>
-                                        <img src={src} alt={`clip ${num}`} />
+                    <div className="sb-list">
+                        {episodes.map((ep, i) => (
+                            <span
+                                key={ep}
+                                className={`sb-item ${i === 0 ? "active" : ""}`}
+                            >
+                                {ep}
+                            </span>
+                        ))}
+                    </div>
+                    <div className="sb-warning">
+                        <strong>WARNING</strong>
+                        AMVerge V2 will revamp how episodes are stored, and all data
+                        will be wiped. Treat this panel as temporary storage.
+                    </div>
+                </aside>
+
+                {/* Main */}
+                <main className="app-main">
+                    <div className="am-toolbar">
+                        <button className="am-import">
+                            <FiFilePlus /> Import Episode
+                        </button>
+                        <label className="am-check">
+                            <span className="am-box" /> Preview All
+                        </label>
+                        <label className="am-check">
+                            <span className="am-box" /> 3 selected
+                        </label>
+                    </div>
+                    <div className="am-grid">
+                        {Array.from({ length: 42 }).map((_, i) => {
+                            const num = String(i + 109).padStart(4, "0");
+                            const src = `/clips/Sousou no Frieren - 01_${num}.gif`;
+                            return (
+                                <div
+                                    key={i}
+                                    className={`am-cell${previewSrc === src ? " active" : ""}`}
+                                    onClick={() => setPreviewSrc(src)}
+                                >
+                                    <img src={src} alt={`clip ${num}`} loading="lazy" />
+                                </div>
+                            );
+                        })}
+                    </div>
+                </main>
+
+                {/* Right panel */}
+                <aside className="app-right">
+                    <div className="rp-preview">
+                        <img src={previewSrc} alt="preview" />
+                    </div>
+
+                    <div className="rp-card">
+                        <div className="rp-card-head">
+                            <FiFilePlus /> EXPORT SETTINGS
+                        </div>
+                        <div className="rp-export-grid">
+                            <div className="rp-export-left">
+                                <div className="rp-select-row">
+                                    <div className="rp-select">
+                                        <div className="rp-select-main">
+                                            <strong>DEFAULT MP4</strong>
+                                            <span>H.264 High · AAC · MP4</span>
+                                        </div>
+                                        <FiChevronDown />
                                     </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                    <div className="right-pane">
-                        <div className="preview-panel">
-                            <div className="preview-video">
-                                <img src={previewSrc} alt="preview" />
-                            </div>
-                            <div className="merge-row">
-                                <div className="merge-checkbox">✓</div>
-                                <span>Merge Clips</span>
-                            </div>
-                            <div className="export-path-row">
-                                <div className="export-path-input">C:/path/to/export/directory</div>
-                                <div className="folder-icon">
-                                    <FaFolderOpen />
+                                    <span className="rp-icon-btn"><FiEdit2 /></span>
+                                </div>
+                                <div className="rp-dest-row">
+                                    <div className="rp-dest">Select destination...</div>
+                                    <span className="rp-icon-btn"><FiFolder /></span>
+                                </div>
+                                <div className="rp-options">
+                                    <label className="rp-opt">
+                                        MERGE CLIPS <span className="am-box checked" />
+                                    </label>
+                                    <label className="rp-opt">
+                                        PREVIEW LANGUAGE
+                                        <span className="rp-mini-select">EN <FiChevronDown /></span>
+                                    </label>
                                 </div>
                             </div>
-                            <button className="export-btn">Export</button>
-                            <div className="how-to-use">
-                                <h4>HOW TO USE:</h4>
-                                <p>Windows:</p>
-                                <ul>
-                                    <li>Select multiple clips with Ctrl + Click, Shift + Click, or Double Click</li>
-                                    <li>Click "Merge clips" to merge, or leave unchecked to export separately</li>
-                                    <li>Click Export to export clips</li>
-                                </ul>
-                            </div>
+                            <button className="rp-export-btn">Export Now</button>
                         </div>
                     </div>
-                </div>
-            </div>            
+
+                    <div className="rp-card">
+                        <div className="rp-card-head between">
+                            <span><FiHelpCircle /> HOW TO USE</span>
+                            <FiChevronUp />
+                        </div>
+                        <div className="rp-tabs">
+                            <span className="rp-tab active"><FaWindows /> Windows</span>
+                            <span className="rp-tab"><FaApple /> macOS</span>
+                        </div>
+                        <ol className="rp-steps">
+                            <li>Select clips with <b>Ctrl + Click</b> or <b>Shift + Click</b></li>
+                            <li>Double click to <b>Focus</b> a clip</li>
+                            <li>Select <b>Export Profile</b> for export settings</li>
+                            <li>Click <b>Export Now</b> to start the process</li>
+                        </ol>
+                    </div>
+                </aside>
+            </div>
         </div>
     );
 }
