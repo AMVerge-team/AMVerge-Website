@@ -56,7 +56,7 @@ AMVerge-Website/
 │   ├── mdx.d.ts              type decl for importing *.mdx as components
 │   │
 │   ├── components/
-│   │   ├── Navbar.tsx        route-aware nav: scroll-spy sections + page links, hue slider -> --accent
+│   │   ├── Navbar.tsx        3-zone nav: brand | page links | actions (hue slider + Download), mobile dropdown
 │   │   ├── Footer.tsx        shared footer (page links + GitHub), used by SiteLayout
 │   │   ├── Landing.tsx       hero, download btn (GitHub latest .exe), cumulative dl count
 │   │   ├── About.tsx         feature list + MiniUI mock
@@ -110,7 +110,7 @@ AMVerge-Website/
 - `/features`, `/changelog`, `/faq`, `/gallery` render under `SiteLayout` (shared Navbar + Footer, scroll-to-top on change).
 - `/docs` renders `DocsLayout` with nested routes generated from `docs/registry.ts`. First registry entry is the `/docs` index route, the rest are `/docs/<slug>`.
 
-`Navbar` is route-aware: section links scroll on home, but navigate to `/#<id>` from other pages. `App` reads `location.hash` and scrolls to the matching section on load.
+`Navbar` is a 3-zone bar (brand | page links | actions). Actions = hue slider + Download CTA (`utils/download.ts`, latest GitHub `.exe`). Below 860px it collapses to a hamburger dropdown. `App` still reads `location.hash` and scrolls to the matching section on load (used by in-page anchors like `/#download`).
 
 ### Adding a docs page
 
