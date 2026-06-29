@@ -176,6 +176,20 @@
   background: var(--accent-bg, rgba(255, 255, 255, 0.06));
 }
 
+.docs-subgroup {
+  margin-top: 4px;
+}
+
+.docs-subgroup-label {
+  font-family: system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 10px 2px;
+}
+
 /* Sidebar footer */
 .docs-sidebar-footer {
   display: flex;

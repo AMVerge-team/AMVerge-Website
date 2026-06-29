@@ -11,6 +11,13 @@ import CliOverview from './pages/cli-overview.mdx'
 import CliInstallation from './pages/cli-installation.mdx'
 import CliReference from './pages/cli-reference.mdx'
 import CliDetection from './pages/cli-detection.mdx'
+import PyPipeline from './pages/py-pipeline.mdx'
+import PyDetection from './pages/py-detection.mdx'
+import PyCutting from './pages/py-cutting.mdx'
+import PyExport from './pages/py-export.mdx'
+import PyThumbnails from './pages/py-thumbnails.mdx'
+import PyVideo from './pages/py-video.mdx'
+import PyUtilities from './pages/py-utilities.mdx'
 
 export type DocPage = {
   slug: string
@@ -20,7 +27,8 @@ export type DocPage = {
 
 export type DocGroup = {
   label: string
-  pages: DocPage[]
+  pages?: DocPage[]
+  subgroups?: { label: string; pages: DocPage[] }[]
 }
 
 // Sidebar categories. Order here = order in sidebar.
@@ -43,10 +51,35 @@ export const docGroups: DocGroup[] = [
     ],
   },
   {
-    label: 'Developer',
-    pages: [
-      { slug: 'architecture', label: 'Architecture', Component: Architecture },
-      { slug: 'contributing', label: 'Contributing', Component: Contributing },
+    label: 'Python Library',
+    subgroups: [
+      {
+        label: 'Core Pipeline',
+        pages: [
+          { slug: 'py-pipeline', label: 'Pipeline API', Component: PyPipeline },
+          { slug: 'py-video', label: 'Video & Metadata', Component: PyVideo },
+        ],
+      },
+      {
+        label: 'Scene Detection',
+        pages: [
+          { slug: 'py-detection', label: 'Detection Methods', Component: PyDetection },
+          { slug: 'py-cutting', label: 'Scene Cutting', Component: PyCutting },
+        ],
+      },
+      {
+        label: 'Export & Output',
+        pages: [
+          { slug: 'py-export', label: 'Export & Codecs', Component: PyExport },
+          { slug: 'py-thumbnails', label: 'Thumbnails', Component: PyThumbnails },
+        ],
+      },
+      {
+        label: 'Utilities',
+        pages: [
+          { slug: 'py-utilities', label: 'Diagnostics & IPC', Component: PyUtilities },
+        ],
+      },
     ],
   },
   {
@@ -58,10 +91,28 @@ export const docGroups: DocGroup[] = [
       { slug: 'cli-detection', label: 'Detection Methods', Component: CliDetection },
     ],
   },
+  {
+    label: 'Developer',
+    pages: [
+      { slug: 'architecture', label: 'Architecture', Component: Architecture },
+      { slug: 'contributing', label: 'Contributing', Component: Contributing },
+    ],
+  },
 ]
 
 // Flat list for route generation. First entry = /docs index.
-export const docs: DocPage[] = docGroups.flatMap((g) => g.pages)
+function flattenPages(groups: DocGroup[]): DocPage[] {
+  const result: DocPage[] = []
+  for (const g of groups) {
+    if (g.pages) result.push(...g.pages)
+    if (g.subgroups) {
+      for (const sg of g.subgroups) result.push(...sg.pages)
+    }
+  }
+  return result
+}
+
+export const docs: DocPage[] = flattenPages(docGroups)
 
 export const docsIndexSlug = docs[0]?.slug
 

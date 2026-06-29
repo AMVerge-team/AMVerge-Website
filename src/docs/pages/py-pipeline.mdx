@@ -1,0 +1,60 @@
+# Pipeline API
+
+The high-level entry point for scene detection.
+
+## `detect_scenes(video_path, **kwargs)`
+
+```python
+from amverge import detect_scenes
+
+result = detect_scenes("episode.mp4")
+for scene in result.scenes:
+    print(scene.index, scene.start, scene.end, scene.path)
+```
+
+| Param | Type | Default | Description |
+|-------|------|---------|-------------|
+| `video_path` | `str` | required | Path to video file |
+| `method` | `DetectionMethod` | `KEYFRAME` | `KEYFRAME`, `EDGE`, or `TRANSNETV2` |
+| `output_dir` | `str` | auto | Output directory for scenes |
+| `min_duration` | `float` | `0.25` | Merge scenes shorter than N seconds |
+| `workers` | `int` | `4` | Thumbnail thread count |
+| `no_thumbnails` | `bool` | `False` | Skip thumbnail generation |
+| `no_similarity` | `bool` | `False` | Skip similarity check |
+| `edge_threshold` | `float` | `0.15` | Edge detection sensitivity |
+| `edge_radius` | `float` | `0.6` | Keyframe window radius |
+
+## `DetectResult`
+
+Returned by `detect_scenes()`.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `scenes` | `list[Scene]` | All detected scenes |
+| `method` | `DetectionMethod` | Method used |
+| `video_path` | `str` | Source video path |
+| `duration` | `float` | Video duration in seconds |
+| `thumbnail_paths` | `list[str]` | Generated thumbnail paths |
+
+## `Scene`
+
+Represents a single detected scene.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `index` | `int` | Scene number (0-based) |
+| `start` | `float` | Start time in seconds |
+| `end` | `float` | End time in seconds |
+| `path` | `str` | Clip file path |
+| `thumbnail` | `str` | Thumbnail file path |
+| `original_file` | `str` | Source video path |
+
+## `DetectionMethod`
+
+```python
+from amverge import DetectionMethod
+
+DetectionMethod.KEYFRAME    # I-frame based (fast, default)
+DetectionMethod.EDGE        # Canny edge detection
+DetectionMethod.TRANSNETV2  # ML deep learning
+```

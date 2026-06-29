@@ -1,0 +1,50 @@
+# Thumbnails
+
+Generate JPEG thumbnails from video clips.
+
+## Basic Thumbnail
+
+```python
+from amverge import make_thumbnail, generate_thumbnails
+
+# Single thumbnail from a clip
+make_thumbnail("clip.mp4", "thumb.jpg")
+
+# Batch generation for a list of scenes
+paths = generate_thumbnails(scenes, workers=4)
+```
+
+Thumbnails are decoded via PyAV, resized to 960px wide, and saved as progressive JPEGs. Generation runs in parallel with configurable worker count.
+
+## Thumbnail Generator
+
+```python
+from amverge import ThumbnailGenerator
+
+gen = ThumbnailGenerator(workers=4)
+for scene in scenes:
+    gen.add(scene)
+
+gen.run()
+results = gen.results  # dict[scene_index -> thumbnail_path]
+```
+
+Streams `THUMBNAIL_READY` events during generation for progress tracking. First 24 thumbnails emit `INITIAL_CLIPS_READY` for fast UI feedback.
+
+## Similarity Checker
+
+```python
+from amverge import SimilarityChecker, check_pair_similar, find_similar_pairs
+
+# Check if two adjacent thumbnails are visually similar
+similar = check_pair_similar("thumb_01.jpg", "thumb_02.jpg")
+
+# Find all similar adjacent pairs in a scene list
+pairs = find_similar_pairs(scenes)
+
+# Class-based approach
+checker = SimilarityChecker()
+results = checker.check_all(scenes)
+```
+
+Uses cosine similarity on 8x8 pooled pixel values. Threshold is configurable via `--similarity-threshold`.

@@ -39,10 +39,18 @@ export default function DocsLayout() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const activeGroup = docGroups.find((g) =>
-    g.pages.some((p) => location.pathname === docHref(p.slug)),
-  )
-  const activePage = activeGroup?.pages.find(
+  const allPages = docGroups.flatMap((g) => [
+    ...(g.pages ?? []),
+    ...(g.subgroups?.flatMap((s) => s.pages) ?? []),
+  ]);
+  const activeGroup = docGroups.find((grp) => {
+    const grpPages = [
+      ...(grp.pages ?? []),
+      ...(grp.subgroups?.flatMap((s) => s.pages) ?? []),
+    ];
+    return grpPages.some((p) => location.pathname === docHref(p.slug));
+  })
+  const activePage = allPages.find(
     (p) => location.pathname === docHref(p.slug),
   )
 
@@ -121,7 +129,16 @@ export default function DocsLayout() {
 
         <nav className="docs-tree">
           {docGroups.map((group) => {
-            const open = group === activeGroup ? true : isOpen(group.label)
+            const allPages = [
+              ...(group.pages ?? []),
+              ...(group.subgroups?.flatMap((s) => s.pages) ?? []),
+            ];
+            const open =
+              group === activeGroup ||
+              allPages.some((p) => location.pathname === docHref(p.slug))
+                ? true
+                : isOpen(group.label);
+
             return (
               <div key={group.label} className="docs-group">
                 <button
@@ -136,7 +153,7 @@ export default function DocsLayout() {
                 </button>
                 {open && (
                   <div className="docs-group-items">
-                    {group.pages.map((page) => (
+                    {group.pages?.map((page) => (
                       <NavLink
                         key={page.slug}
                         to={docHref(page.slug)}
@@ -147,6 +164,23 @@ export default function DocsLayout() {
                       >
                         {page.label}
                       </NavLink>
+                    ))}
+                    {group.subgroups?.map((sg) => (
+                      <div key={sg.label} className="docs-subgroup">
+                        <div className="docs-subgroup-label">{sg.label}</div>
+                        {sg.pages.map((page) => (
+                          <NavLink
+                            key={page.slug}
+                            to={docHref(page.slug)}
+                            end
+                            className={({ isActive }) =>
+                              isActive ? 'docs-link active' : 'docs-link'
+                            }
+                          >
+                            {page.label}
+                          </NavLink>
+                        ))}
+                      </div>
                     ))}
                   </div>
                 )}

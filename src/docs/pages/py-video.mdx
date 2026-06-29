@@ -1,0 +1,63 @@
+# Video & Metadata
+
+## `AmvergeVideo`
+
+Wrapper class for video file operations.
+
+```python
+from amverge import AmvergeVideo
+
+video = AmvergeVideo("episode.mp4")
+print(video.duration, video.fps, video.width, video.height)
+```
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `path` | `str` | Full file path |
+| `duration` | `float` | Duration in seconds |
+| `fps` | `float` | Frames per second |
+| `width` | `int` | Video width |
+| `height` | `int` | Video height |
+| `codec` | `str` | Video codec name |
+
+## Video Info Functions
+
+```python
+from amverge import get_video_duration, get_video_info
+
+duration = get_video_duration("episode.mp4")
+info = get_video_info("episode.mp4")  # dict with all metadata
+```
+
+## Probe Utilities
+
+```python
+from amverge import (
+    probe_video_fps,
+    probe_video_dimensions,
+    probe_video_duration,
+    probe_video_total_frames,
+)
+
+fps = probe_video_fps("episode.mp4")
+w, h = probe_video_dimensions("episode.mp4")
+secs = probe_video_duration("episode.mp4")
+frames = probe_video_total_frames("episode.mp4")
+```
+
+## Scene Utilities
+
+```python
+from amverge import (
+    scenes_frames_to_seconds,
+    convert_scenes_to_timestamps,
+    scenes_to_objects,
+    merge_short_scenes,
+)
+
+# Convert frame-indexed scenes to second timestamps
+scenes_frames_to_seconds(scenes, fps)
+
+# Merge scenes shorter than threshold
+merge_short_scenes(scenes, min_duration=0.5)
+```

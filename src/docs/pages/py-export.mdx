@@ -1,0 +1,59 @@
+# Export & Codecs
+
+Export scenes with full codec control.
+
+## Scene Exporter
+
+```python
+from amverge import SceneExporter
+
+exporter = SceneExporter(scenes, "episode.mp4")
+exporter.export(
+    output_dir="./export",
+    select=[0, 2, 5, 6, 7, 8],
+    codec="h264_high",
+    audio="aac_320",
+    container="mp4",
+    hardware="gpu",
+    merge=True,
+)
+```
+
+| Param | Type | Default | Description |
+|-------|------|---------|-------------|
+| `output_dir` | `str` | `./export` | Output directory |
+| `select` | `list[int]` | all | Scene indices to export |
+| `codec` | `str` | `copy` | Codec profile name |
+| `audio` | `str` | `copy` | Audio codec name |
+| `container` | `str` | `mp4` | `mp4`, `mkv`, or `mov` |
+| `hardware` | `str` | `auto` | `auto`, `gpu`, `cpu` |
+| `merge` | `bool` | `False` | Merge into single file |
+
+## Codec Profiles
+
+```python
+from amverge import CODEC_PROFILES, VALID_CODECS
+
+# All available codec profiles
+for name, profile in CODEC_PROFILES.items():
+    print(name, profile.description)
+```
+
+Common profiles: `h264_main`, `h264_high`, `h265_main`, `h265_main10`, `av1_main`, `prores_422`, `prores_422_hq`.
+
+## Audio Codecs
+
+```python
+from amverge import VALID_AUDIO, AUDIO_FFMPEG
+
+# All available audio codecs
+print(VALID_AUDIO)  # ['copy', 'aac', 'aac_320', 'pcm16', 'flac', 'opus', 'mp3', 'none']
+```
+
+## GPU Detection
+
+```python
+from amverge import resolve_gpu
+
+encoder = resolve_gpu("h264")  # Returns 'h264_nvenc' if NVIDIA GPU available
+```
