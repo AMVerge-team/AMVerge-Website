@@ -590,11 +590,11 @@ Explanation Section
 
 .explanation-section {
   display: grid;
-  grid-template-columns: minmax(0, 360px) auto minmax(0, 360px);
+  grid-template-columns: minmax(0, 520px) auto minmax(0, 520px);
   justify-content: center;
   align-content: center;
   align-items: start;
-  gap: clamp(28px, 5vw, 80px);
+  gap: clamp(32px, 5vw, 90px);
   width: 100%;
   min-height: 100vh;
   padding: clamp(80px, 12vh, 140px) clamp(20px, 4vw, 48px);
@@ -631,7 +631,7 @@ Explanation Section
 
 .explanation-label {
   font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(11px, 0.8vw, 14px);
+  font-size: clamp(14px, 1.1vw, 20px);
   letter-spacing: 2px;
   margin-bottom: clamp(8px, 1vw, 14px);
 }
@@ -650,9 +650,9 @@ Explanation Section
 
 .explanation-pane h2 {
   font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(48px, 6vw, 96px);
+  font-size: clamp(56px, 7vw, 120px);
   font-weight: normal;
-  margin: 0 0 clamp(12px, 1.5vw, 20px);
+  margin: 0 0 clamp(14px, 1.8vw, 24px);
   line-height: 0.85;
 }
 
@@ -666,7 +666,7 @@ Explanation Section
 
 .explanation-pane p {
   font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(14px, 1vw, 18px);
+  font-size: clamp(16px, 1.3vw, 24px);
   line-height: 1.5;
   margin: 0;
   max-width: 100%;
@@ -694,7 +694,7 @@ Explanation Section
 /* left-pane video (placeholder = hero clip) */
 .explanation-video {
   width: 100%;
-  max-width: 340px;
+  max-width: 100%;
   aspect-ratio: 16 / 9;
   margin-bottom: clamp(16px, 2vw, 28px);
   border-radius: 10px;
