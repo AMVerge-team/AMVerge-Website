@@ -9,9 +9,8 @@ export default function Explanation() {
                 <span className="explanation-label">The Old Way</span>
                 <h2>Hours</h2>
                 <div className="explanation-video">
-                    {/* TODO: swap for custom manual-cutting recording */}
                     <video muted loop playsInline autoPlay preload="auto">
-                        <source src="/clips/AMVerge-Video.mp4" type="video/mp4" />
+                        <source src="/clips/AE Manual Clips Splitting.mp4" type="video/mp4" />
                     </video>
                 </div>
                 <p>
@@ -28,9 +27,8 @@ export default function Explanation() {
                 <span className="explanation-label">With <span>AMV</span>erge</span>
                 <h2>Minutes</h2>
                 <div className="explanation-video">
-                    {/* TODO: swap for custom AMVerge usage recording */}
                     <video muted loop playsInline autoPlay preload="auto">
-                        <source src="/clips/AMVerge-Video.mp4" type="video/mp4" />
+                        <source src="/clips/AMVerge Scene Splitting.mp4" type="video/mp4" />
                     </video>
                 </div>
                 <p>
