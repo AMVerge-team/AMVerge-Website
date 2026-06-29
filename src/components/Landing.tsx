@@ -152,7 +152,6 @@ export default function Landing() {
           <source src="/clips/AMVerge-Video.mp4" type="video/mp4" />
         </video>
         <div className="hero-overlay" />
-        <div className="hero-particles" />
         <div className="hero-grid" />
         <div className="hero-content">
           {version && <p className="hero-badge">{version} · Windows</p>}
