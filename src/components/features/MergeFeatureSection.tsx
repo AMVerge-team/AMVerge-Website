@@ -1,5 +1,4 @@
-import { FiLayers } from "react-icons/fi";
-import { clipFrames } from "./clipFrames";
+import { FiVideo } from "react-icons/fi";
 
 export default function MergeFeatureSection() {
     return (
@@ -26,16 +25,9 @@ export default function MergeFeatureSection() {
                 </div>
             </div>
             <div className="feat-visual">
-                <div className="feat-merge-visual">
-                    <div className="feat-merge-clips">
-                        {clipFrames.slice(0, 4).map((src, i) => (
-                            <img key={i} src={src} alt="" className={i > 0 ? "feat-overlap" : ""} />
-                        ))}
-                    </div>
-                    <span className="feat-merge-arrow"><FiLayers /></span>
-                    <div className="feat-merge-result">
-                        <img src={clipFrames[0]} alt="" />
-                    </div>
+                <div className="feat-video-placeholder">
+                    <FiVideo />
+                    <span>Merge demo</span>
                 </div>
             </div>
         </section>

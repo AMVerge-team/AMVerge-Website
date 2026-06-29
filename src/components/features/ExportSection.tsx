@@ -4,17 +4,9 @@ export default function ExportSection() {
     return (
         <section className="feat-section feat-alt">
             <div className="feat-visual">
-                <div className="feat-export-visual">
-                    <div className="feat-export-badge"><FiVideo /> mp4</div>
-                    <div className="feat-export-badge">mkv</div>
-                    <div className="feat-export-badge">mov</div>
-                    <div className="feat-export-divider" />
-                    <div className="feat-export-targets">
-                        <span>DaVinci</span>
-                        <span>Premiere</span>
-                        <span>After Effects</span>
-                        <span>CapCut</span>
-                    </div>
+                <div className="feat-video-placeholder">
+                    <FiVideo />
+                    <span>Export demo</span>
                 </div>
             </div>
             <div className="feat-text">

@@ -1,15 +1,12 @@
-import { clipFrames } from "./clipFrames";
+import { FiVideo } from "react-icons/fi";
 
 export default function BrowseSection() {
     return (
         <section className="feat-section feat-alt">
             <div className="feat-visual">
-                <div className="feat-grid-mock">
-                    {clipFrames.map((src, i) => (
-                        <div key={i} className="feat-grid-cell">
-                            <img src={src} alt="" />
-                        </div>
-                    ))}
+                <div className="feat-video-placeholder">
+                    <FiVideo />
+                    <span>Grid browsing demo</span>
                 </div>
             </div>
             <div className="feat-text">

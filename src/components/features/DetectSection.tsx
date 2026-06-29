@@ -1,5 +1,4 @@
-import { FiScissors } from "react-icons/fi";
-import { clipFrames } from "./clipFrames";
+import { FiVideo } from "react-icons/fi";
 
 export default function DetectSection() {
     return (
@@ -26,25 +25,9 @@ export default function DetectSection() {
                 </div>
             </div>
             <div className="feat-visual">
-                <div className="feat-clip-stack">
-                    <div className="feat-clip-row">
-                        {clipFrames.slice(0, 8).map((src, i) => (
-                            <img key={i} src={src} alt="" />
-                        ))}
-                    </div>
-                    <div className="feat-clip-row">
-                        {clipFrames.slice(8, 16).map((src, i) => (
-                            <img key={i} src={src} alt="" />
-                        ))}
-                    </div>
-                    <div className="feat-clip-row">
-                        {clipFrames.slice(16, 20).map((src, i) => (
-                            <img key={i} src={src} alt="" />
-                        ))}
-                    </div>
-                </div>
-                <div className="feat-arrow-icon">
-                    <FiScissors />
+                <div className="feat-video-placeholder">
+                    <FiVideo />
+                    <span>Detection demo</span>
                 </div>
             </div>
         </section>
