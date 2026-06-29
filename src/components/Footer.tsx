@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiGithub, FiDownload } from "react-icons/fi";
+import { FaDiscord } from "react-icons/fa";
 import { downloadLatestExe } from "../utils/download";
 
 export default function Footer() {
@@ -40,6 +41,13 @@ export default function Footer() {
                         rel="noopener noreferrer"
                     >
                         <FiGithub /> GitHub
+                    </a>
+                    <a
+                        href="https://discord.com/invite/bmXjTgsAaN"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <FaDiscord /> Discord
                     </a>
                 </div>
             </div>

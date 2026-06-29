@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { FiDownload } from "react-icons/fi";
+import { FiDownload, FiGithub } from "react-icons/fi";
+import { FaDiscord } from "react-icons/fa";
 import {
   fetchLatestRelease,
   fetchReleases,
@@ -128,6 +129,24 @@ export default function Landing() {
                 ? "Loading..."
                 : `${displayCount.toLocaleString()}+ downloads`}
             </p>
+            <div className="hero-links">
+              <a
+                className="hero-link"
+                href="https://github.com/AMVerge-team/AMVerge"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FiGithub /> GitHub
+              </a>
+              <a
+                className="hero-link hero-link-discord"
+                href="https://discord.com/invite/bmXjTgsAaN"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaDiscord /> Discord
+              </a>
+            </div>
           </div>
         </div>
         <div

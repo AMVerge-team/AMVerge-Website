@@ -389,6 +389,32 @@ body {
   margin: 0;
 }
 
+.hero-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(15px, 1vw, 18px);
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.hero-link:hover {
+  color: white;
+}
+
+.hero-link-discord:hover {
+  color: #5865f2;
+}
+
 /* decorative background grid */
 .hero-grid {
   position: absolute;
