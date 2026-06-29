@@ -23,6 +23,7 @@
     color: white;
     font-weight: normal;
     line-height: 1.05;
+    letter-spacing: 1px;
     margin: clamp(8px, 1vw, 14px) 0 clamp(14px, 2vw, 22px);
 }
 
@@ -101,6 +102,7 @@
     color: white;
     font-weight: normal;
     line-height: 1.05;
+    letter-spacing: 1px;
     margin: clamp(8px, 1vw, 14px) 0 clamp(20px, 3vw, 32px);
 }
 

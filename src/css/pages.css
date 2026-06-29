@@ -20,6 +20,7 @@
     font-size: clamp(44px, 7vw, 72px);
     color: white;
     font-weight: normal;
+    letter-spacing: 1px;
     margin: 0;
 }
 
@@ -44,6 +45,8 @@
     font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: clamp(44px, 7vw, 72px);
     color: white;
+    font-weight: normal;
+    letter-spacing: 1px;
     margin: 0 0 12px;
 }
 
