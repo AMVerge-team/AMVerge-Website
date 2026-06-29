@@ -1,7 +1,30 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FiChevronRight, FiDownload } from "react-icons/fi";
+import { FaWindows, FaApple } from "react-icons/fa";
 import { fetchReleases } from "../services/github";
 import type { GithubRelease } from "../services/github";
+
+function getExcerpt(body: string | null) {
+    if (!body) return null;
+    const line = body.trim().split("\n")[0];
+    if (line.length <= 80) return line;
+    return line.slice(0, 80) + "...";
+}
+
+function getReleaseDownloads(rel: GithubRelease) {
+    let count = 0;
+    for (const a of rel.assets ?? []) {
+        if (!a.name.endsWith(".sig") && !a.name.endsWith("latest.json")) {
+            count += a.download_count;
+        }
+    }
+    return count;
+}
+
+function hasPlatform(rel: GithubRelease, ext: string) {
+    return (rel.assets ?? []).some((a) => a.name.endsWith(ext));
+}
 
 export default function Changelog() {
     const [releases, setReleases] = useState<GithubRelease[] | null>(null);
@@ -55,6 +78,8 @@ export default function Changelog() {
                             { year: "numeric", month: "short", day: "numeric" },
                         );
                         const isLatest = i === 0;
+                        const excerpt = getExcerpt(rel.body);
+                        const dls = getReleaseDownloads(rel);
 
                         return (
                             <Link
@@ -62,16 +87,39 @@ export default function Changelog() {
                                 className={`changelog-entry ${isLatest ? "changelog-latest" : ""}`}
                                 key={rel.id}
                             >
-                                <div className="changelog-head">
-                                    <span className="changelog-tag">{rel.tag_name}</span>
-                                    {isLatest && (
-                                        <span className="changelog-badge">Latest</span>
-                                    )}
-                                    <time>{date}</time>
+                                <div className="changelog-entry-inner">
+                                    <div className="changelog-left">
+                                        <div className="changelog-head">
+                                            <span className="changelog-tag">{rel.tag_name}</span>
+                                            {isLatest && (
+                                                <span className="changelog-badge">Latest</span>
+                                            )}
+                                            <time>{date}</time>
+                                        </div>
+                                        <h2 className="changelog-name">
+                                            {rel.name || rel.tag_name}
+                                        </h2>
+                                        {excerpt && (
+                                            <p className="changelog-excerpt">{excerpt}</p>
+                                        )}
+                                    </div>
+                                    <div className="changelog-right">
+                                        <div className="changelog-meta-row">
+                                            {hasPlatform(rel, ".exe") && (
+                                                <span className="changelog-platform"><FaWindows /></span>
+                                            )}
+                                            {hasPlatform(rel, ".dmg") && (
+                                                <span className="changelog-platform"><FaApple /></span>
+                                            )}
+                                            {dls > 0 && (
+                                                <span className="changelog-dls">
+                                                    <FiDownload /> {dls.toLocaleString()}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <FiChevronRight className="changelog-arrow" />
+                                    </div>
                                 </div>
-                                <h2 className="changelog-name">
-                                    {rel.name || rel.tag_name}
-                                </h2>
                             </Link>
                         );
                     })}
