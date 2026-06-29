@@ -1,4 +1,4 @@
-const API_BASE = "https://api.github.com/repos/crptk/AMVerge";
+const API_BASE = "https://api.github.com/repos/AMVerge-team/AMVerge";
 
 function headers(): HeadersInit {
   const token = import.meta.env.VITE_GITHUB_TOKEN as string | undefined;

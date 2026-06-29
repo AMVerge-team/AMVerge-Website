@@ -22,7 +22,7 @@ export default function Changelog() {
             {error && (
                 <p className="page-muted">
                     Could not load releases right now. See them on{" "}
-                    <a href="https://github.com/crptk/AMVerge/releases" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/AMVerge-team/AMVerge/releases" target="_blank" rel="noopener noreferrer">
                         GitHub
                     </a>.
                 </p>

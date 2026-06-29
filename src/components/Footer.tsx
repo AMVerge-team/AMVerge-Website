@@ -14,7 +14,7 @@ export default function Footer() {
                 <Link to="/gallery">Gallery</Link>
                 <Link to="/docs">Docs</Link>
                 <a
-                    href="https://github.com/crptk/AMVerge"
+                    href="https://github.com/AMVerge-team/AMVerge"
                     target="_blank"
                     rel="noopener noreferrer"
                 >

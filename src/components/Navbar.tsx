@@ -76,7 +76,7 @@ export default function Navbar() {
             <div className="nav-content">
                 <div className="nav-brand">
                     <a
-                        href="https://github.com/crptk/AMVerge"
+                        href="https://github.com/AMVerge-team/AMVerge"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="nav-github"

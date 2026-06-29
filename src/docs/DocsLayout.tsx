@@ -155,7 +155,7 @@ export default function DocsLayout() {
 
         <div className="docs-sidebar-footer">
           <a
-            href="https://github.com/crptk/AMVerge"
+            href="https://github.com/AMVerge-team/AMVerge"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"

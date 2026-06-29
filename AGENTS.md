@@ -1,6 +1,6 @@
 # AGENTS.md - AMVerge Website
 
-Marketing landing page + docs for AMVerge (the desktop scene-selection app by Crptk). Single-page React scroll site with a small Postgres-backed download counter API and an MDX docs section styled to match the landing.
+Marketing landing page + docs for AMVerge (the desktop scene-selection app by AMVerge-team). Single-page React scroll site with a small Postgres-backed download counter API and an MDX docs section styled to match the landing.
 
 ## AI Agent Instructions
 
@@ -136,7 +136,7 @@ Single long page. Each section is a `<div id="...">` matching the `sections` lis
 
 ### Download flow
 
-`Landing.tsx` / `CTA.tsx` hit `api.github.com/repos/crptk/AMVerge/releases/latest`, find the first `.exe` asset (excluding `.sig`), and redirect to its `browser_download_url`. Cumulative count sums `download_count` across all releases. `counter-server.cjs` is a separate optional Postgres counter, not required for downloads to work.
+`Landing.tsx` / `CTA.tsx` hit `api.github.com/repos/AMVerge-team/AMVerge/releases/latest`, find the first `.exe` asset (excluding `.sig`), and redirect to its `browser_download_url`. Cumulative count sums `download_count` across all releases. `counter-server.cjs` is a separate optional Postgres counter, not required for downloads to work.
 
 ## Code Conventions
 
@@ -161,4 +161,4 @@ Single long page. Each section is a `<div id="...">` matching the `sections` lis
 
 ## Origin
 
-Promotes AMVerge (desktop app by Crptk, GitHub `crptk/AMVerge`). The companion CLI/library lives in `AMVerge-CLI` (see its `AGENTS.md`). Preview gifs are from Sousou no Frieren E01.
+Promotes AMVerge (desktop app by AMVerge-team, GitHub `AMVerge-team/AMVerge`). The companion CLI/library lives in `AMVerge-CLI` (see its `AGENTS.md`). Preview gifs are from Sousou no Frieren E01.
