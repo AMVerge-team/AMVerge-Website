@@ -355,6 +355,60 @@
   line-height: 1.6;
 }
 
+/* ---- Terminal / console blocks (distinct from code blocks) ---- */
+.docs-content pre:has(code[class*="language-bash"]),
+.docs-content pre:has(code[class*="language-sh"]),
+.docs-content pre:has(code[class*="language-shell"]),
+.docs-content pre:has(code[class*="language-console"]),
+.docs-content pre:has(code[class*="language-terminal"]),
+.docs-content pre:has(code[class*="language-powershell"]),
+.docs-content pre:has(code[class*="language-ps"]),
+.docs-content pre:has(code[class*="language-zsh"]) {
+  background: #07070a;
+  border-color: rgba(255, 255, 255, 0.12);
+  padding-top: 40px;
+}
+
+/* title bar */
+.docs-content pre:has(code[class*="language-bash"])::before,
+.docs-content pre:has(code[class*="language-sh"])::before,
+.docs-content pre:has(code[class*="language-shell"])::before,
+.docs-content pre:has(code[class*="language-console"])::before,
+.docs-content pre:has(code[class*="language-terminal"])::before,
+.docs-content pre:has(code[class*="language-powershell"])::before,
+.docs-content pre:has(code[class*="language-ps"])::before,
+.docs-content pre:has(code[class*="language-zsh"])::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #14141a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px 8px 0 0;
+}
+
+/* traffic-light dots */
+.docs-content pre:has(code[class*="language-bash"])::after,
+.docs-content pre:has(code[class*="language-sh"])::after,
+.docs-content pre:has(code[class*="language-shell"])::after,
+.docs-content pre:has(code[class*="language-console"])::after,
+.docs-content pre:has(code[class*="language-terminal"])::after,
+.docs-content pre:has(code[class*="language-powershell"])::after,
+.docs-content pre:has(code[class*="language-ps"])::after,
+.docs-content pre:has(code[class*="language-zsh"])::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow: 16px 0 #ffbd2e, 32px 0 #27c93f;
+}
+
 .docs-content blockquote {
   margin: 24px 0;
   padding: 8px 18px;
