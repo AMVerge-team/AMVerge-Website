@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/LogoAMVergeFull.png" alt="AMVerge" height="80"/>
+  <img src="https://raw.githubusercontent.com/AMVerge-team/AMVerge/main/frontend/src/assets/amverge_title_gif.gif" alt="AMVerge" width="720"/>
 </p>
 
 <p align="center">
@@ -11,21 +11,19 @@
 
 # AMVerge Website
 
-Marketing landing page and documentation site for [AMVerge](https://github.com/AMVerge-team/AMVerge), the desktop scene selection tool for AMV editors.
-
-Built with React 19, TypeScript, Vite 8, and MDX.
+**Marketing landing page and documentation site for AMVerge.**  
+Built to showcase the app, explain the features, and help editors get started.
 
 ---
 
 ## Features
 
-- **Landing page** — Hero with background video, feature sections, contributors grid
-- **Features page** — Alternating left-right layout with video placeholders
-- **Changelog** — Live GitHub releases with dedicated release pages and download links
+- **Landing page** — Hero video background, pixel-style typography, dynamic accent color
+- **Features page** — Alternating left-right layout with demo video placeholders
+- **Changelog** — Live GitHub releases with dedicated per-version pages and download links
 - **FAQ** — Two-column accordion with animated expand
 - **Docs** — MDX-powered documentation matching the landing aesthetic
-- **Dynamic accent** — Hue slider rewrites `--accent` CSS variable globally
-- **Download counter** — Cumulative counts from GitHub release assets
+- **Live accent slider** — Hue slider rewrites `--accent` CSS variable globally
 
 ---
 
@@ -37,8 +35,6 @@ cd AMVerge-Website
 npm install
 npm run dev        # http://localhost:5173
 ```
-
----
 
 ## Build
 
@@ -62,11 +58,11 @@ npm run lint       # eslint
 | Fonts | Jersey 10 (Google Fonts) |
 | Lint | eslint 9 + typescript-eslint |
 
-No backend. Download counts read live from the GitHub releases API.
+No backend. Download counts and changelog data read live from the GitHub releases API.
 
 ---
 
-## Project Structure
+## Repository Structure
 
 ```
 src/
@@ -85,13 +81,15 @@ src/
 
 ## AI Agents
 
-An [AGENTS.md](AGENTS.md) file is included for AI coding assistants.
+An [AGENTS.md](AGENTS.md) file is included for AI coding assistants (OpenCode, Claude Code, Cursor, etc.).
 
 ---
 
 ## License
 
-AMVerge Website is licensed under the GNU GPL v3.0. See [LICENSE](LICENSE) for details.
+AMVerge Website is licensed under the GNU GPL v3.0. See [LICENSE](LICENSE) for the full text.
+
+Any derivative work must also be open-source under the same license.
 
 Based on AMVerge by [Crptk](https://github.com/crptk).
 
