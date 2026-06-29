@@ -10,7 +10,7 @@ Marketing landing page + docs for AMVerge (the desktop scene-selection app by AM
 - **Commit per task:** separate commit after each task/logical change. Do not batch unrelated changes.
 - **No em dashes:** never use `—` in any prose, docs, README, MDX, or commit messages. Use a comma, colon, parentheses, or plain hyphen `-` instead.
 - **Accent color is dynamic:** all theme color comes from the CSS var `--accent`. The navbar hue slider rewrites it at runtime on `document.documentElement`. Never hardcode the accent green, use `var(--accent)`.
-- **Two CSS worlds:** `index.css` is a light/dark token system that is mostly overridden. `App.css` sets the real look (black bg, `Jersey 10` pixel font on everything). Docs live in `Docs.css`. Know which file owns a rule before editing.
+- **Two CSS worlds:** `index.css` is a light/dark token system that is mostly overridden. `src/css/home.css` sets the real look (black bg, `Jersey 10` pixel font on everything). Docs live in `src/css/docs.css`. Know which file owns a rule before editing.
 
 ## Build & Run
 
@@ -51,9 +51,14 @@ AMVerge-Website/
 ├── src/
 │   ├── main.tsx              entry, BrowserRouter, routes (/ -> App, /docs -> DocsLayout)
 │   ├── App.tsx               landing page, stacks all section components
-│   ├── App.css               real site styling: black bg, Jersey 10 font, --accent
-│   ├── index.css             light/dark token base (mostly overridden by App.css)
+│   ├── index.css             light/dark token base (mostly overridden by home.css)
 │   ├── mdx.d.ts              type decl for importing *.mdx as components
+│   │
+│   ├── css/
+│   │   ├── home.css          real site styling: black bg, Jersey 10 font, --accent
+│   │   ├── pages.css         shared styling for multi-page routes (landing look)
+│   │   ├── features.css      feature section alternating layout + video placeholders
+│   │   └── docs.css          docs styling, matches landing (black/Jersey/--accent)
 │   │
 │   ├── components/
 │   │   ├── home/
@@ -156,7 +161,7 @@ Single long page. Each section is a `<div id="...">` matching the `sections` lis
 
 - **TypeScript:** PascalCase components, camelCase vars/fns, typed props and API shapes.
 - **Components:** one component per file in `components/`, default export.
-- **Styling:** plain CSS, no Tailwind. Landing rules in `App.css`, docs rules in `Docs.css`. Use `var(--accent)` for theme color.
+- **Styling:** plain CSS, no Tailwind. Landing rules in `css/home.css`, docs rules in `css/docs.css`. Use `var(--accent)` for theme color.
 - **AMVerge wordmark:** `<span>AMV</span>erge`, the `AMV` span is colored `--accent`, `erge` stays white. Match this everywhere (landing, docs, MiniUI).
 - **Assets:** runtime images served from `public/` via absolute paths (`/clips/...`). Build-time imports from `src/assets/`.
 
@@ -168,7 +173,7 @@ Single long page. Each section is a `<div id="...">` matching the `sections` lis
 | `src/main.tsx` | Routes generated from `docs/registry.ts`. The first entry is the index route (`path` undefined, `index`), others use their slug. Keep this mapping if editing routes. |
 | `src/components/Navbar.tsx` | `sections` array ids MUST match the `id=` on each landing section div, or scroll-spy and nav clicks break. Slider writes `--accent` globally. |
 | `src/index.css` | `#root { text-align: center }` and `width: 80%`. Docs override both (`.docs-root { text-align: left }` + viewport breakout). Do not assume content is left-aligned by default. |
-| `src/docs/Docs.css` | `.docs-root` breaks out of `#root`'s 80% width via `width: 100vw; margin-left: calc(-50vw + 50%)` to fill screen. Docs reuse the landing look (black bg, Jersey font, `--accent`). |
+| `src/css/docs.css` | `.docs-root` breaks out of `#root`'s 80% width via `width: 100vw; margin-left: calc(-50vw + 50%)` to fill screen. Docs reuse the landing look (black bg, Jersey font, `--accent`). |
 | `counter-server.cjs` | CORS `origin` list is hardcoded (localhost + a placeholder vercel domain). Update it for real deploys. Needs `DATABASE_URL`, SSL `rejectUnauthorized: false`. |
 | `src/components/MiniUI.tsx` / `Explanation.tsx` | Both render a 35-cell clip grid from `/clips/Sousou no Frieren - 01_0109..0143.gif`. Those gif files must exist in `public/clips/`. |
 | Prod deep links | Vite dev serves `/docs/installation` fine, but a static build needs SPA fallback to `index.html` or refreshing a subroute 404s. Not configured yet. |

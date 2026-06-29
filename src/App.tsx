@@ -9,7 +9,7 @@ import Merge from "./components/home/Merge.tsx"
 import Contributors from "./components/home/Contributors.tsx"
 import Footer from "./components/ui/Footer.tsx"
 import SectionDivider from "./components/ui/SectionDivider.tsx"
-import './App.css'
+import './css/home.css'
 
 function App() {
   const { hash } = useLocation()

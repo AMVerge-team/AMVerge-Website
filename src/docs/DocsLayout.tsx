@@ -11,7 +11,7 @@ import {
 import { docGroups, docHref } from './registry'
 import { useToc } from './useToc'
 import SearchModal from './SearchModal'
-import './Docs.css'
+import '../css/docs.css'
 
 export default function DocsLayout() {
   const location = useLocation()
