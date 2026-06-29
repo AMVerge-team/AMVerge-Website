@@ -184,6 +184,8 @@
 }
 
 .faq-item {
+    display: flex;
+    flex-direction: column;
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
     overflow: hidden;
