@@ -25,10 +25,10 @@ function App() {
       <main>
         <Landing />
         <About />
-        <Contributors />
         <Explanation />
         <Merge />
         <CTA />
+        <Contributors />
       </main>
       <Footer />
     </>
