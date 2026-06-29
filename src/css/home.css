@@ -474,7 +474,7 @@ body {
   margin-left: 0;
 }
 
-.contrib-avatars:hover .ca-dot {
+.ca-dot:hover {
   border-color: var(--accent);
   transform: translateY(-3px);
 }
@@ -487,10 +487,6 @@ body {
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: 15px;
   color: #aaa;
-}
-
-.contrib-avatars:hover .ca-more {
-  color: var(--accent);
 }
 
 /* decorative background grid */
