@@ -344,62 +344,9 @@
   background: #121216;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  padding: 42px 18px 16px;
+  padding: 46px 18px 16px;
   overflow-x: auto;
 }
-
-/* ---- Code block header bar (accent dot + language label) ---- */
-.docs-content pre::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  padding-left: 32px;
-  background: #16161c;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px 8px 0 0;
-  font-family: ui-monospace, Consolas, monospace;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #8a8a95;
-}
-
-/* accent dot at the left of the bar */
-.docs-content pre::after {
-  content: "";
-  position: absolute;
-  top: 12px;
-  left: 14px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-/* per-language labels */
-.docs-content pre:has(code.language-python)::before,
-.docs-content pre:has(code.language-py)::before { content: "Python"; }
-.docs-content pre:has(code.language-ts)::before,
-.docs-content pre:has(code.language-typescript)::before { content: "TypeScript"; }
-.docs-content pre:has(code.language-tsx)::before { content: "TSX"; }
-.docs-content pre:has(code.language-js)::before,
-.docs-content pre:has(code.language-javascript)::before { content: "JavaScript"; }
-.docs-content pre:has(code.language-jsx)::before { content: "JSX"; }
-.docs-content pre:has(code.language-json)::before { content: "JSON"; }
-.docs-content pre:has(code.language-rust)::before,
-.docs-content pre:has(code.language-rs)::before { content: "Rust"; }
-.docs-content pre:has(code.language-toml)::before { content: "TOML"; }
-.docs-content pre:has(code.language-yaml)::before,
-.docs-content pre:has(code.language-yml)::before { content: "YAML"; }
-.docs-content pre:has(code.language-html)::before { content: "HTML"; }
-.docs-content pre:has(code.language-css)::before { content: "CSS"; }
-.docs-content pre:has(code.language-md)::before,
-.docs-content pre:has(code.language-markdown)::before { content: "Markdown"; }
 
 .docs-content pre code {
   background: none;
@@ -408,7 +355,57 @@
   line-height: 1.6;
 }
 
-/* ---- Terminal / console blocks (distinct from code blocks) ---- */
+/* ---- Code / terminal header bar (icon + language label, injected by JS) ---- */
+.code-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 0 14px;
+  background: #16161c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px 8px 0 0;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: #9a9aa5;
+}
+
+.code-ic {
+  display: inline-flex;
+  align-items: center;
+}
+
+.code-ic svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.code-lang {
+  line-height: 1;
+}
+
+/* terminal variant: traffic-light dots instead of an icon, darker bar */
+.code-header.terminal {
+  background: #14141a;
+}
+
+.code-dots {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow: 16px 0 #ffbd2e, 32px 0 #27c93f;
+  margin-right: 30px;
+}
+
+/* terminal blocks get a darker body */
 .docs-content pre:has(code[class*="language-bash"]),
 .docs-content pre:has(code[class*="language-sh"]),
 .docs-content pre:has(code[class*="language-shell"]),
@@ -419,47 +416,6 @@
 .docs-content pre:has(code[class*="language-zsh"]) {
   background: #07070a;
   border-color: rgba(255, 255, 255, 0.12);
-  padding-top: 40px;
-}
-
-/* title bar */
-.docs-content pre:has(code[class*="language-bash"])::before,
-.docs-content pre:has(code[class*="language-sh"])::before,
-.docs-content pre:has(code[class*="language-shell"])::before,
-.docs-content pre:has(code[class*="language-console"])::before,
-.docs-content pre:has(code[class*="language-terminal"])::before,
-.docs-content pre:has(code[class*="language-powershell"])::before,
-.docs-content pre:has(code[class*="language-ps"])::before,
-.docs-content pre:has(code[class*="language-zsh"])::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  background: #14141a;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px 8px 0 0;
-}
-
-/* traffic-light dots */
-.docs-content pre:has(code[class*="language-bash"])::after,
-.docs-content pre:has(code[class*="language-sh"])::after,
-.docs-content pre:has(code[class*="language-shell"])::after,
-.docs-content pre:has(code[class*="language-console"])::after,
-.docs-content pre:has(code[class*="language-terminal"])::after,
-.docs-content pre:has(code[class*="language-powershell"])::after,
-.docs-content pre:has(code[class*="language-ps"])::after,
-.docs-content pre:has(code[class*="language-zsh"])::after {
-  content: "";
-  position: absolute;
-  top: 11px;
-  left: 14px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #ff5f56;
-  box-shadow: 16px 0 #ffbd2e, 32px 0 #27c93f;
 }
 
 .docs-content blockquote {
