@@ -344,9 +344,62 @@
   background: #121216;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  padding: 16px 18px;
+  padding: 42px 18px 16px;
   overflow-x: auto;
 }
+
+/* ---- Code block header bar (accent dot + language label) ---- */
+.docs-content pre::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding-left: 32px;
+  background: #16161c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px 8px 0 0;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8a8a95;
+}
+
+/* accent dot at the left of the bar */
+.docs-content pre::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* per-language labels */
+.docs-content pre:has(code.language-python)::before,
+.docs-content pre:has(code.language-py)::before { content: "Python"; }
+.docs-content pre:has(code.language-ts)::before,
+.docs-content pre:has(code.language-typescript)::before { content: "TypeScript"; }
+.docs-content pre:has(code.language-tsx)::before { content: "TSX"; }
+.docs-content pre:has(code.language-js)::before,
+.docs-content pre:has(code.language-javascript)::before { content: "JavaScript"; }
+.docs-content pre:has(code.language-jsx)::before { content: "JSX"; }
+.docs-content pre:has(code.language-json)::before { content: "JSON"; }
+.docs-content pre:has(code.language-rust)::before,
+.docs-content pre:has(code.language-rs)::before { content: "Rust"; }
+.docs-content pre:has(code.language-toml)::before { content: "TOML"; }
+.docs-content pre:has(code.language-yaml)::before,
+.docs-content pre:has(code.language-yml)::before { content: "YAML"; }
+.docs-content pre:has(code.language-html)::before { content: "HTML"; }
+.docs-content pre:has(code.language-css)::before { content: "CSS"; }
+.docs-content pre:has(code.language-md)::before,
+.docs-content pre:has(code.language-markdown)::before { content: "Markdown"; }
 
 .docs-content pre code {
   background: none;
