@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar.tsx"
 import Merge from "./components/Merge.tsx"
 import Contributors from "./components/Contributors.tsx"
 import Footer from "./components/Footer.tsx"
+import SectionDivider from "./components/SectionDivider.tsx"
 import './App.css'
 
 function App() {
@@ -24,10 +25,15 @@ function App() {
       <Navbar />
       <main>
         <Landing />
+        <SectionDivider />
         <About />
+        <SectionDivider />
         <Explanation />
+        <SectionDivider />
         <Merge />
+        <SectionDivider />
         <CTA />
+        <SectionDivider />
         <Contributors />
       </main>
       <Footer />

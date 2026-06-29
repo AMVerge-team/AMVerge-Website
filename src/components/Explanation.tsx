@@ -4,7 +4,7 @@ export default function Explanation() {
     const ref = useFadeIn<HTMLDivElement>();
 
     return (
-        <div id="explanation" className="explanation-section fade-in section-divider" ref={ref}>
+        <div id="explanation" className="explanation-section fade-in" ref={ref}>
             <div className="explanation-pane explanation-old">
                 <span className="explanation-label">The Old Way</span>
                 <h2>Hours</h2>
