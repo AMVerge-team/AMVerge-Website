@@ -126,7 +126,7 @@
     text-align: left;
 }
 
-.feat-alt {
+.feat-section.feat-alt {
     flex-direction: row-reverse;
 }
 
@@ -255,7 +255,7 @@
 /* ---- Responsive ---- */
 @media (max-width: 860px) {
     .feat-section,
-    .feat-alt {
+    .feat-section.feat-alt {
         flex-direction: column;
         min-height: auto;
         padding: clamp(32px, 5vh, 56px) 0;
