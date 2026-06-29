@@ -121,7 +121,7 @@
 
 /* ---- Changelog ---- */
 .changelog-card-logo {
-    height: 16px;
+    height: 20px;
 }
 
 .changelog-list {
@@ -129,6 +129,34 @@
     flex-direction: column;
     gap: 12px;
     text-align: left;
+}
+
+.changelog-list.fade-in-children .changelog-entry {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.changelog-list.fade-in-children .changelog-entry:nth-child(1) { animation-delay: 0s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(2) { animation-delay: 0.08s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(3) { animation-delay: 0.16s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(4) { animation-delay: 0.24s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(5) { animation-delay: 0.32s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(6) { animation-delay: 0.4s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(7) { animation-delay: 0.48s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(8) { animation-delay: 0.56s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(9) { animation-delay: 0.64s; }
+.changelog-list.fade-in-children .changelog-entry:nth-child(10) { animation-delay: 0.72s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .changelog-entry {

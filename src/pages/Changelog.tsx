@@ -71,7 +71,7 @@ export default function Changelog() {
             )}
 
             {releases && (
-                <div className="changelog-list">
+                <div className="changelog-list fade-in-children">
                     {releases.map((rel, i) => {
                         const date = new Date(rel.published_at).toLocaleDateString(
                             undefined,
