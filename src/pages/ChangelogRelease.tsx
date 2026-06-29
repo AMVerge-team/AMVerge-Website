@@ -11,9 +11,14 @@ import { fetchReleaseByTag } from "../services/github";
 import type { GithubRelease, GithubAsset } from "../services/github";
 
 function getDownloads(rel: GithubRelease) {
-    return (rel.assets ?? []).filter(
+    const list = (rel.assets ?? []).filter(
         (a) => !a.name.endsWith(".sig") && !a.name.endsWith("latest.json"),
     );
+    return list.sort((a, b) => {
+        const pa = a.name.endsWith(".exe") ? 0 : a.name.endsWith(".dmg") ? 1 : 2;
+        const pb = b.name.endsWith(".exe") ? 0 : b.name.endsWith(".dmg") ? 1 : 2;
+        return pa - pb;
+    });
 }
 
 function formatSize(bytes: number) {
