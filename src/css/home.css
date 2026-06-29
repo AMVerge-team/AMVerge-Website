@@ -1153,16 +1153,17 @@ CTA Section
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(16px, 1.1vw, 19px);
   color: white;
+  background: transparent;
   text-decoration: none;
-  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 10px;
   padding: 9px 20px;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .contrib-cta:hover {
-  background: var(--accent);
-  color: black;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 
