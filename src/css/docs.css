@@ -465,26 +465,56 @@
 
 .docs-content table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 24px 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 28px 0;
   font-family: system-ui, sans-serif;
   font-size: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .docs-content th,
 .docs-content td {
   text-align: left;
-  padding: 10px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.docs-content th {
+/* vertical column dividers */
+.docs-content th:not(:last-child),
+.docs-content td:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* no border under the last row */
+.docs-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-content thead th {
   color: white;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-bottom-color: rgba(255, 255, 255, 0.14);
 }
 
-.docs-content td {
+.docs-content tbody td {
   color: #b8b8c0;
+}
+
+.docs-content tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.docs-content tbody tr {
+  transition: background 0.15s ease;
+}
+
+.docs-content tbody tr:hover {
+  background: rgba(255, 255, 255, 0.045);
 }
 
 /* =====================================================
