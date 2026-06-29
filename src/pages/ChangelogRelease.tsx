@@ -105,6 +105,7 @@ export default function ChangelogRelease() {
                 <FiArrowLeft /> Changelog
             </Link>
 
+            <div className="release-fade-in">
             <div className="release-header">
                 <div className="release-meta">
                     <span className="changelog-tag">{release.tag_name}</span>
@@ -142,6 +143,7 @@ export default function ChangelogRelease() {
                 >
                     <FiExternalLink /> View on GitHub
                 </a>
+            </div>
             </div>
         </div>
     );
