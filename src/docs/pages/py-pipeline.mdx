@@ -1,8 +1,7 @@
 # Pipeline API
 
-The high-level entry point for scene detection.
-
-## `detect_scenes(video_path, **kwargs)`
+The high-level entry point for scene detection. One call detects scenes, cuts
+clips, generates thumbnails, and runs the similarity check.
 
 ```python
 from amverge import detect_scenes
@@ -12,49 +11,92 @@ for scene in result.scenes:
     print(scene.index, scene.start, scene.end, scene.path)
 ```
 
+## `detect_scenes(...)`
+
+```python
+def detect_scenes(
+    video_path: str,
+    output_dir: str | None = None,
+    method: DetectionMethod = "keyframe",
+    min_duration: float = 0.25,
+    thumbnails: bool = True,
+    similarity: bool = True,
+    similarity_threshold: float = 0.10,
+    thumbnail_workers: int = 4,
+    edge_threshold: float = 0.15,
+    edge_radius: float = 0.6,
+    edge_blocksize: int = 3,
+    progress: ProgressCb | None = None,
+) -> DetectResult: ...
+```
+
 | Param | Type | Default | Description |
-|-------|------|---------|-------------|
-| `video_path` | `str` | required | Path to video file |
-| `method` | `DetectionMethod` | `KEYFRAME` | `KEYFRAME`, `EDGE`, or `TRANSNETV2` |
-| `output_dir` | `str` | auto | Output directory for scenes |
+|---|---|---|---|
+| `video_path` | `str` | required | Path to the source video |
+| `output_dir` | `str \| None` | `<stem>_scenes/` | Where clips + thumbnails are written |
+| `method` | `DetectionMethod` | `"keyframe"` | `"keyframe"`, `"edge"`, or `"transnetv2"` |
 | `min_duration` | `float` | `0.25` | Merge scenes shorter than N seconds |
-| `workers` | `int` | `4` | Thumbnail thread count |
-| `no_thumbnails` | `bool` | `False` | Skip thumbnail generation |
-| `no_similarity` | `bool` | `False` | Skip similarity check |
-| `edge_threshold` | `float` | `0.15` | Edge detection sensitivity |
-| `edge_radius` | `float` | `0.6` | Keyframe window radius |
-
-## `DetectResult`
-
-Returned by `detect_scenes()`.
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `scenes` | `list[Scene]` | All detected scenes |
-| `method` | `DetectionMethod` | Method used |
-| `video_path` | `str` | Source video path |
-| `duration` | `float` | Video duration in seconds |
-| `thumbnail_paths` | `list[str]` | Generated thumbnail paths |
-
-## `Scene`
-
-Represents a single detected scene.
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `index` | `int` | Scene number (0-based) |
-| `start` | `float` | Start time in seconds |
-| `end` | `float` | End time in seconds |
-| `path` | `str` | Clip file path |
-| `thumbnail` | `str` | Thumbnail file path |
-| `original_file` | `str` | Source video path |
+| `thumbnails` | `bool` | `True` | Generate JPEG thumbnails |
+| `similarity` | `bool` | `True` | Run adjacent-scene similarity check |
+| `similarity_threshold` | `float` | `0.10` | Dissimilarity cutoff (lower = stricter) |
+| `thumbnail_workers` | `int` | `4` | Parallel thumbnail threads |
+| `edge_threshold` | `float` | `0.15` | Cut sensitivity (edge method) |
+| `edge_radius` | `float` | `0.6` | Keyframe window in seconds (edge method) |
+| `edge_blocksize` | `int` | `3` | Edge-map pooling block size (edge method) |
+| `progress` | `ProgressCb \| None` | `None` | Callback `(stage, percent, message)` |
 
 ## `DetectionMethod`
 
-```python
-from amverge import DetectionMethod
+A string literal type, not an enum:
 
-DetectionMethod.KEYFRAME    # I-frame based (fast, default)
-DetectionMethod.EDGE        # Canny edge detection
-DetectionMethod.TRANSNETV2  # ML deep learning
+```python
+DetectionMethod = Literal["keyframe", "edge", "transnetv2"]
 ```
+
+## `Scene`
+
+```python
+@dataclass
+class Scene:
+    index: int            # 0-based scene number
+    start: float          # start time (seconds)
+    end: float            # end time (seconds)
+    duration: float       # end - start
+    path: str             # absolute path to the .mp4 clip
+    thumbnail: str | None # thumbnail JPEG path, or None
+    original_file: str    # source video file stem
+```
+
+`Scene.to_dict()` serializes to a plain dict.
+
+## `DetectResult`
+
+```python
+@dataclass
+class DetectResult:
+    scenes: list[Scene]
+    similar_pairs: list[tuple[int, int]]  # adjacent indices flagged similar
+    output_dir: str
+    scenes_json: str                       # path to saved scenes.json
+    # set by SceneDetector: detection_time, method, video_path
+```
+
+| Method | Description |
+|---|---|
+| `to_dict()` | Plain dict with `scenes`, `similar_pairs`, `output_dir`, `scenes_json` |
+| `to_json(path)` | Write the result as JSON, returns the path |
+| `filter(min_duration=1.0)` | New result with short scenes removed (adjacent merged) |
+
+## Progress callback
+
+```python
+def on_progress(stage: str, pct: int, msg: str) -> None:
+    print(f"[{pct:3d}%] {stage}: {msg}")
+
+detect_scenes("episode.mp4", method="transnetv2", progress=on_progress)
+```
+
+> TransNetV2 needs `pip install amverge[ml]`; edge needs `pip install amverge[edge]`.
+> Both raise a clear `ImportError` if the extra is missing.
+
+Next: [Video & Metadata](/docs/py-video).
