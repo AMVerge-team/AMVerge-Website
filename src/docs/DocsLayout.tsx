@@ -90,8 +90,12 @@ export default function DocsLayout() {
   const renderSubgroup = (sg: DocSubgroup, prefix: string, depth: number) => {
     const key = `${prefix}/${sg.label}`
     const open = isOpen(key)
+    const hasSub = Boolean(sg.subgroups?.length)
     return (
-      <div key={key} className={`docs-subgroup depth-${depth}`}>
+      <div
+        key={key}
+        className={`docs-subgroup depth-${depth} ${hasSub ? 'has-subgroups' : ''}`}
+      >
         <button
           className="docs-subgroup-label"
           onClick={() => toggle(key)}

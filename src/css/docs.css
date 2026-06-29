@@ -209,16 +209,27 @@
   font-size: 13px;
 }
 
+/* a subgroup that holds other subgroups (e.g. Python Library) reads like a
+   nav item, matching the page links beside it */
+.docs-subgroup.has-subgroups > .docs-subgroup-label {
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  color: #888;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  padding: 6px 10px;
+}
+
+.docs-subgroup.has-subgroups > .docs-subgroup-label:hover {
+  color: white;
+}
+
 /* nested subgroups (e.g. Python Library -> Core Pipeline) indent a level */
 .docs-subgroup .docs-subgroup.depth-1 {
   margin-left: 12px;
   padding-left: 8px;
   border-left: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.docs-subgroup.depth-1 > .docs-subgroup-label {
-  font-size: 10px;
-  color: #7a7a82;
 }
 
 /* nested page links sit slightly indented under their subgroup label */
