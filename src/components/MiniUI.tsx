@@ -123,34 +123,32 @@ export default function MiniUI() {
                         <div className="rp-card-head">
                             <FiFilePlus /> EXPORT SETTINGS
                         </div>
-                        <div className="rp-export-grid">
-                            <div className="rp-export-left">
-                                <div className="rp-select-row">
-                                    <div className="rp-select">
-                                        <div className="rp-select-main">
-                                            <strong>DEFAULT MP4</strong>
-                                            <span>H.264 High · AAC · MP4</span>
-                                        </div>
-                                        <FiChevronDown />
-                                    </div>
-                                    <span className="rp-icon-btn"><FiEdit2 /></span>
+                        <div className="rp-row">
+                            <div className="rp-select">
+                                <div className="rp-select-main">
+                                    <strong>DEFAULT MP4</strong>
+                                    <span>H.264 High · AAC · MP4</span>
                                 </div>
-                                <div className="rp-dest-row">
-                                    <div className="rp-dest">Select destination...</div>
-                                    <span className="rp-icon-btn"><FiFolder /></span>
-                                </div>
-                                <div className="rp-options">
-                                    <label className="rp-opt">
-                                        MERGE CLIPS <span className="am-box checked" />
-                                    </label>
-                                    <label className="rp-opt">
-                                        PREVIEW LANGUAGE
-                                        <span className="rp-mini-select">EN <FiChevronDown /></span>
-                                    </label>
-                                </div>
+                                <FiChevronDown />
                             </div>
-                            <button className="rp-export-btn">Export Now</button>
+                            <span className="rp-browse"><FiEdit2 /></span>
                         </div>
+                        <div className="rp-row">
+                            <div className="rp-dest">Select destination...</div>
+                            <span className="rp-browse"><FiFolder /></span>
+                        </div>
+                        <div className="rp-row rp-opts">
+                            <label className="rp-opt">
+                                MERGE CLIPS <span className="am-box checked" />
+                            </label>
+                            <label className="rp-opt rp-opt-lang">
+                                PREVIEW LANGUAGE
+                                <span className="rp-mini-select">EN <FiChevronDown /></span>
+                            </label>
+                        </div>
+                        <button className="rp-export-main">
+                            <FiFilePlus /> Export Now
+                        </button>
                     </div>
 
                     <div className="rp-card">

@@ -1208,34 +1208,21 @@ UI Section
   gap: 5px;
 }
 
-.rp-export-grid {
+.rp-row {
   display: flex;
-  align-items: stretch;
-  gap: 6px;
-}
-
-.rp-export-left {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.rp-select-row {
-  display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: 5px;
 }
 
 .rp-select {
   flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
-  padding: 4px 6px;
+  border-radius: 8px;
+  padding: 5px 8px;
   color: #ccc;
 }
 
@@ -1255,70 +1242,82 @@ UI Section
   color: #888;
 }
 
-.rp-icon-btn {
+/* pencil / folder browse buttons (match .export-dir-browse) */
+.rp-browse {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
-  color: #bbb;
-  font-size: 11px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
-}
-
-.rp-export-btn {
-  flex: 0 0 auto;
-  width: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 1px solid var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   border-radius: 8px;
-  background: none;
-  color: var(--accent);
-  font-size: 11px;
-  padding: 0 6px;
-}
-
-.rp-dest-row {
-  display: flex;
-  gap: 5px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
 }
 
 .rp-dest {
   flex: 1;
-  font-size: 9px;
+  min-width: 0;
+  font-size: 10px;
   color: #888;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
-  padding: 5px 7px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 7px 9px;
 }
 
-.rp-options {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+.rp-opts {
+  justify-content: flex-start;
+  gap: 12px;
 }
 
 .rp-opt {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-size: 9px;
-  color: #aaa;
-  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.7px;
+}
+
+.rp-opt-lang {
+  flex: 1;
 }
 
 .rp-mini-select {
   display: flex;
   align-items: center;
-  gap: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
-  padding: 1px 4px;
+  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 4px 6px;
   color: #ccc;
+}
+
+/* full-width Export Now at the bottom (match .export-main-button) */
+.rp-export-main {
+  width: 100%;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.rp-export-main:hover {
+  background: var(--accent);
+  color: black;
 }
 
 .rp-tabs {
