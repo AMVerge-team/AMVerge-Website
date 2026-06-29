@@ -147,6 +147,7 @@ export default function Landing() {
           loop
           playsInline
           preload="auto"
+          controls
         >
           <source src="/clips/AMVerge-Video.mp4" type="video/mp4" />
         </video>
