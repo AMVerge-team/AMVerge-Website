@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+<p align="center">
+  <img src="public/LogoAMVergeFull.png" alt="AMVerge" height="80"/>
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="https://img.shields.io/badge/react-19-61dafb?style=flat-square" alt="React"/>
+  <img src="https://img.shields.io/badge/typescript-~6-3178c6?style=flat-square" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/vite-8-646cff?style=flat-square" alt="Vite"/>
+  <img src="https://img.shields.io/badge/license-GPL--3.0-22c55e?style=flat-square" alt="License"/>
+</p>
 
-Currently, two official plugins are available:
+# AMVerge Website
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Marketing landing page and documentation site for [AMVerge](https://github.com/AMVerge-team/AMVerge), the desktop scene selection tool for AMV editors.
 
-## React Compiler
+Built with React 19, TypeScript, Vite 8, and MDX.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Landing page** — Hero with background video, feature sections, contributors grid
+- **Features page** — Alternating left-right layout with video placeholders
+- **Changelog** — Live GitHub releases with dedicated release pages and download links
+- **FAQ** — Two-column accordion with animated expand
+- **Docs** — MDX-powered documentation matching the landing aesthetic
+- **Dynamic accent** — Hue slider rewrites `--accent` CSS variable globally
+- **Download counter** — Cumulative counts from GitHub release assets
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Quick Start
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/AMVerge-team/AMVerge-Website.git
+cd AMVerge-Website
+npm install
+npm run dev        # http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build      # tsc + vite build -> dist/
+npm run preview    # serve built dist/
+npm run lint       # eslint
 ```
+
+---
+
+## Tech Stack
+
+| Layer | Tech |
+|---|---|
+| Build | Vite 8 |
+| UI | React 19 |
+| Language | TypeScript ~6 |
+| Routing | react-router-dom |
+| Docs | MDX via `@mdx-js/rollup` |
+| Fonts | Jersey 10 (Google Fonts) |
+| Lint | eslint 9 + typescript-eslint |
+
+No backend. Download counts read live from the GitHub releases API.
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── home/          Landing, About, Explanation, Merge, CTA, Contributors
+│   ├── ui/            Navbar, Footer, MiniUI, SectionDivider, ContributorAvatars
+│   └── features/      DetectSection, BrowseSection, MergeFeatureSection, ExportSection
+├── pages/             Features, Changelog, FAQ, Gallery, ChangelogRelease
+├── css/               home.css, pages.css, features.css, docs.css
+├── docs/              DocsLayout, registry, MDX pages
+├── services/github/   GitHub API client, releases, contributors
+└── hooks/             useFadeIn, useContributors
+```
+
+---
+
+## AI Agents
+
+An [AGENTS.md](AGENTS.md) file is included for AI coding assistants.
+
+---
+
+## License
+
+AMVerge Website is licensed under the GNU GPL v3.0. See [LICENSE](LICENSE) for details.
+
+Based on AMVerge by [Crptk](https://github.com/crptk).
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on reporting issues, submitting PRs, and development setup.
