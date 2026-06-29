@@ -12,6 +12,7 @@ import { docGroups, docHref } from './registry'
 import { useToc } from './useToc'
 import SearchModal from './SearchModal'
 import '../css/docs.css'
+import 'highlight.js/styles/github-dark.css'
 
 export default function DocsLayout() {
   const location = useLocation()

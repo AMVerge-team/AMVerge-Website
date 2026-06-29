@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import mdx from '@mdx-js/rollup'
 import rehypeSlug from 'rehype-slug'
+import rehypeHighlight from 'rehype-highlight'
+import remarkGfm from 'remark-gfm'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -38,7 +40,7 @@ function docSources() {
 export default defineConfig({
   plugins: [
     docSources(),
-    { enforce: 'pre', ...mdx({ rehypePlugins: [rehypeSlug] }) },
+    { enforce: 'pre', ...mdx({ remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug, rehypeHighlight] }) },
     react({ include: /\.(jsx|js|mdx|md|tsx|ts)$/ }),
   ],
 })
