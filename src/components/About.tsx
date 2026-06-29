@@ -5,7 +5,7 @@ export default function About() {
     const ref = useFadeIn<HTMLDivElement>();
 
     return (
-        <div id="about" className="about-section fade-in" ref={ref}>
+        <div id="about" className="about-section fade-in section-divider" ref={ref}>
             <div className="about-text">
                 <h1>
                     Your Episode.<br />

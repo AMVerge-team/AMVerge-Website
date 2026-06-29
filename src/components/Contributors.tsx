@@ -16,7 +16,7 @@ export default function Contributors() {
     const extra = (contributors?.length ?? 0) - shown.length;
 
     return (
-        <section id="contributors" className="contrib-section fade-in" ref={ref}>
+        <section id="contributors" className="contrib-section fade-in section-divider" ref={ref}>
             <span className="contrib-eyebrow">Thank you</span>
             <h2 className="contrib-title">
                 AMVerge wouldn't exist <span className="cta-accent">without you</span>

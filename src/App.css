@@ -17,6 +17,24 @@ body {
   margin: 0;
 }
 
+/* Thin centered divider line at the top of a section */
+.section-divider {
+  position: relative;
+}
+
+.section-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 88%);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 5;
+}
+
 /* Fade-in on scroll */
 .fade-in {
   opacity: 0;
@@ -1042,7 +1060,6 @@ CTA Section
   text-align: center;
   gap: clamp(12px, 1.6vw, 18px);
   padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 60px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .contrib-eyebrow {

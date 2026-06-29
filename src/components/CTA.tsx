@@ -34,7 +34,7 @@ export default function CTA() {
     }, []);
 
     return (
-        <section id="download" className="cta-section fade-in" ref={ref}>
+        <section id="download" className="cta-section fade-in section-divider" ref={ref}>
             <div className="cta-glow" />
             <div className="cta-inner">
                 <span className="cta-eyebrow">Ready when you are</span>
