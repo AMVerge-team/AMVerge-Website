@@ -33,10 +33,16 @@ export type DocPage = {
   Component: ComponentType
 }
 
+export type DocSubgroup = {
+  label: string
+  pages?: DocPage[]
+  subgroups?: DocSubgroup[]
+}
+
 export type DocGroup = {
   label: string
   pages?: DocPage[]
-  subgroups?: { label: string; pages: DocPage[] }[]
+  subgroups?: DocSubgroup[]
 }
 
 // Sidebar categories. Order here = order in sidebar.
@@ -92,38 +98,6 @@ export const docGroups: DocGroup[] = [
     ],
   },
   {
-    label: 'Python Library',
-    subgroups: [
-      {
-        label: 'Core Pipeline',
-        pages: [
-          { slug: 'py-pipeline', label: 'Pipeline API', Component: PyPipeline },
-          { slug: 'py-video', label: 'Video & Metadata', Component: PyVideo },
-        ],
-      },
-      {
-        label: 'Scene Detection',
-        pages: [
-          { slug: 'py-detection', label: 'Detection Methods', Component: PyDetection },
-          { slug: 'py-cutting', label: 'Scene Cutting', Component: PyCutting },
-        ],
-      },
-      {
-        label: 'Export & Output',
-        pages: [
-          { slug: 'py-export', label: 'Export & Codecs', Component: PyExport },
-          { slug: 'py-thumbnails', label: 'Thumbnails', Component: PyThumbnails },
-        ],
-      },
-      {
-        label: 'Utilities',
-        pages: [
-          { slug: 'py-utilities', label: 'Diagnostics & IPC', Component: PyUtilities },
-        ],
-      },
-    ],
-  },
-  {
     label: 'AMVerge CLI',
     pages: [
       { slug: 'cli-overview', label: 'Overview', Component: CliOverview },
@@ -138,17 +112,58 @@ export const docGroups: DocGroup[] = [
       { slug: 'architecture', label: 'Architecture', Component: Architecture },
       { slug: 'contributing', label: 'Contributing', Component: Contributing },
     ],
+    subgroups: [
+      {
+        label: 'Python Library',
+        subgroups: [
+          {
+            label: 'Core Pipeline',
+            pages: [
+              { slug: 'py-pipeline', label: 'Pipeline API', Component: PyPipeline },
+              { slug: 'py-video', label: 'Video & Metadata', Component: PyVideo },
+            ],
+          },
+          {
+            label: 'Scene Detection',
+            pages: [
+              { slug: 'py-detection', label: 'Detection Methods', Component: PyDetection },
+              { slug: 'py-cutting', label: 'Scene Cutting', Component: PyCutting },
+            ],
+          },
+          {
+            label: 'Export & Output',
+            pages: [
+              { slug: 'py-export', label: 'Export & Codecs', Component: PyExport },
+              { slug: 'py-thumbnails', label: 'Thumbnails', Component: PyThumbnails },
+            ],
+          },
+          {
+            label: 'Utilities',
+            pages: [
+              { slug: 'py-utilities', label: 'Diagnostics & IPC', Component: PyUtilities },
+            ],
+          },
+        ],
+      },
+    ],
   },
 ]
 
 // Flat list for route generation. First entry = /docs index.
+function flattenSub(sgs: DocSubgroup[]): DocPage[] {
+  const result: DocPage[] = []
+  for (const sg of sgs) {
+    if (sg.pages) result.push(...sg.pages)
+    if (sg.subgroups) result.push(...flattenSub(sg.subgroups))
+  }
+  return result
+}
+
 function flattenPages(groups: DocGroup[]): DocPage[] {
   const result: DocPage[] = []
   for (const g of groups) {
     if (g.pages) result.push(...g.pages)
-    if (g.subgroups) {
-      for (const sg of g.subgroups) result.push(...sg.pages)
-    }
+    if (g.subgroups) result.push(...flattenSub(g.subgroups))
   }
   return result
 }

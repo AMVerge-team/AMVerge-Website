@@ -9,7 +9,16 @@ import {
   FiSearch,
 } from 'react-icons/fi'
 import { docGroups, docHref } from './registry'
+import type { DocSubgroup, DocPage } from './registry'
 import { useToc } from './useToc'
+
+// All pages reachable from a subgroup (recurses into nested subgroups).
+function subPages(sg: DocSubgroup): DocPage[] {
+  return [
+    ...(sg.pages ?? []),
+    ...(sg.subgroups?.flatMap(subPages) ?? []),
+  ]
+}
 import SearchModal from './SearchModal'
 import CopyCodeButton from './CopyCodeButton'
 import CodeBlockHeader from './CodeBlockHeader'
@@ -40,17 +49,14 @@ export default function DocsLayout() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const allPages = docGroups.flatMap((g) => [
+  const groupPages = (g: (typeof docGroups)[number]) => [
     ...(g.pages ?? []),
-    ...(g.subgroups?.flatMap((s) => s.pages) ?? []),
-  ]);
-  const activeGroup = docGroups.find((grp) => {
-    const grpPages = [
-      ...(grp.pages ?? []),
-      ...(grp.subgroups?.flatMap((s) => s.pages) ?? []),
-    ];
-    return grpPages.some((p) => location.pathname === docHref(p.slug));
-  })
+    ...(g.subgroups?.flatMap(subPages) ?? []),
+  ]
+  const allPages = docGroups.flatMap(groupPages)
+  const activeGroup = docGroups.find((grp) =>
+    groupPages(grp).some((p) => location.pathname === docHref(p.slug)),
+  )
   const activePage = allPages.find(
     (p) => location.pathname === docHref(p.slug),
   )
@@ -60,17 +66,18 @@ export default function DocsLayout() {
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() => {
     const init: Record<string, boolean> = {}
     const here = window.location.pathname
+    const hasActive = (slugs: { slug: string }[]) =>
+      slugs.some((p) => here === docHref(p.slug))
+
+    const seedSub = (sg: DocSubgroup, prefix: string) => {
+      const key = `${prefix}/${sg.label}`
+      init[key] = !hasActive(subPages(sg))
+      sg.subgroups?.forEach((child) => seedSub(child, key))
+    }
+
     for (const g of docGroups) {
-      const gPages = [
-        ...(g.pages ?? []),
-        ...(g.subgroups?.flatMap((s) => s.pages) ?? []),
-      ]
-      init[g.label] = !gPages.some((p) => here === docHref(p.slug))
-      g.subgroups?.forEach((sg) => {
-        init[`${g.label}/${sg.label}`] = !sg.pages.some(
-          (p) => here === docHref(p.slug),
-        )
-      })
+      init[g.label] = !hasActive(groupPages(g))
+      g.subgroups?.forEach((sg) => seedSub(sg, g.label))
     }
     return init
   })
@@ -78,6 +85,41 @@ export default function DocsLayout() {
     collapsed[label] === undefined ? false : !collapsed[label]
   const toggle = (label: string) =>
     setCollapsed((c) => ({ ...c, [label]: isOpen(label) }))
+
+  // Recursive: a subgroup may hold pages and/or nested subgroups.
+  const renderSubgroup = (sg: DocSubgroup, prefix: string, depth: number) => {
+    const key = `${prefix}/${sg.label}`
+    const open = isOpen(key)
+    return (
+      <div key={key} className={`docs-subgroup depth-${depth}`}>
+        <button
+          className="docs-subgroup-label"
+          onClick={() => toggle(key)}
+          aria-expanded={open}
+        >
+          {sg.label}
+          <FiChevronRight className={`docs-chevron ${open ? 'open' : ''}`} />
+        </button>
+        {open && (
+          <>
+            {sg.pages?.map((page) => (
+              <NavLink
+                key={page.slug}
+                to={docHref(page.slug)}
+                end
+                className={({ isActive }) =>
+                  isActive ? 'docs-link active' : 'docs-link'
+                }
+              >
+                {page.label}
+              </NavLink>
+            ))}
+            {sg.subgroups?.map((child) => renderSubgroup(child, key, depth + 1))}
+          </>
+        )}
+      </div>
+    )
+  }
 
   return (
     <div
@@ -176,37 +218,9 @@ export default function DocsLayout() {
                         {page.label}
                       </NavLink>
                     ))}
-                    {group.subgroups?.map((sg) => {
-                      const sgKey = `${group.label}/${sg.label}`
-                      const sgOpen = isOpen(sgKey)
-                      return (
-                        <div key={sg.label} className="docs-subgroup">
-                          <button
-                            className="docs-subgroup-label"
-                            onClick={() => toggle(sgKey)}
-                            aria-expanded={sgOpen}
-                          >
-                            {sg.label}
-                            <FiChevronRight
-                              className={`docs-chevron ${sgOpen ? 'open' : ''}`}
-                            />
-                          </button>
-                          {sgOpen &&
-                            sg.pages.map((page) => (
-                              <NavLink
-                                key={page.slug}
-                                to={docHref(page.slug)}
-                                end
-                                className={({ isActive }) =>
-                                  isActive ? 'docs-link active' : 'docs-link'
-                                }
-                              >
-                                {page.label}
-                              </NavLink>
-                            ))}
-                        </div>
-                      )
-                    })}
+                    {group.subgroups?.map((sg) =>
+                      renderSubgroup(sg, group.label, 0),
+                    )}
                   </div>
                 )}
               </div>
