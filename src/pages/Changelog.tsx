@@ -1,37 +1,17 @@
 import { useEffect, useState } from "react";
-import { FiDownload, FiChevronDown, FiExternalLink } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { fetchReleases } from "../services/github";
 import type { GithubRelease } from "../services/github";
-
-function getExeAsset(rel: GithubRelease) {
-    return rel.assets?.find(
-        (a) => a.name.endsWith(".exe") && !a.name.endsWith(".sig"),
-    );
-}
-
-function renderBody(body: string) {
-    return body
-        .replace(/### /g, "")
-        .replace(/## /g, "")
-        .replace(/\*\*(.*?)\*\*/g, "$1")
-        .replace(/`(.*?)`/g, "$1")
-        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-        .trim();
-}
 
 export default function Changelog() {
     const [releases, setReleases] = useState<GithubRelease[] | null>(null);
     const [error, setError] = useState(false);
-    const [expanded, setExpanded] = useState<Record<number, boolean>>({});
 
     useEffect(() => {
         fetchReleases()
             .then((data) => setReleases(data))
             .catch(() => setError(true));
     }, []);
-
-    const toggle = (id: number) =>
-        setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
 
     return (
         <div className="page page-changelog">
@@ -70,79 +50,29 @@ export default function Changelog() {
             {releases && (
                 <div className="changelog-list">
                     {releases.map((rel, i) => {
-                        const exe = getExeAsset(rel);
-                        const isExpanded = expanded[rel.id] ?? false;
-                        const isLatest = i === 0;
                         const date = new Date(rel.published_at).toLocaleDateString(
                             undefined,
-                            { year: "numeric", month: "long", day: "numeric" },
+                            { year: "numeric", month: "short", day: "numeric" },
                         );
+                        const isLatest = i === 0;
 
                         return (
-                            <article
+                            <Link
+                                to={`/changelog/${rel.tag_name}`}
                                 className={`changelog-entry ${isLatest ? "changelog-latest" : ""}`}
                                 key={rel.id}
-                                id={rel.tag_name}
                             >
                                 <div className="changelog-head">
-                                    <div className="changelog-info">
-                                        <span className="changelog-tag">
-                                            {rel.tag_name}
-                                        </span>
-                                        {isLatest && (
-                                            <span className="changelog-badge">Latest</span>
-                                        )}
-                                    </div>
+                                    <span className="changelog-tag">{rel.tag_name}</span>
+                                    {isLatest && (
+                                        <span className="changelog-badge">Latest</span>
+                                    )}
                                     <time>{date}</time>
                                 </div>
-
                                 <h2 className="changelog-name">
                                     {rel.name || rel.tag_name}
                                 </h2>
-
-                                {rel.body && (
-                                    <>
-                                        <div
-                                            className={`changelog-body-wrap ${isExpanded ? "open" : ""}`}
-                                        >
-                                            <pre className="changelog-body">
-                                                {renderBody(rel.body)}
-                                            </pre>
-                                        </div>
-                                        <button
-                                            className="changelog-expand"
-                                            onClick={() => toggle(rel.id)}
-                                        >
-                                            <FiChevronDown
-                                                className={`changelog-expand-icon ${isExpanded ? "open" : ""}`}
-                                            />
-                                            {isExpanded ? "Collapse" : "Expand"}
-                                        </button>
-                                    </>
-                                )}
-
-                                <div className="changelog-actions">
-                                    {exe && (
-                                        <a
-                                            className="changelog-dl"
-                                            href={exe.browser_download_url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <FiDownload />
-                                            {exe.name}
-                                        </a>
-                                    )}
-                                    <a
-                                        className="changelog-gh"
-                                        href={rel.html_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <FiExternalLink /> GitHub
-                                    </a>
-                                </div>
-                            </article>
+                            </Link>
                         );
                     })}
                 </div>

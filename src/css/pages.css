@@ -123,165 +123,169 @@
 .changelog-list {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
     text-align: left;
 }
 
 .changelog-entry {
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
-    padding: 24px 28px;
+    padding: 20px 24px;
     background: rgba(255, 255, 255, 0.015);
-    transition: border-color 0.25s ease;
+    text-decoration: none;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.changelog-entry:hover {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .changelog-latest {
     border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.025);
 }
 
 .changelog-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 10px;
-}
-
-.changelog-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    margin-bottom: 8px;
 }
 
 .changelog-tag {
     font-family: 'Jersey 10', system-ui, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     color: white;
     background: rgba(255, 255, 255, 0.06);
-    padding: 3px 10px;
+    padding: 2px 8px;
     border-radius: 6px;
 }
 
 .changelog-latest .changelog-tag {
     color: var(--accent);
-    background: rgba(255, 255, 255, 0.08);
 }
 
 .changelog-badge {
     font-family: 'Jersey 10', system-ui, sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     color: black;
     background: var(--accent);
-    padding: 2px 8px;
+    padding: 1px 6px;
     border-radius: 4px;
-    letter-spacing: 0.5px;
 }
 
 .changelog-head time {
-    color: #777;
-    font-size: 14px;
+    color: #666;
+    font-size: 13px;
 }
 
 .changelog-name {
     font-family: 'Jersey 10', system-ui, sans-serif;
-    font-size: clamp(22px, 1.6vw, 30px);
+    font-size: clamp(20px, 1.4vw, 26px);
     color: white;
     font-weight: normal;
-    margin: 0 0 14px;
+    margin: 0;
 }
 
-.changelog-body-wrap {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-}
-
-.changelog-body-wrap.open {
-    max-height: 2000px;
-}
-
-.changelog-body {
-    font-family: system-ui, sans-serif;
-    font-size: 14px;
-    line-height: 1.65;
-    color: #b8b8c0;
-    white-space: pre-wrap;
-    word-break: break-word;
-    margin: 0 0 16px;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
-}
-
-.changelog-expand {
+/* ---- Changelog Release Detail ---- */
+.changelog-back {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: none;
-    border: none;
-    color: #888;
-    cursor: pointer;
     font-family: 'Jersey 10', system-ui, sans-serif;
-    font-size: 14px;
-    padding: 0;
-    margin-bottom: 16px;
+    font-size: clamp(15px, 1vw, 18px);
+    color: #888;
+    text-decoration: none;
+    margin-bottom: clamp(24px, 3vw, 40px);
     transition: color 0.2s ease;
 }
 
-.changelog-expand:hover {
+.changelog-back:hover {
     color: var(--accent);
 }
 
-.changelog-expand-icon {
-    transition: transform 0.25s ease;
+.release-header {
+    margin-bottom: clamp(24px, 3vw, 40px);
 }
 
-.changelog-expand-icon.open {
-    transform: rotate(180deg);
-}
-
-.changelog-actions {
+.release-meta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-    padding-top: 14px;
+    margin-bottom: 12px;
+}
+
+.release-meta time {
+    color: #666;
+    font-size: 15px;
+}
+
+.release-title {
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: clamp(36px, 5vw, 60px);
+    color: white;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.release-body {
+    font-family: system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #bbb;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0 0 clamp(28px, 4vw, 44px);
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+}
+
+.release-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.changelog-dl {
+.release-dl {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     font-family: 'Jersey 10', system-ui, sans-serif;
-    font-size: 15px;
+    font-size: clamp(16px, 1.1vw, 20px);
     color: white;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 10px 20px;
     text-decoration: none;
     transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.changelog-dl:hover {
+.release-dl:hover {
     border-color: var(--accent);
     color: var(--accent);
 }
 
-.changelog-gh {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+.release-gh {
     font-size: 14px;
     color: #888;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     transition: color 0.2s ease;
 }
 
-.changelog-gh:hover {
+.release-gh:hover {
     color: var(--accent);
 }
 

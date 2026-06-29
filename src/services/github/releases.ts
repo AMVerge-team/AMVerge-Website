@@ -19,6 +19,10 @@ export async function fetchReleases(): Promise<GithubRelease[]> {
   return ghFetch<GithubRelease[]>("/releases?per_page=100");
 }
 
+export async function fetchReleaseByTag(tag: string): Promise<GithubRelease> {
+  return ghFetch<GithubRelease>(`/releases/tags/${tag}`);
+}
+
 export function cumulativeDownloadCount(releases: GithubRelease[]): number {
   let total = 0;
   for (const release of releases) {

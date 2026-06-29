@@ -8,6 +8,7 @@ import { docs } from './docs/registry.ts'
 import SiteLayout from './layouts/SiteLayout.tsx'
 import Features from './pages/Features.tsx'
 import Changelog from './pages/Changelog.tsx'
+import ChangelogRelease from './pages/ChangelogRelease.tsx'
 import FAQ from './pages/FAQ.tsx'
 import Gallery from './pages/Gallery.tsx'
 
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
         <Route element={<SiteLayout />}>
           <Route path="/features" element={<Features />} />
           <Route path="/changelog" element={<Changelog />} />
+          <Route path="/changelog/:tag" element={<ChangelogRelease />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/gallery" element={<Gallery />} />
         </Route>
