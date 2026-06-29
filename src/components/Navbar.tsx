@@ -73,15 +73,12 @@ export default function Navbar() {
 
     return (
         <nav className={`site-nav ${scrolled || menuOpen ? "nav-scrolled" : ""}`}>
+            {/* top row: brand + actions */}
             <div className="nav-content">
                 <NavLink to="/" end className="nav-logo">
                     <span>AMV</span>erge
                 </NavLink>
 
-                {/* desktop center links */}
-                <div className="nav-links">{links}</div>
-
-                {/* desktop right actions */}
                 <div className="nav-actions">
                     {slider}
                     <button className="nav-download" onClick={downloadLatestExe}>
@@ -98,6 +95,9 @@ export default function Navbar() {
                     {menuOpen ? <FiX /> : <FiMenu />}
                 </button>
             </div>
+
+            {/* second row: centered links (desktop) */}
+            <div className="nav-row">{links}</div>
 
             {/* mobile dropdown panel */}
             {menuOpen && (

@@ -3,7 +3,7 @@
 
 .page-main {
     min-height: 80vh;
-    padding-top: 90px; /* clear fixed navbar */
+    padding-top: 120px; /* clear taller stacked navbar */
 }
 
 .page {
