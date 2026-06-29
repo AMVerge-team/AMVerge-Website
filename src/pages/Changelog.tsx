@@ -94,7 +94,6 @@ export default function Changelog() {
                                             {isLatest && (
                                                 <span className="changelog-badge">Latest</span>
                                             )}
-                                            <time>{date}</time>
                                         </div>
                                         <h2 className="changelog-name">
                                             {rel.name || rel.tag_name}
@@ -104,6 +103,7 @@ export default function Changelog() {
                                         )}
                                     </div>
                                     <div className="changelog-right">
+                                        <time>{date}</time>
                                         <div className="changelog-meta-row">
                                             {hasPlatform(rel, ".exe") && (
                                                 <span className="changelog-platform"><FaWindows /></span>

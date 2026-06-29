@@ -187,12 +187,6 @@
     border-radius: 4px;
 }
 
-.changelog-head time {
-    color: #666;
-    font-size: 13px;
-    margin-left: auto;
-}
-
 .changelog-name {
     font-family: 'Jersey 10', system-ui, sans-serif;
     font-size: clamp(18px, 1.3vw, 24px);
@@ -215,8 +209,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 6px;
+    gap: 4px;
     flex-shrink: 0;
+}
+
+.changelog-right time {
+    color: #555;
+    font-size: 13px;
 }
 
 .changelog-meta-row {
@@ -241,6 +240,7 @@
 .changelog-arrow {
     color: #444;
     font-size: 18px;
+    margin-top: 4px;
 }
 
 .changelog-entry:hover .changelog-arrow {
