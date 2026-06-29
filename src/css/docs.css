@@ -559,6 +559,40 @@
   color: #aaa;
 }
 
+/* ---- Media: images, GIFs, video ---- */
+.docs-content img,
+.docs-content video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0c0c10;
+}
+
+/* standalone markdown image gets some breathing room */
+.docs-content p > img {
+  margin: 8px 0;
+}
+
+.docs-media {
+  margin: 28px auto;
+}
+
+.docs-media img,
+.docs-media video {
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.docs-media figcaption {
+  margin-top: 10px;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}
+
 .docs-content pre {
   position: relative;
 }
