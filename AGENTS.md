@@ -110,6 +110,7 @@ AMVerge-Website/
 │   │   ├── DocsData.tsx      context: fetches the tree once, shares it to layout + pages
 │   │   ├── DocsLayout.tsx    docs shell: sidebar (from fetched tree), <Outlet/>, TOC, search
 │   │   ├── DocPageView.tsx   route element: fetches a page by :slug, renders markdown
+│   │   ├── DocsNotice.tsx    styled offline / empty / not-found states (retry on API/DB down)
 │   │   ├── DocMarkdown.tsx   react-markdown setup (gfm + raw + slug + highlight + <Media>)
 │   │   ├── Media.tsx         runtime <Media> tag (img / video / gif) used inside markdown
 │   │   ├── searchIndex.ts    runtime-fetched, cached search index
@@ -152,6 +153,7 @@ Docs are no longer files in this repo. The tree (categories/subgroups/pages) and
 - `DocPageView` fetches `GET /api/docs/page/:slug` and renders the Markdown via `DocMarkdown`.
 - `searchIndex` lazy-loads `GET /api/docs/search-index` (cached) for Ctrl+K search.
 - Inside Markdown, the custom `<Media src caption gif />` tag renders images/videos (parsed by `rehype-raw`, mapped to `Media`).
+- `DocsNotice` renders the offline/empty/not-found states. A network/5xx failure (API or DB down) shows an "offline" panel with a retry button; a real 404 (`fetchDocPage` returns `null`) shows "not found". Keep that 404-vs-error split intact.
 
 To add/edit/reorder pages or categories: use the admin Docs tab. No code change or redeploy needed.
 
