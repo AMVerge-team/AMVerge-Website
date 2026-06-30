@@ -4,15 +4,17 @@ import { fetchDocPage } from './api'
 import { docHref } from './docsTypes'
 import { useDocsData } from './DocsData'
 import DocMarkdown from './DocMarkdown'
+import DocsNotice from './DocsNotice'
 import type { DocPageContent } from './docsTypes'
 
-type LoadState = 'loading' | 'ready' | 'missing'
+type LoadState = 'loading' | 'ready' | 'notfound' | 'offline'
 
 export default function DocPageView() {
   const { slug } = useParams()
-  const { indexSlug, loading: treeLoading } = useDocsData()
+  const { indexSlug, loading: treeLoading, error: treeError, reload } = useDocsData()
   const [page, setPage] = useState<DocPageContent | null>(null)
   const [state, setState] = useState<LoadState>('loading')
+  const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {
     if (!slug) return
@@ -20,42 +22,35 @@ export default function DocPageView() {
     setState('loading')
     fetchDocPage(slug)
       .then((p) => {
-        if (!cancelled) {
+        if (cancelled) return
+        if (p) {
           setPage(p)
           setState('ready')
+        } else {
+          setState('notfound')
         }
       })
       .catch(() => {
-        if (!cancelled) setState('missing')
+        if (!cancelled) setState('offline')
       })
     return () => {
       cancelled = true
     }
-  }, [slug])
+  }, [slug, attempt])
 
-  // Index route (/docs): send to the first page once the tree is known.
+  // Index route (/docs): wait for the tree, then send to the first page.
   if (!slug) {
-    if (treeLoading) return <p className="docs-loading">Loading docs...</p>
+    if (treeLoading) return <DocsNotice variant="empty" />
+    if (treeError) return <DocsNotice variant="offline" onRetry={reload} />
     if (indexSlug) return <Navigate to={docHref(indexSlug)} replace />
-    return (
-      <div className="docs-empty">
-        <h1>No documentation yet</h1>
-        <p>Pages published from the admin will appear here.</p>
-      </div>
-    )
+    return <DocsNotice variant="empty" />
   }
 
   if (state === 'loading') return <p className="docs-loading">Loading...</p>
-
-  if (state === 'missing') {
-    return (
-      <div className="docs-empty">
-        <h1>Page not found</h1>
-        <p>This documentation page does not exist or is not published.</p>
-      </div>
-    )
+  if (state === 'offline') {
+    return <DocsNotice variant="offline" onRetry={() => setAttempt((n) => n + 1)} />
   }
-
+  if (state === 'notfound') return <DocsNotice variant="notfound" />
   if (!page) return null
 
   return <DocMarkdown source={page.bodyMarkdown} />

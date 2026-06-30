@@ -12,6 +12,7 @@ import { docHref } from './docsTypes'
 import type { DocNode } from './docsTypes'
 import { useDocsData } from './DocsData'
 import { useToc } from './useToc'
+import DocsNotice from './DocsNotice'
 import SearchModal from './SearchModal'
 import CopyCodeButton from './CopyCodeButton'
 import CodeBlockHeader from './CodeBlockHeader'
@@ -32,7 +33,7 @@ function descendantPages(node: DocNode): DocNode[] {
 
 export default function DocsLayout() {
   const location = useLocation()
-  const { tree, loading, error } = useDocsData()
+  const { tree, loading, error, reload } = useDocsData()
   const [sidebarHidden, setSidebarHidden] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -208,7 +209,7 @@ export default function DocsLayout() {
 
         <nav className="docs-tree">
           {loading && <p className="docs-sidebar-status">Loading...</p>}
-          {!loading && error && <p className="docs-sidebar-status">{error}</p>}
+          {!loading && error && <DocsNotice variant="offline" compact onRetry={reload} />}
           {!loading && !error && tree.map(renderTop)}
         </nav>
 

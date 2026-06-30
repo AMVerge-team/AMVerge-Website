@@ -19,8 +19,11 @@ export async function fetchDocsTree(): Promise<DocNode[]> {
   return payload.tree || []
 }
 
-export async function fetchDocPage(slug: string): Promise<DocPageContent> {
+// Returns null for a genuine 404 (page missing/unpublished); throws for network
+// or server errors (e.g. the API/DB being down) so the UI can tell them apart.
+export async function fetchDocPage(slug: string): Promise<DocPageContent | null> {
   const res = await fetch(`${API_BASE}/api/docs/page/${encodeURIComponent(slug)}`)
+  if (res.status === 404) return null
   if (!res.ok) throw new Error(await parseError(res))
   const payload = (await res.json()) as { page: DocPageContent }
   return payload.page

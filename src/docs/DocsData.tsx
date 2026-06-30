@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { fetchDocsTree } from './api'
 import { firstPageSlug, flattenPages } from './docsTypes'
@@ -10,6 +10,7 @@ type DocsDataValue = {
   indexSlug: string | undefined
   loading: boolean
   error: string
+  reload: () => void
 }
 
 const DocsDataContext = createContext<DocsDataValue>({
@@ -18,12 +19,16 @@ const DocsDataContext = createContext<DocsDataValue>({
   indexSlug: undefined,
   loading: true,
   error: '',
+  reload: () => {},
 })
 
 export function DocsDataProvider({ children }: { children: ReactNode }) {
   const [tree, setTree] = useState<DocNode[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [attempt, setAttempt] = useState(0)
+
+  const reload = useCallback(() => setAttempt((n) => n + 1), [])
 
   useEffect(() => {
     let cancelled = false
@@ -43,7 +48,7 @@ export function DocsDataProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [attempt])
 
   const value: DocsDataValue = {
     tree,
@@ -51,6 +56,7 @@ export function DocsDataProvider({ children }: { children: ReactNode }) {
     indexSlug: firstPageSlug(tree),
     loading,
     error,
+    reload,
   }
 
   return <DocsDataContext.Provider value={value}>{children}</DocsDataContext.Provider>
