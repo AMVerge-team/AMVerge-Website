@@ -3,49 +3,63 @@ import { useLocation } from 'react-router-dom'
 
 export type TocItem = { id: string; text: string; level: number }
 
-// Reads h2/h3 from the rendered MDX article (ids added by rehype-slug)
-// and tracks which one is currently in view for the "On this page" list.
+// Reads h2/h3 from the rendered doc article (ids added by rehype-slug) and
+// tracks which one is in view. Content loads asynchronously, so a MutationObserver
+// rebuilds the list whenever the article DOM changes.
 export function useToc() {
   const { pathname } = useLocation()
   const [items, setItems] = useState<TocItem[]>([])
   const [activeId, setActiveId] = useState<string>('')
 
   useEffect(() => {
-    const article = document.querySelector('.docs-content article')
-    if (!article) {
+    const content = document.querySelector('.docs-content')
+    if (!content) {
       setItems([])
       return
     }
 
-    const headings = Array.from(
-      article.querySelectorAll('h2[id], h3[id]'),
-    ) as HTMLElement[]
+    let intersection: IntersectionObserver | null = null
 
-    setItems(
-      headings.map((h) => ({
-        id: h.id,
-        text: h.textContent ?? '',
-        level: h.tagName === 'H2' ? 2 : 3,
-      })),
-    )
+    const build = () => {
+      const article = content.querySelector('article')
+      const headings = article
+        ? (Array.from(article.querySelectorAll('h2[id], h3[id]')) as HTMLElement[])
+        : []
 
-    if (headings.length === 0) {
-      setActiveId('')
-      return
+      setItems(
+        headings.map((h) => ({
+          id: h.id,
+          text: h.textContent ?? '',
+          level: h.tagName === 'H2' ? 2 : 3,
+        })),
+      )
+
+      intersection?.disconnect()
+      if (headings.length === 0) {
+        setActiveId('')
+        return
+      }
+
+      intersection = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+          if (visible[0]) setActiveId(visible[0].target.id)
+        },
+        { rootMargin: '0px 0px -75% 0px', threshold: 0 },
+      )
+      headings.forEach((h) => intersection?.observe(h))
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-        if (visible[0]) setActiveId(visible[0].target.id)
-      },
-      { rootMargin: '0px 0px -75% 0px', threshold: 0 },
-    )
+    build()
+    const mutation = new MutationObserver(build)
+    mutation.observe(content, { childList: true, subtree: true })
 
-    headings.forEach((h) => observer.observe(h))
-    return () => observer.disconnect()
+    return () => {
+      mutation.disconnect()
+      intersection?.disconnect()
+    }
   }, [pathname])
 
   return { items, activeId }

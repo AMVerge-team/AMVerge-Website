@@ -1169,3 +1169,20 @@
     scroll-margin-top: 72px;
   }
 }
+
+/* Runtime docs states (content + tree fetched from the API) */
+.docs-loading,
+.docs-empty {
+  color: #c8c8c8;
+}
+
+.docs-empty h1 {
+  color: #fff;
+  font-weight: normal;
+}
+
+.docs-sidebar-status {
+  color: #8f8f8f;
+  font-size: 16px;
+  padding: 6px 4px;
+}

@@ -8,25 +8,31 @@ import {
   FiChevronRight,
   FiSearch,
 } from 'react-icons/fi'
-import { docGroups, docHref } from './registry'
-import type { DocSubgroup, DocPage } from './registry'
+import { docHref } from './docsTypes'
+import type { DocNode } from './docsTypes'
+import { useDocsData } from './DocsData'
 import { useToc } from './useToc'
-
-// All pages reachable from a subgroup (recurses into nested subgroups).
-function subPages(sg: DocSubgroup): DocPage[] {
-  return [
-    ...(sg.pages ?? []),
-    ...(sg.subgroups?.flatMap(subPages) ?? []),
-  ]
-}
 import SearchModal from './SearchModal'
 import CopyCodeButton from './CopyCodeButton'
 import CodeBlockHeader from './CodeBlockHeader'
 import '../css/docs.css'
 import 'highlight.js/styles/github-dark.css'
 
+// Page nodes reachable from a node (recurses through child groups).
+function descendantPages(node: DocNode): DocNode[] {
+  const out: DocNode[] = []
+  const walk = (n: DocNode) => {
+    if (n.kind === 'page') out.push(n)
+    n.children.forEach(walk)
+  }
+  node.children.forEach(walk)
+  if (node.kind === 'page') out.push(node)
+  return out
+}
+
 export default function DocsLayout() {
   const location = useLocation()
+  const { tree, loading, error } = useDocsData()
   const [sidebarHidden, setSidebarHidden] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -49,77 +55,85 @@ export default function DocsLayout() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const groupPages = (g: (typeof docGroups)[number]) => [
-    ...(g.pages ?? []),
-    ...(g.subgroups?.flatMap(subPages) ?? []),
-  ]
-  const allPages = docGroups.flatMap(groupPages)
-  const activeGroup = docGroups.find((grp) =>
-    groupPages(grp).some((p) => location.pathname === docHref(p.slug)),
-  )
-  const activePage = allPages.find(
-    (p) => location.pathname === docHref(p.slug),
-  )
+  const subtreeHasActive = (node: DocNode) =>
+    descendantPages(node).some((p) => p.slug && location.pathname === docHref(p.slug))
 
-  // Everything starts collapsed except the section holding the page you
-  // landed on. Seeded once on mount so navigation never re-forces groups open.
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() => {
-    const init: Record<string, boolean> = {}
-    const here = window.location.pathname
-    const hasActive = (slugs: { slug: string }[]) =>
-      slugs.some((p) => here === docHref(p.slug))
+  const activeTopGroup = tree.find(subtreeHasActive)
+  const activePage = tree
+    .flatMap(descendantPages)
+    .find((p) => p.slug && location.pathname === docHref(p.slug))
 
-    const seedSub = (sg: DocSubgroup, prefix: string) => {
-      const key = `${prefix}/${sg.label}`
-      init[key] = !hasActive(subPages(sg))
-      sg.subgroups?.forEach((child) => seedSub(child, key))
+  // A group is open if the user toggled it, otherwise open when it holds the
+  // current page. Recomputed each render, so the path to the active page expands.
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
+  const isOpen = (node: DocNode) =>
+    collapsed[node.id] !== undefined ? !collapsed[node.id] : subtreeHasActive(node)
+  const toggle = (node: DocNode) =>
+    setCollapsed((c) => ({ ...c, [node.id]: isOpen(node) }))
+
+  const renderNode = (node: DocNode, depth: number) => {
+    if (node.kind === 'page') {
+      if (!node.slug) return null
+      return (
+        <NavLink
+          key={node.id}
+          to={docHref(node.slug)}
+          end
+          className={({ isActive }) => (isActive ? 'docs-link active' : 'docs-link')}
+        >
+          {node.label}
+        </NavLink>
+      )
     }
 
-    for (const g of docGroups) {
-      init[g.label] = !hasActive(groupPages(g))
-      g.subgroups?.forEach((sg) => seedSub(sg, g.label))
-    }
-    return init
-  })
-  const isOpen = (label: string) =>
-    collapsed[label] === undefined ? false : !collapsed[label]
-  const toggle = (label: string) =>
-    setCollapsed((c) => ({ ...c, [label]: isOpen(label) }))
-
-  // Recursive: a subgroup may hold pages and/or nested subgroups.
-  const renderSubgroup = (sg: DocSubgroup, prefix: string, depth: number) => {
-    const key = `${prefix}/${sg.label}`
-    const open = isOpen(key)
-    const hasSub = Boolean(sg.subgroups?.length)
+    const open = isOpen(node)
     return (
-      <div
-        key={key}
-        className={`docs-subgroup depth-${depth} ${hasSub ? 'has-subgroups' : ''}`}
-      >
+      <div key={node.id} className={`docs-subgroup depth-${depth}`}>
         <button
           className="docs-subgroup-label"
-          onClick={() => toggle(key)}
+          onClick={() => toggle(node)}
           aria-expanded={open}
         >
-          {sg.label}
+          {node.label}
+          <FiChevronRight className={`docs-chevron ${open ? 'open' : ''}`} />
+        </button>
+        {open && <>{node.children.map((child) => renderNode(child, depth + 1))}</>}
+      </div>
+    )
+  }
+
+  // Top-level groups get the prominent header style; top-level pages render as links.
+  const renderTop = (node: DocNode) => {
+    if (node.kind === 'page') {
+      if (!node.slug) return null
+      return (
+        <div key={node.id} className="docs-group">
+          <NavLink
+            to={docHref(node.slug)}
+            end
+            className={({ isActive }) => (isActive ? 'docs-link active' : 'docs-link')}
+          >
+            {node.label}
+          </NavLink>
+        </div>
+      )
+    }
+
+    const open = isOpen(node)
+    return (
+      <div key={node.id} className="docs-group">
+        <button
+          className="docs-group-header"
+          onClick={() => toggle(node)}
+          aria-expanded={open}
+        >
+          {node.label}
           <FiChevronRight className={`docs-chevron ${open ? 'open' : ''}`} />
         </button>
         {open && (
-          <>
-            {sg.pages?.map((page) => (
-              <NavLink
-                key={page.slug}
-                to={docHref(page.slug)}
-                end
-                className={({ isActive }) =>
-                  isActive ? 'docs-link active' : 'docs-link'
-                }
-              >
-                {page.label}
-              </NavLink>
-            ))}
-            {sg.subgroups?.map((child) => renderSubgroup(child, key, depth + 1))}
-          </>
+          <div className="docs-group-items">
+            {node.children.map((child) => renderNode(child, 0))}
+          </div>
         )}
       </div>
     )
@@ -193,43 +207,9 @@ export default function DocsLayout() {
         </button>
 
         <nav className="docs-tree">
-          {docGroups.map((group) => {
-            const open = isOpen(group.label)
-
-            return (
-              <div key={group.label} className="docs-group">
-                <button
-                  className="docs-group-header"
-                  onClick={() => toggle(group.label)}
-                  aria-expanded={open}
-                >
-                  {group.label}
-                  <FiChevronRight
-                    className={`docs-chevron ${open ? 'open' : ''}`}
-                  />
-                </button>
-                {open && (
-                  <div className="docs-group-items">
-                    {group.pages?.map((page) => (
-                      <NavLink
-                        key={page.slug}
-                        to={docHref(page.slug)}
-                        end
-                        className={({ isActive }) =>
-                          isActive ? 'docs-link active' : 'docs-link'
-                        }
-                      >
-                        {page.label}
-                      </NavLink>
-                    ))}
-                    {group.subgroups?.map((sg) =>
-                      renderSubgroup(sg, group.label, 0),
-                    )}
-                  </div>
-                )}
-              </div>
-            )
-          })}
+          {loading && <p className="docs-sidebar-status">Loading...</p>}
+          {!loading && error && <p className="docs-sidebar-status">{error}</p>}
+          {!loading && !error && tree.map(renderTop)}
         </nav>
 
         <div className="docs-sidebar-footer">
@@ -250,9 +230,9 @@ export default function DocsLayout() {
       {/* ---- Center content ---- */}
       <main className="docs-content">
         <div className="docs-content-inner">
-          {activeGroup && (
+          {activeTopGroup && (
             <div className="docs-breadcrumb">
-              {activeGroup.label}
+              {activeTopGroup.label}
               {activePage && (
                 <>
                   <FiChevronRight />

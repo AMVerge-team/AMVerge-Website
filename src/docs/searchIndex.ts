@@ -1,7 +1,4 @@
-import { docs } from './registry'
-import docSources from 'virtual:doc-sources'
-
-// docSources: { slug: rawMdxSource } provided by the doc-sources Vite plugin.
+import { fetchDocsSearchIndex } from './api'
 
 function stripMd(s: string) {
   return s
@@ -20,13 +17,28 @@ export type SearchDoc = {
   text: string
 }
 
-export const searchDocs: SearchDoc[] = docs.map((d) => {
-  const md = docSources[d.slug] ?? ''
-  const headings = [...md.matchAll(/^#{1,6}\s+(.+)$/gm)].map((m) =>
-    stripMd(m[1]),
-  )
-  return { slug: d.slug, label: d.label, headings, text: stripMd(md) }
-})
+let searchDocs: SearchDoc[] = []
+let loadPromise: Promise<void> | null = null
+
+// Fetch the published-page index from the API once and cache it. Safe to call
+// repeatedly (e.g. every time the search modal opens); only fetches on first call.
+export function loadSearchIndex(): Promise<void> {
+  if (!loadPromise) {
+    loadPromise = fetchDocsSearchIndex()
+      .then((pages) => {
+        searchDocs = pages.map((p) => {
+          const md = p.bodyMarkdown ?? ''
+          const headings = [...md.matchAll(/^#{1,6}\s+(.+)$/gm)].map((m) => stripMd(m[1]))
+          return { slug: p.slug, label: p.label, headings, text: stripMd(md) }
+        })
+      })
+      .catch((err) => {
+        loadPromise = null // allow a later retry
+        throw err
+      })
+  }
+  return loadPromise
+}
 
 export type SearchResult = {
   slug: string

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FiSearch } from 'react-icons/fi'
-import { searchDocsFor } from './searchIndex'
-import { docHref } from './registry'
+import { loadSearchIndex, searchDocsFor } from './searchIndex'
+import { docHref } from './docsTypes'
 
 type Props = {
   open: boolean
@@ -14,14 +14,19 @@ export default function SearchModal({ open, onClose }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
+  const [indexReady, setIndexReady] = useState(0)
 
-  const results = useMemo(() => searchDocsFor(query), [query])
+  const results = useMemo(() => searchDocsFor(query), [query, indexReady])
 
   useEffect(() => {
     if (open) {
       setQuery('')
       setActive(0)
       inputRef.current?.focus()
+      // Load (or refresh from cache) the search index, then re-run the query.
+      void loadSearchIndex()
+        .then(() => setIndexReady((n) => n + 1))
+        .catch(() => {})
     }
   }, [open])
 
