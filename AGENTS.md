@@ -1,6 +1,6 @@
 # AGENTS.md - AMVerge Website
 
-Marketing landing page + docs for AMVerge (the desktop scene-selection app by AMVerge-team). Single-page React scroll site with a small Postgres-backed download counter API and an MDX docs section styled to match the landing.
+Marketing landing page + docs for AMVerge (the desktop scene-selection app by AMVerge-team). Single-page React scroll site with a small Postgres-backed download counter API. The docs section is rendered from Markdown fetched at runtime from the admin backend (managed in the separate `AMVerge-Website-Admin` repo / `admin.amverge.app`), styled to match the landing.
 
 ## AI Agent Instructions
 
@@ -35,14 +35,14 @@ DATABASE_URL=postgres://... npm start   # node counter-server.cjs, port 3001
 | Build | Vite 8 |
 | UI | React 19 |
 | Language | TypeScript ~6 |
-| Routing | react-router-dom (landing `/`, docs `/docs`) |
-| Docs | MDX via `@mdx-js/rollup` |
+| Routing | react-router-dom (landing `/`, docs `/docs/:slug`) |
+| Docs | Markdown fetched from the API, rendered with `react-markdown` (+ `remark-gfm`, `rehype-raw`, `rehype-slug`, `rehype-highlight`) |
 | Icons | react-icons (Fi, Fa sets) |
 | Fonts | `Jersey 10` (Google Fonts, pixel look), system-ui fallback |
 | Counter API | Express + `pg` (Postgres) + cors, `counter-server.cjs` |
 | Lint | eslint 9 + typescript-eslint |
 
-No backend in the Vite app itself. Download counts read live from the GitHub releases API client-side; `counter-server.cjs` is a standalone optional service.
+Download counts read live from the GitHub releases API client-side; `counter-server.cjs` is a standalone optional download counter. Docs content is fetched at runtime from the admin backend via `VITE_ADMIN_API_URL` (see `.env.example`). The docs section is no longer MDX/build-time.
 
 ## Directory Map
 
@@ -52,7 +52,7 @@ AMVerge-Website/
 │   ├── main.tsx              entry, BrowserRouter, routes (/ -> App, /docs -> DocsLayout)
 │   ├── App.tsx               landing page, stacks all section components
 │   ├── index.css             light/dark token base (mostly overridden by home.css)
-│   ├── mdx.d.ts              type decl for importing *.mdx as components
+│   ├── vite-env.d.ts         import.meta.env typing (VITE_ADMIN_API_URL)
 │   │
 │   ├── css/
 │   │   ├── home.css          real site styling: black bg, Jersey 10 font, --accent
@@ -104,13 +104,19 @@ AMVerge-Website/
 │   │       ├── releases.ts    fetchLatestRelease, fetchReleases, cumulativeDownloadCount
 │   │       └── contributors.ts fetchContributors
 │   │
-│   ├── docs/
-│   │   ├── DocsLayout.tsx    docs shell: header, sidebar (from registry), <Outlet/>
-│   │   ├── Docs.css          docs styling, matches landing (black/Jersey/--accent)
-│   │   ├── registry.ts       single source of doc pages: slug, label, Component
-│   │   └── pages/
-│   │       ├── introduction.mdx
-│   │       └── installation.mdx
+│   ├── docs/                 runtime docs (content from the API, not files)
+│   │   ├── api.ts            fetch docs tree / page / search-index from the backend
+│   │   ├── docsTypes.ts      DocNode tree types + flatten helpers + docHref
+│   │   ├── DocsData.tsx      context: fetches the tree once, shares it to layout + pages
+│   │   ├── DocsLayout.tsx    docs shell: sidebar (from fetched tree), <Outlet/>, TOC, search
+│   │   ├── DocPageView.tsx   route element: fetches a page by :slug, renders markdown
+│   │   ├── DocMarkdown.tsx   react-markdown setup (gfm + raw + slug + highlight + <Media>)
+│   │   ├── Media.tsx         runtime <Media> tag (img / video / gif) used inside markdown
+│   │   ├── searchIndex.ts    runtime-fetched, cached search index
+│   │   ├── SearchModal.tsx   Ctrl+K search over the index
+│   │   ├── useToc.ts         "On this page" headings (MutationObserver, async-safe)
+│   │   ├── CopyCodeButton.tsx / CodeBlockHeader.tsx / codeLanguages.tsx  code-block decorators
+│   │   └── docs.css          docs styling, matches landing (black/Jersey/--accent)
 │   │
 │   └── assets/               hero.png, logos
 │
@@ -134,16 +140,20 @@ AMVerge-Website/
 
 - `/` renders the landing `App` (scroll page, its own Navbar).
 - `/features`, `/changelog`, `/faq`, `/gallery` render under `SiteLayout` (shared Navbar + Footer, scroll-to-top on change).
-- `/docs` renders `DocsLayout` with nested routes generated from `docs/registry.ts`. First registry entry is the `/docs` index route, the rest are `/docs/<slug>`.
+- `/docs` renders `DocsLayout` (wrapped in `DocsDataProvider`). `index` and `:slug` both render `DocPageView`; the index redirects to the first page. The sidebar tree and page content are fetched from the API at runtime.
 
 `Navbar` is a 3-zone bar (brand | page links | actions). Actions = hue slider + Download CTA (`utils/download.ts`, latest GitHub `.exe`). Below 860px it collapses to a hamburger dropdown. `App` still reads `location.hash` and scrolls to the matching section on load (used by in-page anchors like `/#download`).
 
-### Adding a docs page
+### Docs content (managed from the admin)
 
-1. Create `src/docs/pages/<name>.mdx`.
-2. Import it in `src/docs/registry.ts` and add `{ slug, label, Component }`.
+Docs are no longer files in this repo. The tree (categories/subgroups/pages) and each page's Markdown live in the `doc_nodes` table and are edited from the admin dashboard's Docs tab (`AMVerge-Website-Admin`). This site only renders them:
 
-Sidebar links and routes both come from that array. No other wiring needed.
+- `DocsData` fetches `GET /api/docs/tree` once and shares it.
+- `DocPageView` fetches `GET /api/docs/page/:slug` and renders the Markdown via `DocMarkdown`.
+- `searchIndex` lazy-loads `GET /api/docs/search-index` (cached) for Ctrl+K search.
+- Inside Markdown, the custom `<Media src caption gif />` tag renders images/videos (parsed by `rehype-raw`, mapped to `Media`).
+
+To add/edit/reorder pages or categories: use the admin Docs tab. No code change or redeploy needed.
 
 ### Landing scroll model
 
@@ -169,8 +179,9 @@ Single long page. Each section is a `<div id="...">` matching the `sections` lis
 
 | File | Role |
 |---|---|
-| `vite.config.ts` | MDX plugin must stay `{ enforce: 'pre', ...mdx() }` before react, and react `include` must list `mdx`. Remove either and `.mdx` imports break. |
-| `src/main.tsx` | Routes generated from `docs/registry.ts`. The first entry is the index route (`path` undefined, `index`), others use their slug. Keep this mapping if editing routes. |
+| `vite.config.ts` | Plain `react()` plugin only. Docs are runtime Markdown now, so MDX and the old `doc-sources` virtual plugin were removed. |
+| `src/main.tsx` | `/docs` is `DocsDataProvider > DocsLayout` with `index` + `:slug` both rendering `DocPageView`. Tree/content come from the API, not generated routes. |
+| `src/docs/api.ts` | All docs reads target `VITE_ADMIN_API_URL` (the admin backend). If unset it falls back to `http://localhost:3001`. Backend must allow this origin in CORS. |
 | `src/components/Navbar.tsx` | `sections` array ids MUST match the `id=` on each landing section div, or scroll-spy and nav clicks break. Slider writes `--accent` globally. |
 | `src/index.css` | `#root { text-align: center }` and `width: 80%`. Docs override both (`.docs-root { text-align: left }` + viewport breakout). Do not assume content is left-aligned by default. |
 | `src/css/docs.css` | `.docs-root` breaks out of `#root`'s 80% width via `width: 100vw; margin-left: calc(-50vw + 50%)` to fill screen. Docs reuse the landing look (black bg, Jersey font, `--accent`). |
