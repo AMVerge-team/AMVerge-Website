@@ -1,3 +1,5 @@
+import VideoPlayer from './VideoPlayer'
+
 // Runtime <Media> tag used inside doc markdown (parsed by rehype-raw, so props
 // arrive as strings / empty-string-for-boolean rather than real booleans).
 type MediaProps = {
@@ -30,7 +32,7 @@ export default function Media({ src, alt = '', caption, video, poster, gif, widt
         isGif ? (
           <video src={src} poster={poster} autoPlay loop muted playsInline preload="metadata" />
         ) : (
-          <video src={src} poster={poster} controls preload="metadata" />
+          <VideoPlayer src={src} poster={poster} />
         )
       ) : (
         <img src={src} alt={alt || caption || ''} loading="lazy" />
