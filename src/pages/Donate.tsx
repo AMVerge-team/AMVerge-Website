@@ -62,13 +62,13 @@ export default function Donate() {
 
                 <div className="feature-card">
                     <div className="feature-icon"><FiCode /></div>
-                    <h2>Why I built this</h2>
+                    <h2>Why we built this</h2>
                     <p>
-                        AMVerge was born from frustration. I spent way too many hours
+                        AMVerge was born from frustration. We spent way too many hours
                         scrubbing through episodes looking for that one perfect scene, and
-                        I knew there had to be a better way. I built it for myself first,
-                        then opened it up so every editor could benefit. No profit motive,
-                        no startup dreams, just a tool that solves a real problem.
+                        we knew there had to be a better way. We built it for ourselves
+                        first, then opened it up so every editor could benefit. No profit
+                        motive, no startup dreams, just a tool that solves a real problem.
                     </p>
                 </div>
 
@@ -77,7 +77,7 @@ export default function Donate() {
                     <h2>What if nobody donates?</h2>
                     <p>
                         Nothing changes. AMVerge stays free, stays open source, stays
-                        actively maintained. I built this project because I enjoy it and
+                        actively maintained. We built this project because we enjoy it and
                         because the AMV community deserves good tools. Donations are
                         appreciated but never expected. The project's future doesn't
                         depend on them, it depends on editors finding it useful.
@@ -90,7 +90,7 @@ export default function Donate() {
                 <h3>If you'd like to chip in</h3>
                 <p>
                     There's zero pressure. But if AMVerge saved you hours of work and
-                    you want to throw a few bucks my way, it genuinely helps keep
+                    you want to throw a few bucks our way, it genuinely helps keep
                     the servers running and the coffee flowing.
                 </p>
                 <a
