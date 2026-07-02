@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FiChevronRight, FiDownload } from "react-icons/fi";
 import { FaWindows, FaApple } from "react-icons/fa";
 import { fetchReleases } from "../services/github";
+import useSEO from "../hooks/useSEO";
 import type { GithubRelease } from "../services/github";
 
 function getExcerpt(body: string | null) {
@@ -29,6 +30,11 @@ function hasPlatform(rel: GithubRelease, ext: string) {
 export default function Changelog() {
     const [releases, setReleases] = useState<GithubRelease[] | null>(null);
     const [error, setError] = useState(false);
+
+    useSEO({
+        title: "Changelog",
+        description: "AMVerge release history and changelog. See what's new in each version, download the latest build for Windows and macOS.",
+    });
 
     useEffect(() => {
         fetchReleases()

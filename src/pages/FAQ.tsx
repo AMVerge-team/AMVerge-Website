@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
+import useSEO from "../hooks/useSEO";
 
 const faqs = [
     {
@@ -39,6 +40,11 @@ const faqs = [
 
 export default function FAQ() {
     const [open, setOpen] = useState<number | null>(null);
+
+    useSEO({
+        title: "FAQ",
+        description: "Frequently asked questions about AMVerge. Is it free? What platforms? What formats? Find answers about the free scene selection tool for AMV editors.",
+    });
 
     return (
         <div className="page page-faq">

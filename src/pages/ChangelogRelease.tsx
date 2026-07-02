@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import {
-    FiDownload,
-    FiExternalLink,
-    FiArrowLeft,
-    FiHardDrive,
-} from "react-icons/fi";
+import { FiDownload, FiExternalLink, FiArrowLeft, FiHardDrive } from "react-icons/fi";
 import { FaWindows, FaApple } from "react-icons/fa";
 import { fetchReleaseByTag } from "../services/github";
+import useSEO from "../hooks/useSEO";
 import type { GithubRelease, GithubAsset } from "../services/github";
 
 function getDownloads(rel: GithubRelease) {
@@ -63,6 +59,11 @@ export default function ChangelogRelease() {
     const { tag } = useParams<{ tag: string }>();
     const [release, setRelease] = useState<GithubRelease | null>(null);
     const [error, setError] = useState(false);
+
+    useSEO({
+        title: release ? `Release ${release.tag_name}` : "Release",
+        description: release ? `AMVerge ${release.name || release.tag_name} release notes and downloads.` : "AMVerge release details and download links.",
+    });
 
     useEffect(() => {
         if (!tag) return;

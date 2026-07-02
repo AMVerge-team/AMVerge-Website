@@ -5,6 +5,7 @@ import { docHref } from './docsTypes'
 import { useDocsData } from './DocsData'
 import DocMarkdown from './DocMarkdown'
 import DocsNotice from './DocsNotice'
+import useSEO from '../hooks/useSEO'
 import type { DocPageContent } from './docsTypes'
 
 type LoadState = 'loading' | 'ready' | 'notfound' | 'offline'
@@ -15,6 +16,11 @@ export default function DocPageView() {
   const [page, setPage] = useState<DocPageContent | null>(null)
   const [state, setState] = useState<LoadState>('loading')
   const [attempt, setAttempt] = useState(0)
+
+  useSEO({
+    title: page?.label ? `Docs - ${page.label}` : "Docs",
+    description: page?.label ? `AMVerge documentation: ${page.label}. Learn how to use the free scene selection tool.` : "AMVerge documentation. Guides, installation, and usage for the free scene selection tool.",
+  })
 
   useEffect(() => {
     if (!slug) return

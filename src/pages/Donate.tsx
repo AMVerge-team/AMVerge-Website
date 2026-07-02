@@ -1,6 +1,11 @@
 import { FiCoffee, FiExternalLink, FiHeart, FiServer, FiStar, FiShare2, FiCode, FiSmile } from "react-icons/fi";
+import useSEO from "../hooks/useSEO";
 
 export default function Donate() {
+    useSEO({
+        title: "Donate",
+        description: "Support AMVerge development. Free forever, no obligation. Buy the team a coffee if the tool has saved you time. Every bit helps keep servers running.",
+    });
     return (
         <div className="page page-donate">
             <div className="section-head">
