@@ -19,7 +19,7 @@ function setMeta(id: string, content: string, attr: string) {
 
 export default function useSEO({ title, description, image, url }: SEOProps) {
   useEffect(() => {
-    const fullTitle = title.includes("AMVerge") ? title : `${title} | AMVerge`;
+    const fullTitle = title.includes("AMVerge") ? title : `AMVerge | ${title}`;
     document.title = fullTitle;
 
     setMeta("og:title", fullTitle, "property");

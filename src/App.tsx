@@ -16,7 +16,7 @@ function App() {
   const { hash } = useLocation()
 
   useSEO({
-    title: "Fast Scene Selection for AMV Editors",
+    title: "Home",
     description: "AMVerge splits any video into individual scenes automatically. Browse in a grid and export clips instantly. Free, open-source, built for the AMV community.",
     url: "https://amverge.app/",
   })
