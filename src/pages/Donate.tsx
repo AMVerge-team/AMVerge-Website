@@ -1,4 +1,4 @@
-import { FiCoffee, FiExternalLink, FiHeart, FiServer, FiStar, FiShare2 } from "react-icons/fi";
+import { FiCoffee, FiExternalLink, FiHeart, FiServer, FiStar, FiShare2, FiCode, FiSmile } from "react-icons/fi";
 
 export default function Donate() {
     return (
@@ -57,6 +57,30 @@ export default function Donate() {
                         GitHub, share AMVerge with your editing friends, report bugs when
                         you find them, or contribute code if you're into that. Word of
                         mouth and honest feedback are just as valuable as any donation.
+                    </p>
+                </div>
+
+                <div className="feature-card">
+                    <div className="feature-icon"><FiCode /></div>
+                    <h2>Why I built this</h2>
+                    <p>
+                        AMVerge was born from frustration. I spent way too many hours
+                        scrubbing through episodes looking for that one perfect scene, and
+                        I knew there had to be a better way. I built it for myself first,
+                        then opened it up so every editor could benefit. No profit motive,
+                        no startup dreams, just a tool that solves a real problem.
+                    </p>
+                </div>
+
+                <div className="feature-card">
+                    <div className="feature-icon"><FiSmile /></div>
+                    <h2>What if nobody donates?</h2>
+                    <p>
+                        Nothing changes. AMVerge stays free, stays open source, stays
+                        actively maintained. I built this project because I enjoy it and
+                        because the AMV community deserves good tools. Donations are
+                        appreciated but never expected. The project's future doesn't
+                        depend on them, it depends on editors finding it useful.
                     </p>
                 </div>
             </div>
