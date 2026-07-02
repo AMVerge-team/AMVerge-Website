@@ -13,6 +13,7 @@ import type { DocNode } from './docsTypes'
 import { useDocsData } from './DocsData'
 import { useToc } from './useToc'
 import DocsNotice from './DocsNotice'
+import { Skeleton } from '../components/ui/Skeleton'
 import SearchModal from './SearchModal'
 import CopyCodeButton from './CopyCodeButton'
 import CodeBlockHeader from './CodeBlockHeader'
@@ -208,7 +209,16 @@ export default function DocsLayout() {
         </button>
 
         <nav className="docs-tree">
-          {loading && <p className="docs-sidebar-status">Loading...</p>}
+          {loading && (
+            <div className="docs-sidebar-skeleton">
+              <Skeleton width="80%" height="24px" borderRadius="6px" />
+              <Skeleton width="65%" height="18px" borderRadius="6px" />
+              <Skeleton width="70%" height="18px" borderRadius="6px" />
+              <Skeleton width="55%" height="18px" borderRadius="6px" />
+              <Skeleton width="75%" height="18px" borderRadius="6px" />
+              <Skeleton width="60%" height="18px" borderRadius="6px" />
+            </div>
+          )}
           {!loading && error && <DocsNotice variant="offline" compact onRetry={reload} />}
           {!loading && !error && tree.map(renderTop)}
         </nav>

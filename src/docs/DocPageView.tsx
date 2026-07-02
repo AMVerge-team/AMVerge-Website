@@ -6,6 +6,7 @@ import { useDocsData } from './DocsData'
 import DocMarkdown from './DocMarkdown'
 import DocsNotice from './DocsNotice'
 import useSEO from '../hooks/useSEO'
+import { SkeletonText, Skeleton } from '../components/ui/Skeleton'
 import type { DocPageContent } from './docsTypes'
 
 type LoadState = 'loading' | 'ready' | 'notfound' | 'offline'
@@ -52,7 +53,17 @@ export default function DocPageView() {
     return <DocsNotice variant="empty" />
   }
 
-  if (state === 'loading') return <p className="docs-loading">Loading...</p>
+  if (state === 'loading') return (
+    <div className="docs-content" style={{ padding: "clamp(24px, 4vw, 48px) clamp(20px, 4vw, 40px)" }}>
+      <Skeleton width="50%" height="36px" className="skeleton-center" />
+      <div style={{ height: 24 }} />
+      <SkeletonText lines={6} />
+      <div style={{ height: 20 }} />
+      <SkeletonText lines={4} />
+      <div style={{ height: 20 }} />
+      <Skeleton height="200px" borderRadius="12px" />
+    </div>
+  )
   if (state === 'offline') {
     return <DocsNotice variant="offline" onRetry={() => setAttempt((n) => n + 1)} />
   }

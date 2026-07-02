@@ -4,6 +4,7 @@ import { FaDiscord } from "react-icons/fa";
 import useSEO from "../hooks/useSEO";
 import { fetchFaqItems } from "../services/faq";
 import type { FaqItem } from "../services/faq";
+import { SkeletonText } from "../components/ui/Skeleton";
 
 export default function FAQ() {
     const [open, setOpen] = useState<number | null>(null);
@@ -38,7 +39,7 @@ export default function FAQ() {
             </p>
 
             <div className="faq-list fade-in-children">
-                {loading && <p className="page-muted">Loading FAQ...</p>}
+                {loading && <SkeletonText lines={4} />}
                 {!loading && faqs.length === 0 && (
                     <p className="page-muted">No FAQ items available.</p>
                 )}

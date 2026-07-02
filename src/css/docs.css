@@ -2,6 +2,13 @@
    3-column layout: fixed sidebar | content | "on this page" toc.
    --accent inherits from App.css (lime default). */
 
+.docs-sidebar-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 12px 0;
+}
+
 .docs-layout {
   display: flex;
   align-items: flex-start;

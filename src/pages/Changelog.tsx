@@ -4,6 +4,7 @@ import { FiChevronRight, FiDownload } from "react-icons/fi";
 import { FaWindows, FaApple } from "react-icons/fa";
 import { fetchReleases } from "../services/github";
 import useSEO from "../hooks/useSEO";
+import { SkeletonCard } from "../components/ui/Skeleton";
 import type { GithubRelease } from "../services/github";
 
 function getExcerpt(body: string | null) {
@@ -69,7 +70,7 @@ export default function Changelog() {
             )}
 
             {!error && releases === null && (
-                <p className="page-muted">Loading releases...</p>
+                <SkeletonCard count={5} />
             )}
 
             {!error && releases?.length === 0 && (

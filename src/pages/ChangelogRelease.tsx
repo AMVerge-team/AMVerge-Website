@@ -4,6 +4,7 @@ import { FiDownload, FiExternalLink, FiArrowLeft, FiHardDrive } from "react-icon
 import { FaWindows, FaApple } from "react-icons/fa";
 import { fetchReleaseByTag } from "../services/github";
 import useSEO from "../hooks/useSEO";
+import { Skeleton } from "../components/ui/Skeleton";
 import type { GithubRelease, GithubAsset } from "../services/github";
 
 function getDownloads(rel: GithubRelease) {
@@ -88,7 +89,21 @@ export default function ChangelogRelease() {
     if (!release) {
         return (
             <div className="page">
-                <p className="page-muted">Loading...</p>
+                <Link to="/changelog" className="changelog-back">
+                    <FiArrowLeft /> Changelog
+                </Link>
+                <div className="release-fade-in">
+                    <div className="release-header">
+                        <Skeleton width="180px" height="28px" className="skeleton-center" />
+                        <div style={{ height: 12 }} />
+                        <Skeleton width="60%" height="48px" className="skeleton-center" />
+                    </div>
+                    <div className="release-body-section">
+                        <Skeleton width="30%" height="22px" />
+                        <div style={{ height: 14 }} />
+                        <Skeleton height="120px" borderRadius="12px" />
+                    </div>
+                </div>
             </div>
         );
     }
