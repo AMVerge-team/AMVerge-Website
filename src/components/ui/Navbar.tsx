@@ -17,7 +17,10 @@ export default function Navbar() {
     const onHome = location.pathname === "/";
 
     const [scrolled, setScrolled] = useState(false);
-    const [hue, setHue] = useState(120); // lime = 120
+    const [hue, setHue] = useState(() => {
+    const cached = localStorage.getItem("accent-hue");
+    return cached ? Number(cached) : 120;
+});
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
@@ -36,6 +39,7 @@ export default function Navbar() {
             "--accent",
             `hsl(${hue}, 100%, 50%)`,
         );
+        localStorage.setItem("accent-hue", String(hue));
     }, [hue]);
 
     // close mobile menu on route change
