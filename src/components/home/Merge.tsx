@@ -1,0 +1,40 @@
+import { useFadeIn } from "../../hooks/useFadeIn";
+
+export default function Merge() {
+    const ref = useFadeIn<HTMLDivElement>();
+    return (
+        <div id="merge-section" className="merge-info-section fade-in" ref={ref}>
+            <div className="merge-info-text">
+                <div className="section-head">
+                    <span className="section-eyebrow">Stay in control</span>
+                    <h1>
+                        Merge Scenes, Stay in Control.
+                    </h1>
+                </div>
+                <p>
+                    No scene detection system is perfect, and AMVerge is built with that in mind.
+                    Fast motion, flashes, camera shakes, or intense fight sequences can sometimes create
+                    extra cuts. Instead of forcing you to manually rebuild clips in an editor, AMVerge lets you
+                    instantly merge selected scenes back together into one seamless segment.
+                    This also keeps your project panel clean and organized. Rather than dealing with dozens of tiny clips,
+                    you can combine related moments into larger, easy-to-manage scenes that are faster to browse,
+                    preview, and import into your editing workflow.
+                </p>
+            </div>
+
+            <div className="merge-clip-grid">
+                {Array.from({ length: 24 }).map((_, i) => {
+                    const num = String(i + 109).padStart(4, '0');
+                    return (
+                        <div key={i} className="clip-cell">
+                            <img
+                                src={`/gifs/Sousou no Frieren - 01_${num}.gif`}
+                                alt={`clip ${num}`}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    )
+}
