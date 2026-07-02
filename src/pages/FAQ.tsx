@@ -1,50 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
 import useSEO from "../hooks/useSEO";
-
-const faqs = [
-    {
-        q: "What is AMVerge?",
-        a: "A desktop scene selection tool for AMV editors. It splits any video into individual scenes and shows them in a grid so you can find and export clips fast, no timeline scrubbing required.",
-    },
-    {
-        q: "Is it free?",
-        a: "Yes. AMVerge is free and open source. Grab the latest build from the download button or GitHub releases.",
-    },
-    {
-        q: "What platforms are supported?",
-        a: "Windows 10/11 and macOS. The download provides installers for both platforms.",
-    },
-    {
-        q: "What video formats can I import?",
-        a: "Anime episodes, movies, or any common video file. AMVerge runs automatic scene detection and exports clips as MP4, MKV, or MOV.",
-    },
-    {
-        q: "Detection made too many cuts. Can I fix that?",
-        a: "Yes. Select the extra clips and use Merge to join them back into one seamless scene before exporting. AMVerge also uses CLIP similarity to suggest merges automatically.",
-    },
-    {
-        q: "Where can I report bugs or request features?",
-        a: "Open an issue on the GitHub repository. Links are in the footer, or use the Discord server.",
-    },
-    {
-        q: "Can I import clips directly into my editor?",
-        a: "Yes. AMVerge supports direct import to DaVinci Resolve, After Effects, Premiere Pro, and CapCut. No manual reimport needed.",
-    },
-    {
-        q: "Does it work with non-anime videos?",
-        a: "Yes. Any video file works. The scene detection is format-agnostic and works on live action, animation, or any content.",
-    },
-];
+import { fetchFaqItems } from "../services/faq";
+import type { FaqItem } from "../services/faq";
 
 export default function FAQ() {
     const [open, setOpen] = useState<number | null>(null);
+    const [faqs, setFaqs] = useState<FaqItem[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useSEO({
         title: "FAQ",
         description: "Frequently asked questions about AMVerge. Is it free? What platforms? What formats? Find answers about the free scene selection tool for AMV editors.",
     });
+
+    useEffect(() => {
+        fetchFaqItems()
+            .then(setFaqs)
+            .catch(() => {})
+            .finally(() => setLoading(false));
+    }, []);
 
     return (
         <div className="page page-faq">
@@ -62,17 +38,21 @@ export default function FAQ() {
             </p>
 
             <div className="faq-list fade-in-children">
+                {loading && <p className="page-muted">Loading FAQ...</p>}
+                {!loading && faqs.length === 0 && (
+                    <p className="page-muted">No FAQ items available.</p>
+                )}
                 {faqs.map((item, i) => {
                     const isOpen = open === i;
                     return (
-                        <div className={`faq-item ${isOpen ? "open" : ""}`} key={item.q}>
+                        <div className={`faq-item ${isOpen ? "open" : ""}`} key={item.id}>
                             <button className="faq-q" onClick={() => setOpen(isOpen ? null : i)}>
                                 <span className="faq-num">{String(i + 1).padStart(2, '0')}</span>
-                                <span className="faq-q-text">{item.q}</span>
+                                <span className="faq-q-text">{item.question}</span>
                                 <FiChevronDown className="faq-chevron" />
                             </button>
                             <div className={`faq-a-wrap ${isOpen ? "open" : ""}`}>
-                                <p className="faq-a">{item.a}</p>
+                                <p className="faq-a">{item.answer}</p>
                             </div>
                         </div>
                     );
