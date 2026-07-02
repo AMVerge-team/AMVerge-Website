@@ -24,7 +24,6 @@ export default function Footer() {
                 <div className="footer-col">
                     <h4>Product</h4>
                     <Link to="/features">Features</Link>
-                    <Link to="/gallery">Gallery</Link>
                     <Link to="/changelog">Changelog</Link>
                 </div>
 
