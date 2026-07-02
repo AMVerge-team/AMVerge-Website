@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiHome, FiFileText, FiHelpCircle, FiDownload, FiCoffee, FiClock, FiGithub } from "react-icons/fi";
+import { FiHome, FiFileText, FiHelpCircle, FiDownload, FiCoffee, FiClock } from "react-icons/fi";
 import useSEO from "../hooks/useSEO";
 
 export default function NotFound() {
@@ -52,16 +52,6 @@ export default function NotFound() {
                     <h2>Donate</h2>
                     <p>Support the project</p>
                 </Link>
-                <a
-                    href="https://github.com/AMVerge-team/AMVerge"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="feature-card"
-                >
-                    <div className="feature-icon"><FiGithub /></div>
-                    <h2>GitHub</h2>
-                    <p>Source code and issues</p>
-                </a>
             </div>
         </div>
     );
