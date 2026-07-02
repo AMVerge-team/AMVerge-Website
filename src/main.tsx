@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import DocsLayout from './docs/DocsLayout.tsx'
@@ -24,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/changelog/:tag" element={<ChangelogRelease />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/gallery" element={<Navigate to="/" replace />} />
         </Route>
         <Route
           path="/docs"
