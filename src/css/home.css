@@ -75,10 +75,9 @@ body {
 
 @media (max-width: 960px) {
   .nav-content {
-    grid-template-columns: 1fr auto;
-  }
-  .nav-right {
-    justify-self: end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
