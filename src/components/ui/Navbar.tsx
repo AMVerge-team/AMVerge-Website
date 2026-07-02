@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FiDownload, FiMenu, FiX, FiGithub } from "react-icons/fi";
+import { FiDownload, FiMenu, FiX } from "react-icons/fi";
 import { downloadLatestExe } from "../../utils/download";
 
 const pages = [
@@ -80,15 +80,6 @@ export default function Navbar() {
         <nav className={`site-nav ${scrolled || menuOpen ? "nav-scrolled" : ""}`}>
             <div className="nav-content">
                 <div className="nav-brand">
-                    <a
-                        href="https://github.com/AMVerge-team/AMVerge"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="nav-github"
-                        aria-label="GitHub"
-                    >
-                        <FiGithub />
-                    </a>
                     <NavLink to="/" end className="nav-logo">
                         <span>AMV</span>erge
                     </NavLink>
