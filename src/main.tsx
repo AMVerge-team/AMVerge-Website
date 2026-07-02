@@ -12,6 +12,7 @@ import Changelog from './pages/Changelog.tsx'
 import ChangelogRelease from './pages/ChangelogRelease.tsx'
 import FAQ from './pages/FAQ.tsx'
 import Gallery from './pages/Gallery.tsx'
+import Donate from './pages/Donate.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/changelog/:tag" element={<ChangelogRelease />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/donate" element={<Donate />} />
         </Route>
         <Route
           path="/docs"

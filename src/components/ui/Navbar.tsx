@@ -9,6 +9,7 @@ const pages = [
     { to: "/gallery", label: "Gallery" },
     { to: "/faq", label: "FAQ" },
     { to: "/changelog", label: "Changelog" },
+    { to: "/donate", label: "Donate" },
     { to: "/docs", label: "Docs" },
 ];
 

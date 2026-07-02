@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiGithub, FiDownload } from "react-icons/fi";
+import { FiGithub, FiDownload, FiCoffee } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
 import { downloadLatestExe } from "../../utils/download";
 import ContributorAvatars from "./ContributorAvatars";
@@ -50,6 +50,9 @@ export default function Footer() {
                     >
                         <FaDiscord /> Discord
                     </a>
+                    <Link to="/donate">
+                        <FiCoffee /> Donate
+                    </Link>
                 </div>
 
                 <div className="footer-col footer-contrib-col">
