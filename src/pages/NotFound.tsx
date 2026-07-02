@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiHome, FiFileText, FiHelpCircle, FiDownload } from "react-icons/fi";
+import { FiHome, FiFileText, FiHelpCircle, FiDownload, FiCoffee, FiClock, FiGithub } from "react-icons/fi";
 import useSEO from "../hooks/useSEO";
 
 export default function NotFound() {
@@ -42,6 +42,26 @@ export default function NotFound() {
                     <h2>FAQ</h2>
                     <p>Frequently asked questions</p>
                 </Link>
+                <Link to="/changelog" className="feature-card">
+                    <div className="feature-icon"><FiClock /></div>
+                    <h2>Changelog</h2>
+                    <p>See what's new in each release</p>
+                </Link>
+                <Link to="/donate" className="feature-card">
+                    <div className="feature-icon"><FiCoffee /></div>
+                    <h2>Donate</h2>
+                    <p>Support the project</p>
+                </Link>
+                <a
+                    href="https://github.com/AMVerge-team/AMVerge"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="feature-card"
+                >
+                    <div className="feature-icon"><FiGithub /></div>
+                    <h2>GitHub</h2>
+                    <p>Source code and issues</p>
+                </a>
             </div>
         </div>
     );
