@@ -76,11 +76,6 @@ export default function MiniUI() {
                             </span>
                         ))}
                     </div>
-                    <div className="sb-warning">
-                        <strong>WARNING</strong>
-                        AMVerge V2 will revamp how episodes are stored, and all data
-                        will be wiped. Treat this panel as temporary storage.
-                    </div>
                 </aside>
 
                 {/* Main */}
