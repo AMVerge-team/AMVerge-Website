@@ -666,6 +666,20 @@
     }
 }
 
+/* ---- 404 ---- */
+.notfound-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.notfound-links .feature-card {
+    text-decoration: none;
+    text-align: left;
+}
+
 /* ---- Footer ---- */
 .site-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
