@@ -24,11 +24,13 @@ export default function Features() {
                 opening a timeline until you're ready.
             </p>
 
+            <div className="fade-in-children">
             <DetectSection />
             <BrowseSection />
             <MergeFeatureSection />
             <ExportSection />
             <FeatureCTA />
+            </div>
         </div>
     );
 }

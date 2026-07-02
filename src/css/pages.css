@@ -163,6 +163,50 @@
 .faq-list.fade-in-children .faq-item:nth-child(7) { animation-delay: 0.6s; }
 .faq-list.fade-in-children .faq-item:nth-child(8) { animation-delay: 0.7s; }
 
+.page-features.fade-in-children > .feat-section,
+.page-features.fade-in-children > .feat-cta {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeInUp 0.55s ease forwards;
+}
+
+.page-features.fade-in-children > .feat-section:nth-child(1),
+.page-features.fade-in-children > .feat-cta:nth-child(1) { animation-delay: 0s; }
+.page-features.fade-in-children > .feat-section:nth-child(2),
+.page-features.fade-in-children > .feat-cta:nth-child(2) { animation-delay: 0.1s; }
+.page-features.fade-in-children > .feat-section:nth-child(3),
+.page-features.fade-in-children > .feat-cta:nth-child(3) { animation-delay: 0.2s; }
+.page-features.fade-in-children > .feat-section:nth-child(4),
+.page-features.fade-in-children > .feat-cta:nth-child(4) { animation-delay: 0.3s; }
+.page-features.fade-in-children > .feat-section:nth-child(5),
+.page-features.fade-in-children > .feat-cta:nth-child(5) { animation-delay: 0.4s; }
+
+.donate-grid.fade-in-children .feature-card {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeInUp 0.45s ease forwards;
+}
+
+.donate-grid.fade-in-children .feature-card:nth-child(1) { animation-delay: 0s; }
+.donate-grid.fade-in-children .feature-card:nth-child(2) { animation-delay: 0.08s; }
+.donate-grid.fade-in-children .feature-card:nth-child(3) { animation-delay: 0.16s; }
+.donate-grid.fade-in-children .feature-card:nth-child(4) { animation-delay: 0.24s; }
+.donate-grid.fade-in-children .feature-card:nth-child(5) { animation-delay: 0.32s; }
+.donate-grid.fade-in-children .feature-card:nth-child(6) { animation-delay: 0.4s; }
+
+.notfound-links.fade-in-children .feature-card {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeInUp 0.45s ease forwards;
+}
+
+.notfound-links.fade-in-children .feature-card:nth-child(1) { animation-delay: 0s; }
+.notfound-links.fade-in-children .feature-card:nth-child(2) { animation-delay: 0.08s; }
+.notfound-links.fade-in-children .feature-card:nth-child(3) { animation-delay: 0.16s; }
+.notfound-links.fade-in-children .feature-card:nth-child(4) { animation-delay: 0.24s; }
+.notfound-links.fade-in-children .feature-card:nth-child(5) { animation-delay: 0.32s; }
+.notfound-links.fade-in-children .feature-card:nth-child(6) { animation-delay: 0.4s; }
+
 @keyframes fadeInUp {
     from {
         opacity: 0;

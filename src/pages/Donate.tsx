@@ -20,7 +20,7 @@ export default function Donate() {
                 no locked features. Just a tool made for editors, by editors.
             </p>
 
-            <div className="donate-grid">
+            <div className="donate-grid fade-in-children">
                 <div className="feature-card">
                     <div className="feature-icon"><FiHeart /></div>
                     <h2>No obligation, ever</h2>

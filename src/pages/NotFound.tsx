@@ -21,7 +21,7 @@ export default function NotFound() {
                 might have been cut from the timeline.
             </p>
 
-            <div className="notfound-links">
+            <div className="notfound-links fade-in-children">
                 <Link to="/" className="feature-card">
                     <div className="feature-icon"><FiHome /></div>
                     <h2>Home</h2>

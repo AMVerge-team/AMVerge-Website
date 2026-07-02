@@ -176,6 +176,7 @@ Single long page. Each section is a `<div id="...">` matching the `sections` lis
 - **Styling:** plain CSS, no Tailwind. Landing rules in `css/home.css`, docs rules in `css/docs.css`. Use `var(--accent)` for theme color.
 - **AMVerge wordmark:** `<span>AMV</span>erge`, the `AMV` span is colored `--accent`, `erge` stays white. Match this everywhere (landing, docs, MiniUI).
 - **Assets:** runtime images served from `public/` via absolute paths (`/clips/...`). Build-time imports from `src/assets/`.
+- **Animations:** use CSS only, no JS animation libraries. Landing sections use `useFadeIn` hook (IntersectionObserver adds `.visible`). Multi-page routes use `.fade-in-children` with staggered `nth-child` delays in `pages.css`. Add both the container class and CSS rules for each new page/component that animates.
 
 ## Critical Paths
 
