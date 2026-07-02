@@ -12,6 +12,7 @@ import Changelog from './pages/Changelog.tsx'
 import ChangelogRelease from './pages/ChangelogRelease.tsx'
 import FAQ from './pages/FAQ.tsx'
 import Donate from './pages/Donate.tsx'
+import NotFound from './pages/NotFound.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/faq" element={<FAQ />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/gallery" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
         <Route
           path="/docs"
