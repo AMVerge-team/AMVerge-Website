@@ -4,12 +4,6 @@ import exportContent from "../../content/features/export.yaml";
 export default function ExportSection() {
     return (
         <section className="feat-section feat-alt">
-            <div className="feat-visual">
-                <div className="feat-video-placeholder">
-                    <FiVideo />
-                    <span>{exportContent.placeholderLabel}</span>
-                </div>
-            </div>
             <div className="feat-text">
                 <span className="section-eyebrow">{exportContent.eyebrow}</span>
                 <h2>
@@ -25,6 +19,12 @@ export default function ExportSection() {
                             <span>{stat.value}</span> {stat.label}
                         </div>
                     ))}
+                </div>
+            </div>
+            <div className="feat-visual">
+                <div className="feat-video-placeholder">
+                    <FiVideo />
+                    <span>{exportContent.placeholderLabel}</span>
                 </div>
             </div>
         </section>

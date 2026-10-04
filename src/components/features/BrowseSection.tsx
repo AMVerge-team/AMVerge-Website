@@ -4,12 +4,6 @@ import browseContent from "../../content/features/browse.yaml";
 export default function BrowseSection() {
     return (
         <section className="feat-section feat-alt">
-            <div className="feat-visual">
-                <div className="feat-video-placeholder">
-                    <FiVideo />
-                    <span>{browseContent.placeholderLabel}</span>
-                </div>
-            </div>
             <div className="feat-text">
                 <span className="section-eyebrow">{browseContent.eyebrow}</span>
                 <h2>
@@ -25,6 +19,12 @@ export default function BrowseSection() {
                             <span>{stat.value}</span> {stat.label}
                         </div>
                     ))}
+                </div>
+            </div>
+            <div className="feat-visual">
+                <div className="feat-video-placeholder">
+                    <FiVideo />
+                    <span>{browseContent.placeholderLabel}</span>
                 </div>
             </div>
         </section>
