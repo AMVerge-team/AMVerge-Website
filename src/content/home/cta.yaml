@@ -1,11 +1,11 @@
-eyebrow: "Ready when you are"
-titlePrefix: "Stop"
-titleStrike: "Scrubbing."
-titleMiddle: "Start"
-titleAccent: "Selecting."
+eyebrow: "Start editing"
+titlePrefix: "Browse"
+titleStrike: "timelines."
+titleMiddle: "Pick"
+titleAccent: "scenes."
 subtitle: >
-  Turn hours of timeline scrubbing into seconds of browsing.
-  Free, open source, built for editors.
+  Browse any anime episode in seconds and grab only the clips you need.
+  Free and open source for Windows and macOS.
 downloadBtn: "Download"
 githubLabel: "GitHub"
 discordLabel: "Discord"
