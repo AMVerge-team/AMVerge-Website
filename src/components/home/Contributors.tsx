@@ -1,6 +1,8 @@
 import { FiGithub } from "react-icons/fi";
 import { useFadeIn } from "../../hooks/useFadeIn";
 import { useContributors } from "../../hooks/useContributors";
+import contribContent from "../../content/home/contributors.yaml";
+import { formatBrandText } from "../../utils/formatText";
 
 const REPO_URL = "https://github.com/AMVerge-team/AMVerge";
 const MAX_SHOWN = 14;
@@ -18,14 +20,13 @@ export default function Contributors() {
     return (
         <section id="contributors" className="contrib-section fade-in" ref={ref}>
             <div className="section-head">
-                <span className="section-eyebrow">Thank you</span>
+                <span className="section-eyebrow">{contribContent.eyebrow}</span>
                 <h2 className="contrib-title">
-                    AMVerge wouldn't exist <span className="cta-accent">without you</span>
+                    {formatBrandText(contribContent.titlePrefix)} <span className="cta-accent">{contribContent.titleAccent}</span>
                 </h2>
             </div>
             <p className="contrib-sub">
-                Every fix, feature, and idea comes from people giving their own
-                time to make AMVerge better. To everyone below: thank you.
+                {formatBrandText(contribContent.subtitle)}
             </p>
 
             <div className="contrib-grid">
@@ -49,7 +50,7 @@ export default function Contributors() {
             </div>
 
             {extra > 0 && (
-                <p className="contrib-more">+ {extra} more contributors</p>
+                <p className="contrib-more">+ {extra} {contribContent.moreSuffix}</p>
             )}
 
             <a
@@ -58,8 +59,9 @@ export default function Contributors() {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <FiGithub /> Contribute on GitHub
+                <FiGithub /> {contribContent.ctaLabel}
             </a>
         </section>
     );
 }
+
