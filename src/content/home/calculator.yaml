@@ -1,0 +1,32 @@
+eyebrow: "WORKFLOW BENCHMARK & TIMELINE"
+title: "Manual Timeline vs Automated Scene Grid"
+episodesLabel: "Select footage volume"
+episodesUnit: "episodes"
+projectPresets:
+  - id: "single"
+    name: "1 Episode"
+    eps: 1
+    tag: "Quick Reel"
+  - id: "short"
+    name: "4 Episodes"
+    eps: 4
+    tag: "Short AMV"
+  - id: "cour1"
+    name: "12 Episodes"
+    eps: 12
+    tag: "1 Season"
+  - id: "cour2"
+    name: "24 Episodes"
+    eps: 24
+    tag: "Full Series"
+
+timelineManualLabel: "Manual Cutting in AE (Scrubbing / Slicing / Sorting)"
+timelineAmvergeLabel: "AMVerge Scene Engine (I-Frame Auto-Cut + Multi-Export)"
+
+manualTag: "Manual Labor"
+amvergeTag: "Instant Grid"
+
+equivalentLabel: "Reclaimed creative time"
+equivalentUnit: "full new AMVs produced"
+exportPresetLabel: "Target NLE formats:"
+exportPresets: ["Premiere Pro .xml", "DaVinci Resolve .edl", "After Effects .jsx", "Raw MP4 Cuts"]
