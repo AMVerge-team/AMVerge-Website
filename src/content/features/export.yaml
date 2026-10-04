@@ -1,0 +1,14 @@
+eyebrow: "04 / Export"
+titleLine1: "Export Any Format."
+titleLine2: "Import Any Editor."
+description: >
+  Export clips as mp4, mkv, or mov with customizable
+  codec, bitrate, resolution, and framerate. Save settings as
+  reusable profiles. Or send clips directly to DaVinci Resolve,
+  After Effects, Premiere Pro, or CapCut.
+stats:
+  - value: "3"
+    label: "formats"
+  - value: "4"
+    label: "NLEs"
+placeholderLabel: "Export demo"

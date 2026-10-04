@@ -1,35 +1,34 @@
 import { FiVideo } from "react-icons/fi";
+import mergeContent from "../../content/features/merge.yaml";
+import { formatBrandText } from "../../utils/formatText";
 
 export default function MergeFeatureSection() {
     return (
         <section className="feat-section">
             <div className="feat-text">
-                <span className="section-eyebrow">03 / Merge</span>
+                <span className="section-eyebrow">{mergeContent.eyebrow}</span>
                 <h2>
-                    Fix False Cuts.<br />
-                    <span>Merge with One Click.</span>
+                    {mergeContent.titleLine1}<br />
+                    <span>{mergeContent.titleLine2}</span>
                 </h2>
                 <p>
-                    Fast motion, camera shakes, and fight sequences create
-                    extra cuts. AMVerge uses CLIP similarity to detect which
-                    adjacent scenes belong together. Select them, click merge,
-                    and they become one seamless clip.
+                    {formatBrandText(mergeContent.description)}
                 </p>
                 <div className="feat-stats">
-                    <div>
-                        <span>CLIP</span> powered
-                    </div>
-                    <div>
-                        <span>1-click</span> merge
-                    </div>
+                    {mergeContent.stats?.map((stat: { value: string; label: string }, idx: number) => (
+                        <div key={idx}>
+                            <span>{stat.value}</span> {stat.label}
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className="feat-visual">
                 <div className="feat-video-placeholder">
                     <FiVideo />
-                    <span>Merge demo</span>
+                    <span>{mergeContent.placeholderLabel}</span>
                 </div>
             </div>
         </section>
     );
 }
+

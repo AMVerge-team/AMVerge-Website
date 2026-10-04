@@ -54,7 +54,14 @@ AMVerge-Website/
 │   ├── main.tsx              entry, BrowserRouter, routes (/ -> App, /docs -> DocsLayout, /gallery -> / redirect, * -> 404)
 │   ├── App.tsx               landing page, stacks all section components
 │   ├── index.css             light/dark token base (mostly overridden by home.css)
-│   ├── vite-env.d.ts         import.meta.env typing (VITE_ADMIN_API_URL)
+│   ├── vite-env.d.ts         import.meta.env typing (VITE_ADMIN_API_URL, *.yaml)
+│   │
+│   ├── content/              centralized YAML content files for pages & sections
+│   │   ├── home/             hero.yaml, about.yaml, explanation.yaml, merge.yaml, cta.yaml
+│   │   ├── features/         header.yaml, detect.yaml, browse.yaml, merge.yaml, export.yaml, cta.yaml
+│   │   ├── donate/           donate.yaml (header, cards, CTA, thank you)
+│   │   ├── notFound/         notFound.yaml (404 header, links)
+│   │   └── layout/           navbar.yaml (links & labels), footer.yaml (tagline & groups)
 │   │
 │   ├── css/
 │   │   ├── home.css          real site styling: black bg, Jersey 10 font, --accent
@@ -102,6 +109,10 @@ AMVerge-Website/
 │   │   ├── useFadeIn.ts      IntersectionObserver -> adds .visible class on scroll
 │   │   └── useSEO.ts         sets document.title + og/twitter/description meta per page
 │   │
+│   ├── utils/
+│   │   ├── download.ts       downloadLatestExe helper
+│   │   └── formatText.tsx    formatBrandText helper (wraps AMVerge in <span>AMV</span>erge)
+│   │
 │   ├── services/
 │   │   ├── github/
 │   │   │   ├── index.ts       re-exports all public API
@@ -134,9 +145,10 @@ AMVerge-Website/
 ├── counter-server.cjs        Express + Postgres download counter (optional service)
 ├── convert.sh                clip conversion helper
 ├── index.html                Vite entry html (includes base og/twitter meta + description)
-├── vite.config.ts            react plugin
+├── vite.config.ts            react plugin + yaml plugin
 ├── package.json
 └── AGENTS.md
+
 ```
 
 ## Key Architecture

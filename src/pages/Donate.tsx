@@ -1,118 +1,77 @@
+import React from "react";
 import { FiCoffee, FiExternalLink, FiHeart, FiServer, FiStar, FiShare2, FiCode, FiSmile } from "react-icons/fi";
 import useSEO from "../hooks/useSEO";
+import donateContent from "../content/donate/donate.yaml";
+import { formatBrandText } from "../utils/formatText";
+
+const iconMap: Record<string, React.ReactNode> = {
+    heart: <FiHeart />,
+    server: <FiServer />,
+    star: <FiStar />,
+    share: <FiShare2 />,
+    code: <FiCode />,
+    smile: <FiSmile />,
+};
+
+interface DonateCard {
+    id: string;
+    icon: string;
+    title: string;
+    text: string;
+}
 
 export default function Donate() {
     useSEO({
-        title: "Donate",
-        description: "Support AMVerge development. Free forever, no obligation. Buy the team a coffee if the tool has saved you time. Every bit helps keep servers running.",
+        title: donateContent.seo.title,
+        description: donateContent.seo.description,
     });
     return (
         <div className="page page-donate">
             <div className="section-head">
-                <span className="section-eyebrow">Support the project</span>
+                <span className="section-eyebrow">{donateContent.header.eyebrow}</span>
                 <h1 className="page-title">
-                    Buy me a <span>coffee</span>
+                    {donateContent.header.titlePrefix} <span>{donateContent.header.titleAccent}</span>
                 </h1>
             </div>
 
             <p className="page-sub">
-                AMVerge is and always will be free. No paywalls, no premium tiers,
-                no locked features. Just a tool made for editors, by editors.
+                {formatBrandText(donateContent.header.subtitle)}
             </p>
 
             <div className="donate-grid fade-in-children">
-                <div className="feature-card">
-                    <div className="feature-icon"><FiHeart /></div>
-                    <h2>No obligation, ever</h2>
-                    <p>
-                        You do not need to donate to use AMVerge. You do not need to donate
-                        to request features, report bugs, or join the community. The download
-                        button will never ask for your wallet before giving you the installer.
-                        This page exists only because some people asked for a way to say thanks.
-                    </p>
-                </div>
-
-                <div className="feature-card">
-                    <div className="feature-icon"><FiServer /></div>
-                    <h2>Where your support goes</h2>
-                    <p>
-                        Every contribution goes directly toward keeping the project alive:
-                        domain costs, hosting the download counter and docs backend, and
-                        the endless supply of caffeine that powers late-night debugging
-                        sessions. No corporate sponsor, no ads, no data selling.
-                    </p>
-                </div>
-
-                <div className="feature-card">
-                    <div className="feature-icon"><FiStar /></div>
-                    <h2>What you get in return</h2>
-                    <p>
-                        The same thing you already have: a free, open-source scene selection
-                        tool that respects your time and your wallet. Updates keep rolling
-                        out regardless of donations. The best way to support the project is
-                        using it, sharing it, and telling other editors about it.
-                    </p>
-                </div>
-
-                <div className="feature-card">
-                    <div className="feature-icon"><FiShare2 /></div>
-                    <h2>Other ways to help</h2>
-                    <p>
-                        Not in a position to donate? No problem at all. Star the repo on
-                        GitHub, share AMVerge with your editing friends, report bugs when
-                        you find them, or contribute code if you're into that. Word of
-                        mouth and honest feedback are just as valuable as any donation.
-                    </p>
-                </div>
-
-                <div className="feature-card">
-                    <div className="feature-icon"><FiCode /></div>
-                    <h2>Why we built this</h2>
-                    <p>
-                        AMVerge was born from frustration. We spent way too many hours
-                        scrubbing through episodes looking for that one perfect scene, and
-                        we knew there had to be a better way. We built it for ourselves
-                        first, then opened it up so every editor could benefit. No profit
-                        motive, no startup dreams, just a tool that solves a real problem.
-                    </p>
-                </div>
-
-                <div className="feature-card">
-                    <div className="feature-icon"><FiSmile /></div>
-                    <h2>What if nobody donates?</h2>
-                    <p>
-                        Nothing changes. AMVerge stays free, stays open source, stays
-                        actively maintained. We built this project because we enjoy it and
-                        because the AMV community deserves good tools. Donations are
-                        appreciated but never expected. The project's future doesn't
-                        depend on them, it depends on editors finding it useful.
-                    </p>
-                </div>
+                {donateContent.cards.map((card: DonateCard) => (
+                    <div className="feature-card" key={card.id}>
+                        <div className="feature-icon">
+                            {iconMap[card.icon] || <FiHeart />}
+                        </div>
+                        <h2>{card.title}</h2>
+                        <p>{formatBrandText(card.text)}</p>
+                    </div>
+                ))}
             </div>
 
             <div className="donate-cta-card">
                 <FiCoffee className="donate-cta-icon" />
-                <h3>If you'd like to chip in</h3>
+                <h3>{donateContent.cta.title}</h3>
                 <p>
-                    There's zero pressure. But if AMVerge saved you hours of work and
-                    you want to throw a few bucks our way, it genuinely helps keep
-                    the servers running and the coffee flowing.
+                    {formatBrandText(donateContent.cta.text)}
                 </p>
                 <a
-                    href="https://buymeacoffee.com/crptk"
+                    href={donateContent.cta.buttonUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="donate-btn"
                 >
                     <FiCoffee />
-                    Buy Me a Coffee
+                    {donateContent.cta.buttonText}
                     <FiExternalLink className="donate-btn-ext" />
                 </a>
             </div>
 
             <p className="donate-thanks">
-                Thank you for being part of the community.
+                {donateContent.thanks}
             </p>
         </div>
     );
 }
+

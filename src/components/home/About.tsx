@@ -1,5 +1,7 @@
 import MiniUI from "../ui/MiniUI";
 import { useFadeIn } from "../../hooks/useFadeIn";
+import aboutContent from "../../content/home/about.yaml";
+import { formatBrandText } from "../../utils/formatText";
 
 export default function About() {
     const ref = useFadeIn<HTMLDivElement>();
@@ -8,15 +10,14 @@ export default function About() {
         <div id="about" className="about-section fade-in" ref={ref}>
             <div className="about-text">
                 <div className="section-head">
-                    <span className="section-eyebrow">Browse, don't scrub</span>
+                    <span className="section-eyebrow">{aboutContent.eyebrow}</span>
                     <h1>
-                        Your Episode.<br />
-                        <span>Instantly Browsable.</span>
+                        {aboutContent.titleLine1}<br />
+                        <span>{aboutContent.titleLine2}</span>
                     </h1>
                 </div>
                 <p>
-                    Drop any video into <span>AMV</span>erge and get a grid of every scene.
-                    No timeline scrubbing. No manual cuts. Just browse, pick, export.
+                    {formatBrandText(aboutContent.description)}
                 </p>
             </div>
             <div className="about-ui-section">
@@ -24,5 +25,6 @@ export default function About() {
                 <MiniUI />
             </div>
         </div>
-    )
+    );
 }
+

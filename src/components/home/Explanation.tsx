@@ -1,21 +1,23 @@
 import { useFadeIn } from "../../hooks/useFadeIn";
+import explanationContent from "../../content/home/explanation.yaml";
+import { formatBrandText } from "../../utils/formatText";
 
 export default function Explanation() {
     const ref = useFadeIn<HTMLDivElement>();
+    const { oldWay, newWay } = explanationContent;
 
     return (
         <div id="explanation" className="explanation-section fade-in" ref={ref}>
             <div className="explanation-pane explanation-old">
-                <span className="explanation-label">The Old Way</span>
-                <h2>Hours</h2>
+                <span className="explanation-label">{oldWay.label}</span>
+                <h2>{oldWay.time}</h2>
                 <div className="explanation-video">
                     <video muted loop playsInline autoPlay preload="auto">
-                        <source src="/clips/AE Manual Clips Splitting.mp4" type="video/mp4" />
+                        <source src={oldWay.videoSrc} type="video/mp4" />
                     </video>
                 </div>
                 <p>
-                    Scrubbing through a timeline. Frame by frame. Jumping
-                    back and forth. Hoping you didn't miss the shot.
+                    {formatBrandText(oldWay.description)}
                 </p>
             </div>
 
@@ -24,18 +26,18 @@ export default function Explanation() {
             </div>
 
             <div className="explanation-pane explanation-new">
-                <span className="explanation-label">With <span>AMV</span>erge</span>
-                <h2>Minutes</h2>
+                <span className="explanation-label">{formatBrandText(newWay.label)}</span>
+                <h2>{newWay.time}</h2>
                 <div className="explanation-video">
                     <video muted loop playsInline autoPlay preload="auto">
-                        <source src="/clips/AMVerge Scene Splitting.mp4" type="video/mp4" />
+                        <source src={newWay.videoSrc} type="video/mp4" />
                     </video>
                 </div>
                 <p>
-                    Every scene in a visual grid. Browse an entire episode in
-                    seconds. Pick exactly what you need.
+                    {formatBrandText(newWay.description)}
                 </p>
             </div>
         </div>
-    )
+    );
 }
+

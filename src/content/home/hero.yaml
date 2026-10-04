@@ -1,0 +1,11 @@
+platformBadge: "Windows / macOS"
+subtitle: >
+  Turn hours of footage into a browsable scene grid.
+  Find, preview, and export the shots you need, in seconds.
+downloadBtn: "Download"
+downloadingBtn: "Downloading..."
+downloadsPlus: "downloads"
+githubLabel: "GitHub"
+discordLabel: "Discord"
+communityLabel: "Built by the community"
+scrollHint: "Scroll to explore"

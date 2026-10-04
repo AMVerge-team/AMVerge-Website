@@ -1,17 +1,20 @@
 import { FiSend } from "react-icons/fi";
+import ctaContent from "../../content/features/cta.yaml";
+import { formatBrandText } from "../../utils/formatText";
 
 export default function FeatureCTA() {
     return (
         <div className="feat-cta">
-            <span className="section-eyebrow">Ready to try it?</span>
+            <span className="section-eyebrow">{ctaContent.eyebrow}</span>
             <h2>
-                Stop <span className="cta-strike">Scrubbing.</span>
+                {ctaContent.titlePrefix} <span className="cta-strike">{ctaContent.titleStrike}</span>
                 <br />
-                Start <span className="cta-accent">Selecting.</span>
+                {ctaContent.titleMiddle} <span className="cta-accent">{ctaContent.titleAccent}</span>
             </h2>
             <a className="feat-download-btn" href="/#download">
-                <FiSend /> Download AMVerge
+                <FiSend /> {formatBrandText(ctaContent.downloadBtn)}
             </a>
         </div>
     );
 }
+

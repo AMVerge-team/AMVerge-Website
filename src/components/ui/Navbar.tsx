@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiDownload, FiMenu, FiX } from "react-icons/fi";
 import { downloadLatestExe } from "../../utils/download";
+import navbarContent from "../../content/layout/navbar.yaml";
 
-const pages = [
-    { to: "/", label: "Home", end: true },
-    { to: "/features", label: "Features" },
-    { to: "/faq", label: "FAQ" },
-    { to: "/changelog", label: "Changelog" },
-    { to: "/donate", label: "Donate" },
-    { to: "/docs", label: "Docs" },
-];
+interface NavItem {
+    to: string;
+    label: string;
+    end?: boolean;
+}
 
 export default function Navbar() {
     const location = useLocation();
@@ -18,9 +16,9 @@ export default function Navbar() {
 
     const [scrolled, setScrolled] = useState(false);
     const [hue, setHue] = useState(() => {
-    const cached = localStorage.getItem("accent-hue");
-    return cached ? Number(cached) : 120;
-});
+        const cached = localStorage.getItem("accent-hue");
+        return cached ? Number(cached) : 120;
+    });
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
@@ -57,12 +55,12 @@ export default function Navbar() {
                 onChange={(e) => setHue(Number(e.target.value))}
                 className="color-slider"
                 style={{ accentColor }}
-                aria-label="Accent color"
+                aria-label={navbarContent.accentAriaLabel || "Accent color"}
             />
         </div>
     );
 
-    const links = pages.map(({ to, label, end }) => (
+    const links = (navbarContent.links as NavItem[]).map(({ to, label, end }) => (
         <NavLink
             key={to}
             to={to}
@@ -90,13 +88,13 @@ export default function Navbar() {
                     <div className="nav-actions">
                         {slider}
                         <button className="nav-download" onClick={downloadLatestExe}>
-                            <FiDownload /> Download
+                            <FiDownload /> {navbarContent.downloadBtn}
                         </button>
                     </div>
                     <button
                         className="nav-toggle"
                         onClick={() => setMenuOpen((v) => !v)}
-                        aria-label="Toggle menu"
+                        aria-label={navbarContent.toggleMenuAriaLabel || "Toggle menu"}
                     >
                         {menuOpen ? <FiX /> : <FiMenu />}
                     </button>
@@ -109,7 +107,7 @@ export default function Navbar() {
                     <div className="nav-mobile-actions">
                         {slider}
                         <button className="nav-download" onClick={downloadLatestExe}>
-                            <FiDownload /> Download
+                            <FiDownload /> {navbarContent.downloadBtn}
                         </button>
                     </div>
                 </div>
@@ -117,3 +115,4 @@ export default function Navbar() {
         </nav>
     );
 }
+

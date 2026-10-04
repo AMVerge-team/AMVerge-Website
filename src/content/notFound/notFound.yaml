@@ -1,0 +1,40 @@
+seo:
+  title: "404 - Page Not Found"
+
+header:
+  eyebrow: "Error 404"
+  title: "404"
+  subtitle: >
+    This page doesn't exist or was moved. The scene you're looking for
+    might have been cut from the timeline.
+
+links:
+  - to: "/"
+    icon: home
+    title: "Home"
+    description: "Back to the landing page"
+
+  - to: "/features"
+    icon: download
+    title: "Features"
+    description: "See what AMVerge can do"
+
+  - to: "/docs"
+    icon: docs
+    title: "Docs"
+    description: "Read the documentation"
+
+  - to: "/faq"
+    icon: faq
+    title: "FAQ"
+    description: "Frequently asked questions"
+
+  - to: "/changelog"
+    icon: changelog
+    title: "Changelog"
+    description: "See what's new in each release"
+
+  - to: "/donate"
+    icon: donate
+    title: "Donate"
+    description: "Support the project"

@@ -1,0 +1,35 @@
+tagline: >
+  Scene selection made easy. Built for the AMV community,
+  by editors, for editors.
+downloadBtn: "Download"
+
+sections:
+  product:
+    title: "Product"
+    links:
+      - to: "/features"
+        label: "Features"
+      - to: "/changelog"
+        label: "Changelog"
+  resources:
+    title: "Resources"
+    links:
+      - to: "/docs"
+        label: "Docs"
+      - to: "/faq"
+        label: "FAQ"
+  community:
+    title: "Community"
+    github:
+      label: "GitHub"
+      url: "https://github.com/AMVerge-team/AMVerge"
+    discord:
+      label: "Discord"
+      url: "https://discord.com/invite/bmXjTgsAaN"
+    donate:
+      to: "/donate"
+      label: "Donate"
+  contributors:
+    title: "Contributors"
+
+disclaimer: "Not affiliated with any anime studio."

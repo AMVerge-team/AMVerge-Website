@@ -1,0 +1,17 @@
+downloadBtn: "Download"
+accentAriaLabel: "Accent color"
+toggleMenuAriaLabel: "Toggle menu"
+links:
+  - to: "/"
+    label: "Home"
+    end: true
+  - to: "/features"
+    label: "Features"
+  - to: "/faq"
+    label: "FAQ"
+  - to: "/changelog"
+    label: "Changelog"
+  - to: "/donate"
+    label: "Donate"
+  - to: "/docs"
+    label: "Docs"

@@ -1,4 +1,5 @@
 import { FiVideo } from "react-icons/fi";
+import browseContent from "../../content/features/browse.yaml";
 
 export default function BrowseSection() {
     return (
@@ -6,29 +7,27 @@ export default function BrowseSection() {
             <div className="feat-visual">
                 <div className="feat-video-placeholder">
                     <FiVideo />
-                    <span>Grid browsing demo</span>
+                    <span>{browseContent.placeholderLabel}</span>
                 </div>
             </div>
             <div className="feat-text">
-                <span className="section-eyebrow">02 / Browse</span>
+                <span className="section-eyebrow">{browseContent.eyebrow}</span>
                 <h2>
-                    See Everything.<br />
-                    <span>At Once.</span>
+                    {browseContent.titleLine1}<br />
+                    <span>{browseContent.titleLine2}</span>
                 </h2>
                 <p>
-                    Every scene in a 5-column grid. No scrubbing, no jumping
-                    around the timeline. Hover any cell for an instant preview.
-                    Find the exact frame you need in seconds, not minutes.
+                    {browseContent.description}
                 </p>
                 <div className="feat-stats">
-                    <div>
-                        <span>5&times;</span> faster
-                    </div>
-                    <div>
-                        <span>Hover</span> to preview
-                    </div>
+                    {browseContent.stats?.map((stat: { value: string; label: string }, idx: number) => (
+                        <div key={idx}>
+                            <span>{stat.value}</span> {stat.label}
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
     );
 }
+

@@ -7,6 +7,8 @@ import {
     fetchReleases,
     cumulativeDownloadCount,
 } from "../../services/github";
+import ctaContent from "../../content/home/cta.yaml";
+import { formatBrandText } from "../../utils/formatText";
 
 async function downloadLatest() {
     try {
@@ -38,20 +40,19 @@ export default function CTA() {
             <div className="cta-glow" />
             <div className="cta-inner">
                 <div className="section-head">
-                    <span className="section-eyebrow">Ready when you are</span>
+                    <span className="section-eyebrow">{ctaContent.eyebrow}</span>
                     <h2 className="cta-title">
-                        Stop <span className="cta-strike">Scrubbing.</span>
+                        {ctaContent.titlePrefix} <span className="cta-strike">{ctaContent.titleStrike}</span>
                         <br />
-                        Start <span className="cta-accent">Selecting.</span>
+                        {ctaContent.titleMiddle} <span className="cta-accent">{ctaContent.titleAccent}</span>
                     </h2>
                 </div>
                 <p className="cta-sub">
-                    Turn hours of timeline scrubbing into seconds of browsing.
-                    Free, open source, built for editors.
+                    {formatBrandText(ctaContent.subtitle)}
                 </p>
 
                 <button className="cta-download" onClick={downloadLatest}>
-                    <FiDownload /> Download
+                    <FiDownload /> {ctaContent.downloadBtn}
                 </button>
 
                 <div className="cta-secondary">
@@ -60,22 +61,23 @@ export default function CTA() {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <FiGithub /> GitHub
+                        <FiGithub /> {ctaContent.githubLabel}
                     </a>
                     <a
                         href="https://discord.com/invite/bmXjTgsAaN"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <FaDiscord /> Discord
+                        <FaDiscord /> {ctaContent.discordLabel}
                     </a>
                 </div>
 
                 <p className="cta-meta">
                     {count !== null && `${count.toLocaleString()}+ downloads · `}
-                    Windows 10/11 · macOS{version && ` · ${version}`}
+                    {ctaContent.platforms}{version && ` · ${version}`}
                 </p>
             </div>
         </section>
     );
 }
+

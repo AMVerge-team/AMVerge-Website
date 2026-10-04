@@ -7,6 +7,7 @@ import {
   fetchReleases,
   cumulativeDownloadCount,
 } from "../../services/github";
+import heroContent from "../../content/home/hero.yaml";
 
 export default function Landing() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -107,14 +108,13 @@ export default function Landing() {
         <div className="hero-overlay" />
         <div className="hero-grid" />
         <div className="hero-content">
-          {version && <p className="hero-badge">{version} · Windows / macOS</p>}
+          {version && <p className="hero-badge">{version} · {heroContent.platformBadge}</p>}
           <h1 className="hero-title">
             <span>AMV</span>erge
           </h1>
           <div className="hero-accent-line" />
           <p className="hero-subtitle">
-            Turn hours of footage into a browsable scene grid.
-            Find, preview, and export the shots you need, in seconds.
+            {heroContent.subtitle}
           </p>
           <div className="hero-actions">
             <button
@@ -123,12 +123,12 @@ export default function Landing() {
               disabled={downloading}
             >
               <FiDownload />{" "}
-              {downloading ? "Downloading..." : "Download"}
+              {downloading ? heroContent.downloadingBtn : heroContent.downloadBtn}
             </button>
             <p className="hero-count">
               {downloadCount === null
                 ? "Loading..."
-                : `${displayCount.toLocaleString()}+ downloads`}
+                : `${displayCount.toLocaleString()}+ ${heroContent.downloadsPlus}`}
             </p>
             <div className="hero-links">
               <a
@@ -137,7 +137,7 @@ export default function Landing() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FiGithub /> GitHub
+                <FiGithub /> {heroContent.githubLabel}
               </a>
               <a
                 className="hero-link hero-link-discord"
@@ -145,19 +145,19 @@ export default function Landing() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaDiscord /> Discord
+                <FaDiscord /> {heroContent.discordLabel}
               </a>
             </div>
             <div className="hero-contrib">
               <ContributorAvatars limit={5} />
-              <span>Built by the community</span>
+              <span>{heroContent.communityLabel}</span>
             </div>
           </div>
         </div>
         <div
           className={`scroll-hint ${showScrollHint ? "visible" : "hidden"}`}
         >
-          <span>Scroll to explore</span>
+          <span>{heroContent.scrollHint}</span>
           <div className="bounce-arrows">
             <span>&#x25BC;</span>
             <span>&#x25BC;</span>
@@ -167,3 +167,4 @@ export default function Landing() {
     </div>
   );
 }
+

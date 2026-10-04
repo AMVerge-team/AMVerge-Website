@@ -1,0 +1,80 @@
+seo:
+  title: "Donate"
+  description: >
+    Support AMVerge development. Free forever, no obligation. Buy the team a coffee if the tool has saved you time. Every bit helps keep servers running.
+
+header:
+  eyebrow: "Support the project"
+  titlePrefix: "Buy me a"
+  titleAccent: "coffee"
+  subtitle: >
+    AMVerge is and always will be free. No paywalls, no premium tiers,
+    no locked features. Just a tool made for editors, by editors.
+
+cards:
+  - id: obligation
+    icon: heart
+    title: "No obligation, ever"
+    text: >
+      You do not need to donate to use AMVerge. You do not need to donate
+      to request features, report bugs, or join the community. The download
+      button will never ask for your wallet before giving you the installer.
+      This page exists only because some people asked for a way to say thanks.
+
+  - id: support
+    icon: server
+    title: "Where your support goes"
+    text: >
+      Every contribution goes directly toward keeping the project alive:
+      domain costs, hosting the download counter and docs backend, and
+      the endless supply of caffeine that powers late-night debugging
+      sessions. No corporate sponsor, no ads, no data selling.
+
+  - id: return
+    icon: star
+    title: "What you get in return"
+    text: >
+      The same thing you already have: a free, open-source scene selection
+      tool that respects your time and your wallet. Updates keep rolling
+      out regardless of donations. The best way to support the project is
+      using it, sharing it, and telling other editors about it.
+
+  - id: otherWays
+    icon: share
+    title: "Other ways to help"
+    text: >
+      Not in a position to donate? No problem at all. Star the repo on
+      GitHub, share AMVerge with your editing friends, report bugs when
+      you find them, or contribute code if you're into that. Word of
+      mouth and honest feedback are just as valuable as any donation.
+
+  - id: whyBuilt
+    icon: code
+    title: "Why we built this"
+    text: >
+      AMVerge was born from frustration. We spent way too many hours
+      scrubbing through episodes looking for that one perfect scene, and
+      we knew there had to be a better way. We built it for ourselves
+      first, then opened it up so every editor could benefit. No profit
+      motive, no startup dreams, just a tool that solves a real problem.
+
+  - id: nobodyDonates
+    icon: smile
+    title: "What if nobody donates?"
+    text: >
+      Nothing changes. AMVerge stays free, stays open source, stays
+      actively maintained. We built this project because we enjoy it and
+      because the AMV community deserves good tools. Donations are
+      appreciated but never expected. The project's future doesn't
+      depend on them, it depends on editors finding it useful.
+
+cta:
+  title: "If you'd like to chip in"
+  text: >
+    There's zero pressure. But if AMVerge saved you hours of work and
+    you want to throw a few bucks our way, it genuinely helps keep
+    the servers running and the coffee flowing.
+  buttonText: "Buy Me a Coffee"
+  buttonUrl: "https://buymeacoffee.com/crptk"
+
+thanks: "Thank you for being part of the community."
