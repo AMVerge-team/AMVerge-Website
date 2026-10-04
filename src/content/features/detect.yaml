@@ -2,13 +2,11 @@ eyebrow: "01 / Detect"
 titleLine1: "Drop a Video."
 titleLine2: "Get Every Scene."
 description: >
-  AMVerge uses I-Frame detection and PySceneDetect to
-  automatically split any video into individual scenes. No
-  manual cutting, no markers, no timeline. Just drop the file
-  and watch it build a grid of every shot.
+  AMVerge scans I-Frames with PySceneDetect to split video files into
+  individual scene cuts automatically.
 stats:
-  - value: "100%"
-    label: "automatic"
+  - value: "Automatic"
+    label: "cut detection"
   - value: "<1 min"
     label: "per episode"
 placeholderLabel: "Detection demo"

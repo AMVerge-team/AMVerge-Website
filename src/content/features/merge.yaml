@@ -2,13 +2,11 @@ eyebrow: "03 / Merge"
 titleLine1: "Fix False Cuts."
 titleLine2: "Merge with One Click."
 description: >
-  Fast motion, camera shakes, and fight sequences create
-  extra cuts. AMVerge uses CLIP similarity to detect which
-  adjacent scenes belong together. Select them, click merge,
-  and they become one seamless clip.
+  Fight sequences and quick transitions can create extra cuts. Select adjacent
+  shots and merge them back together to keep your clip library organized.
 stats:
   - value: "CLIP"
-    label: "powered"
+    label: "similarity"
   - value: "1-click"
     label: "merge"
 placeholderLabel: "Merge demo"
