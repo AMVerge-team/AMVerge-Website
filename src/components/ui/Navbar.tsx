@@ -8,7 +8,6 @@ const pages = [
     { to: "/features", label: "Features" },
     { to: "/faq", label: "FAQ" },
     { to: "/changelog", label: "Changelog" },
-    { to: "/donate", label: "Donate" },
     { to: "/docs", label: "Docs" },
 ];
 

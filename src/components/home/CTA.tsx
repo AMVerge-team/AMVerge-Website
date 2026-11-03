@@ -38,7 +38,6 @@ export default function CTA() {
             <div className="cta-glow" />
             <div className="cta-inner">
                 <div className="section-head">
-                    <span className="section-eyebrow">Ready when you are</span>
                     <h2 className="cta-title">
                         Stop <span className="cta-strike">Scrubbing.</span>
                         <br />
@@ -47,7 +46,7 @@ export default function CTA() {
                 </div>
                 <p className="cta-sub">
                     Turn hours of timeline scrubbing into seconds of browsing.
-                    Free, open source, built for editors.
+                    <br/>Free, open source, built for editors.
                 </p>
 
                 <button className="cta-download" onClick={downloadLatest}>

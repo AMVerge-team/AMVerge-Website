@@ -5,20 +5,39 @@ import type { GithubContributor } from "../services/github";
 // Module-level cache so the hero, section, and footer share a single fetch.
 let cache: Promise<GithubContributor[]> | null = null;
 
-// Project owners, excluded from the contributor lists.
-const OWNERS = ["moongetsu", "crptk"];
+// The project creator, always listed first whatever the commit counts say.
+const PINNED = "crptk";
+
+// Contributors GitHub's list leaves out: lew-is's commits aren't linked to
+// the account, and Mark-Shun's are only on V2_BRANCH (GitHub counts main).
+// Once they show up there, the duplicate is skipped automatically.
+const UNLINKED = ["lew-is", "Mark-Shun"];
+
+function profile(login: string): GithubContributor {
+    return {
+        login,
+        avatar_url: `https://github.com/${login}.png?size=96`,
+        html_url: `https://github.com/${login}`,
+        contributions: 0,
+    };
+}
 
 export function loadContributors(): Promise<GithubContributor[]> {
     if (!cache) {
         cache = fetchContributors()
-            .then((list) =>
-                list.filter(
-                    (c) =>
-                        !c.login.endsWith("[bot]") &&
-                        !OWNERS.includes(c.login.toLowerCase()),
-                ),
-            )
-            .catch(() => []);
+            .catch(() => [] as GithubContributor[])
+            .then((fetched) => {
+                const list = fetched.filter((c) => !c.login.endsWith("[bot]"));
+                const has = (login: string) =>
+                    list.some((c) => c.login.toLowerCase() === login.toLowerCase());
+                for (const login of [PINNED, ...UNLINKED]) {
+                    if (!has(login)) list.push(profile(login));
+                }
+                const isPinned = (c: GithubContributor) => c.login.toLowerCase() === PINNED;
+                return list.sort(
+                    (a, b) => Number(isPinned(b)) - Number(isPinned(a)) || b.contributions - a.contributions,
+                );
+            });
     }
     return cache;
 }

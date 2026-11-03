@@ -8,15 +8,14 @@ export default function About() {
         <div id="about" className="about-section fade-in" ref={ref}>
             <div className="about-text">
                 <div className="section-head">
-                    <span className="section-eyebrow">Browse, don't scrub</span>
                     <h1>
-                        Your Episode.<br />
+                        Your Episode,<br />
                         <span>Instantly Browsable.</span>
                     </h1>
                 </div>
                 <p>
-                    Drop any video into <span>AMV</span>erge and get a grid of every scene.
-                    No timeline scrubbing. No manual cuts. Just browse, pick, export.
+                    Drop any video into AMVerge and get a grid of every scene.
+                    <br/>No timeline scrubbing. No manual cuts. Just browse, pick, export.
                 </p>
             </div>
             <div className="about-ui-section">

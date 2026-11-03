@@ -111,10 +111,8 @@ export default function Landing() {
           <h1 className="hero-title">
             <span>AMV</span>erge
           </h1>
-          <div className="hero-accent-line" />
           <p className="hero-subtitle">
-            Turn hours of footage into a browsable scene grid.
-            Find, preview, and export the shots you need, in seconds.
+            All-in-one scene selection tool.
           </p>
           <div className="hero-actions">
             <button
@@ -149,7 +147,7 @@ export default function Landing() {
               </a>
             </div>
             <div className="hero-contrib">
-              <ContributorAvatars limit={5} />
+              <ContributorAvatars limit={3} />
               <span>Built by the community</span>
             </div>
           </div>

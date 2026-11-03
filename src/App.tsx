@@ -6,7 +6,7 @@ import CTA from "./components/home/CTA.tsx"
 import Landing from "./components/home/Landing.tsx"
 import Explanation from "./components/home/Explanation.tsx"
 import Navbar from "./components/ui/Navbar.tsx"
-import Merge from "./components/home/Merge.tsx"
+import SceneScoutDemo from "./components/home/SceneScoutDemo.tsx"
 import Contributors from "./components/home/Contributors.tsx"
 import Footer from "./components/ui/Footer.tsx"
 import SectionDivider from "./components/ui/SectionDivider.tsx"
@@ -36,7 +36,7 @@ function App() {
         <SectionDivider />
         <Explanation />
         <SectionDivider />
-        <Merge />
+        <SceneScoutDemo />
         <SectionDivider />
         <CTA />
         <SectionDivider />

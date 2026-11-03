@@ -164,7 +164,7 @@
 }
 
 .docs-link {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: 18px;
   color: #888;
   text-decoration: none;
@@ -425,7 +425,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: 16px;
   color: #777;
   margin-bottom: 12px;
@@ -712,7 +712,7 @@
 
 .amv-time {
   flex: 0 0 auto;
-  font-family: 'Jersey 10', ui-monospace, monospace;
+  font-family: var(--body-font);
   font-size: 15px;
   color: #ccc;
   white-space: nowrap;
@@ -881,7 +881,7 @@
 }
 
 .docs-toc-title {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: 16px;
   color: #888;
   margin-bottom: 12px;
@@ -1034,7 +1034,7 @@
 }
 
 .docs-search-result-label {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: 18px;
   color: white;
 }

@@ -1,7 +1,8 @@
 :root {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: #fff;
+  /* pure black like body: any other shade shows as a band wherever body doesn't cover */
+  --bg: #000;
   /* --border: #e5e4e7; */
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
@@ -14,6 +15,8 @@
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
+  /* reading text: paragraphs and small labels; headings, buttons and the logo keep the pixel font */
+  --body-font: Calibri, Carlito, 'Segoe UI', system-ui, sans-serif;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
@@ -34,7 +37,7 @@
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
-    --bg: #16171d;
+    --bg: #000;
     /* --border: #2e303a; */
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -47,6 +50,43 @@
 
   #social .button-icon {
     filter: invert(1) brightness(2);
+  }
+}
+
+/* the full-width sections (hero, footer, docs) are 100vw, which counts the scrollbar; clip so that never scrolls sideways */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* thin accent scrollbar on a transparent track, like the app; follows the navbar's hue slider */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in srgb, var(--accent) 75%, transparent);
+}
+
+/* firefox has no ::-webkit-scrollbar; chromium would let scrollbar-color override the rules above */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--accent) 50%, transparent) transparent;
   }
 }
 

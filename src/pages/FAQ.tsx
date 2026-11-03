@@ -26,7 +26,6 @@ export default function FAQ() {
     return (
         <div className="page page-faq">
             <div className="section-head">
-                <span className="section-eyebrow">Got questions?</span>
                 <h1 className="page-title">
                     Frequently Asked <span>Questions</span>
                 </h1>

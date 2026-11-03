@@ -10,6 +10,32 @@ html {
   font-family: 'Jersey 10', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* paragraphs, lists and small print (footer, release dates and counts) read in the body font */
+p,
+li,
+dd,
+dt,
+td,
+th,
+figcaption,
+blockquote,
+small,
+label,
+.footer-bottom,
+.footer-bottom *,
+.changelog-right,
+.changelog-right *,
+.changelog-meta-row,
+.changelog-meta-row *,
+.release-meta,
+.release-meta *,
+.release-dl-size,
+.page-muted,
+.faq-a,
+.faq-a * {
+  font-family: var(--body-font);
+}
+
 body {
   background: black;
   display: flex;
@@ -361,7 +387,7 @@ body {
 .hero-title {
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(3rem, 7vw, 7rem);
-  margin: 0 0 clamp(8px, 1.5vw, 20px);
+  margin: 0 0 clamp(4px, 0.6vw, 8px);
   color: white;
   font-weight: normal;
   line-height: 1;
@@ -373,10 +399,10 @@ body {
 }
 
 .hero-subtitle {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(16px, 1.3vw, 22px);
   color: #bbb;
-  margin: 0 0 clamp(28px, 3vw, 44px);
+  margin: 0 0 clamp(14px, 1.5vw, 22px);
   max-width: 520px;
   line-height: 1.4;
 }
@@ -385,7 +411,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .hero-download {
@@ -416,7 +442,7 @@ body {
 }
 
 .hero-count {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(13px, 0.9vw, 16px);
   color: #666;
   margin: 0;
@@ -426,7 +452,7 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 .hero-link {
@@ -452,11 +478,11 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 4px;
 }
 
 .hero-contrib > span {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(13px, 0.9vw, 16px);
   color: #888;
 }
@@ -499,7 +525,7 @@ body {
 }
 
 .ca-more {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: 15px;
   color: #aaa;
 }
@@ -516,33 +542,16 @@ body {
   mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 70%);
 }
 
-/* animated accent line under title */
-.hero-accent-line {
-  width: clamp(60px, 8vw, 120px);
-  height: 2px;
-  background: var(--accent);
-  margin: 0 auto clamp(18px, 2vw, 28px);
-  animation: accentLineIn 0.8s ease-out forwards;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: center;
-}
-
-@keyframes accentLineIn {
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-}
-
 /* badge */
 .hero-badge {
+  font-family: var(--body-font);
   font-size: clamp(10px, 0.7vw, 12px);
   color: var(--accent);
   border: 1px solid var(--accent);
   border-radius: 20px;
   padding: 3px 14px;
-  margin-bottom: clamp(10px, 1.5vw, 20px);
+  margin: 0 0 clamp(6px, 0.8vw, 12px);
+  line-height: 1.4;
 }
 
 .download-btn {
@@ -588,7 +597,7 @@ body {
 }
 
 .scroll-hint > span {
-  font-family: 'Jersey 10', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--body-font);
   font-size: 12px;
   color: #888;
   letter-spacing: 2px;
@@ -713,26 +722,22 @@ Explanation Section
 .explanation-divider {
   grid-column: 2;
   align-self: center;
-  width: clamp(48px, 5vw, 72px);
-  height: clamp(48px, 5vw, 72px);
-  background: var(--accent);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
 }
 
-.explanation-divider span {
-  font-size: clamp(22px, 2vw, 32px);
-  color: black;
-  font-weight: bold;
-  line-height: 1;
+.explanation-divider svg {
+  width: clamp(44px, 4.5vw, 76px);
+  height: auto;
+  color: var(--accent);
 }
 
 .explanation-label {
   font-size: clamp(16px, 1.3vw, 22px);
-  margin-bottom: clamp(4px, 0.5vw, 8px);
+  line-height: 1;
+  margin-bottom: 0;
 }
 
 .explanation-old .explanation-label {
@@ -752,6 +757,7 @@ Explanation Section
   font-size: clamp(56px, 7vw, 120px);
   font-weight: normal;
   margin: 0 0 clamp(14px, 1.8vw, 24px);
+  padding-top: 0;
   line-height: 0.85;
 }
 
@@ -764,7 +770,7 @@ Explanation Section
 }
 
 .explanation-pane p {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(16px, 1.3vw, 24px);
   line-height: 1.5;
   margin: 0;
@@ -859,49 +865,27 @@ Explanation Section
 
 /*
 ====================
-Merge Section
+Scene Scout Demo
 ====================
 */
 
-.merge-info-section {
+.scout-demo-section {
   min-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: clamp(20px, 3vw, 36px);
+  gap: clamp(20px, 2.5vw, 36px);
   padding: clamp(32px, 4vh, 64px) clamp(20px, 4vw, 48px);
   box-sizing: border-box;
 }
 
-.merge-info-text {
+.scout-demo-text {
   max-width: 760px;
   text-align: center;
 }
 
-/* gif scene grid under the merge text, wide 16:9 cells */
-.merge-clip-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  width: 100%;
-  max-width: 1100px;
-}
-
-.merge-clip-grid .clip-cell {
-  aspect-ratio: 16 / 9;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.merge-clip-grid .clip-cell img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.merge-info-text h1 {
+.scout-demo-text h1 {
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(34px, 2.5vw, 54px);
   color: white;
@@ -911,10 +895,112 @@ Merge Section
   margin-bottom: 20px;
 }
 
-.merge-info-text p {
+.scout-demo-text h1 span {
+  color: var(--accent);
+}
+
+.scout-demo-text p {
+  font-family: var(--body-font);
   color: #ccc;
   font-size: clamp(16px, 1.4vw, 24px);
-  line-spacing: 10px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.scout-demo {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.6vw, 22px);
+  width: 100%;
+  max-width: 1100px;
+}
+
+.scout-demo-bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.5vw, 22px);
+  padding: clamp(12px, 1.4vw, 20px) clamp(18px, 2.2vw, 32px);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--accent) 7%, #050505);
+  box-shadow: 0 0 34px color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--accent);
+  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-size: clamp(34px, 5vw, 72px);
+  line-height: 1.1;
+}
+
+.scout-demo-icon {
+  flex: none;
+  font-size: 0.8em;
+}
+
+/* an empty query keeps the bar's height through the caret */
+.scout-demo-query {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 1.1em;
+  letter-spacing: 1px;
+  white-space: pre;
+}
+
+.scout-demo-caret {
+  width: 0.08em;
+  height: 0.85em;
+  margin-left: 0.08em;
+  background: var(--accent);
+  animation: scout-demo-blink 1s step-end infinite;
+}
+
+@keyframes scout-demo-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.scout-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.scout-demo-grid.is-showing {
+  opacity: 1;
+  transform: none;
+}
+
+.scout-demo-cell {
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #101010;
+}
+
+.scout-demo-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .scout-demo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scout-demo-caret {
+    animation: none;
+  }
+
+  .scout-demo-grid {
+    transition: none;
+  }
 }
 
 
@@ -959,32 +1045,7 @@ CTA Section
   max-width: 720px;
 }
 
-/* Shared little heading (eyebrow) used above section titles */
-.section-eyebrow {
-  display: block;
-  font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(13px, 1vw, 17px);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0;
-  position: relative;
-  padding-bottom: clamp(2px, 0.3vw, 5px);
-}
-
-.section-eyebrow::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(24px, 3vw, 40px);
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.5;
-}
-
-/* Groups the eyebrow + title with consistent spacing in every section */
+/* Groups the title and its subtitle with consistent spacing in every section */
 .section-head {
   display: flex;
   flex-direction: column;
@@ -1002,11 +1063,22 @@ CTA Section
   margin: 0;
 }
 
+/* drawn rather than line-through: the pixel font puts its strike above the middle of the letters */
 .cta-strike {
+  position: relative;
   color: #6a6a6a;
-  text-decoration: line-through;
-  text-decoration-color: rgba(255, 60, 60, 0.6);
-  text-decoration-thickness: 3px;
+}
+
+.cta-strike::after {
+  content: "";
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  top: 54%;
+  height: max(3px, 0.05em);
+  background: rgba(255, 60, 60, 0.6);
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .cta-accent {
@@ -1014,7 +1086,7 @@ CTA Section
 }
 
 .cta-sub {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(16px, 1.4vw, 22px);
   color: #999;
   line-height: 1.5;
@@ -1065,7 +1137,7 @@ CTA Section
 }
 
 .cta-meta {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(13px, 0.9vw, 15px);
   color: #666;
   margin: 0;
@@ -1092,7 +1164,7 @@ CTA Section
 }
 
 .contrib-sub {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(15px, 1.3vw, 20px);
   color: #999;
   line-height: 1.5;
@@ -1144,7 +1216,7 @@ CTA Section
 }
 
 .contrib-name {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: 12px;
   color: #888;
   max-width: 64px;
@@ -1154,7 +1226,7 @@ CTA Section
 }
 
 .contrib-more {
-  font-family: 'Jersey 10', system-ui, sans-serif;
+  font-family: var(--body-font);
   font-size: clamp(13px, 1vw, 16px);
   color: #777;
   margin: 4px 0 0;
@@ -1448,7 +1520,7 @@ UI Section
 .am-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 4px;
   padding: 6px;
   overflow: hidden;
@@ -1764,7 +1836,7 @@ Responsive
     align-self: center;
   }
 
-  .explanation-divider span {
+  .explanation-divider svg {
     transform: rotate(90deg);
   }
 

@@ -3,7 +3,6 @@ import { FiSend } from "react-icons/fi";
 export default function FeatureCTA() {
     return (
         <div className="feat-cta">
-            <span className="section-eyebrow">Ready to try it?</span>
             <h2>
                 Stop <span className="cta-strike">Scrubbing.</span>
                 <br />

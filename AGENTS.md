@@ -67,7 +67,7 @@ AMVerge-Website/
 │   │   │   ├── Landing.tsx       hero, download btn, cumulative dl count
 │   │   │   ├── About.tsx         feature text + MiniUI mock
 │   │   │   ├── Explanation.tsx   "Hours vs Minutes" split comparison + clip grid
-│   │   │   ├── Merge.tsx         merge-feature copy block
+│   │   │   ├── SceneScoutDemo.tsx looping search bar typing words, each with its own six clips in `public/clips/search/` (`SEARCHES`)
 │   │   │   ├── CTA.tsx           closing call-to-action + download btn
 │   │   │   └── Contributors.tsx  GitHub contributors grid section
 │   │   │
@@ -233,10 +233,10 @@ Currently animated: Features sections, Donate cards, FAQ items, Changelog entrie
 | `src/index.css` | `#root { text-align: center }` and `width: 80%`. Docs override both (`.docs-root { text-align: left }` + viewport breakout). Do not assume content is left-aligned by default. |
 | `src/css/docs.css` | `.docs-root` breaks out of `#root`'s 80% width via `width: 100vw; margin-left: calc(-50vw + 50%)` to fill screen. Docs reuse the landing look (black bg, Jersey font, `--accent`). |
 | `counter-server.cjs` | CORS `origin` list is hardcoded (localhost + a placeholder vercel domain). Update it for real deploys. Needs `DATABASE_URL`, SSL `rejectUnauthorized: false`. |
-| `src/components/MiniUI.tsx` / `Explanation.tsx` | Both render a 35-cell clip grid from `/gifs/Sousou no Frieren - 01_0109..0143.gif`. Those gif files must exist in `public/gifs/`. |
+| `src/components/MiniUI.tsx` / `Explanation.tsx` | `MiniUI` renders a 45-cell clip grid from `/clips/frieren_v2_0000..0044.webp` (animated WebP) in `public/clips/`. When replacing clips, use new filenames or a new folder: browsers keep serving cached copies of a reused name, which shows old clips beside new ones. |
 | Prod deep links | Vite dev serves `/docs/installation` fine, but a static build needs SPA fallback to `index.html` or refreshing a subroute 404s. Not configured yet. |
 | `src/components/ui/Skeleton.tsx` | All loading states across the site use this component. Add new variants here if needed; never use plain text loading indicators. |
 
 ## Origin
 
-Promotes AMVerge (desktop app by AMVerge-team, GitHub `AMVerge-team/AMVerge`). The companion CLI/library lives in `AMVerge-CLI` (see its `AGENTS.md`). Preview gifs are from Sousou no Frieren E01.
+Promotes AMVerge (desktop app by AMVerge-team, GitHub `AMVerge-team/AMVerge`). The companion CLI/library lives in `AMVerge-CLI` (see its `AGENTS.md`). Preview gifs are from Frieren: Beyond Journey's End S01E25.

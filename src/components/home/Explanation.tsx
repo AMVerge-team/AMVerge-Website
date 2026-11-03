@@ -1,3 +1,4 @@
+import { FaArrowRight } from "react-icons/fa";
 import { useFadeIn } from "../../hooks/useFadeIn";
 
 export default function Explanation() {
@@ -6,7 +7,7 @@ export default function Explanation() {
     return (
         <div id="explanation" className="explanation-section fade-in" ref={ref}>
             <div className="explanation-pane explanation-old">
-                <span className="explanation-label">The Old Way</span>
+                <span className="explanation-label">Traditional Editors</span>
                 <h2>Hours</h2>
                 <div className="explanation-video">
                     <video muted loop playsInline autoPlay preload="auto">
@@ -14,13 +15,12 @@ export default function Explanation() {
                     </video>
                 </div>
                 <p>
-                    Scrubbing through a timeline. Frame by frame. Jumping
-                    back and forth. Hoping you didn't miss the shot.
+                    Scrubbing through a timeline frame by frame, praying you didn't miss a good scene.
                 </p>
             </div>
 
             <div className="explanation-divider">
-                <span>&rarr;</span>
+                <FaArrowRight aria-hidden="true" />
             </div>
 
             <div className="explanation-pane explanation-new">
@@ -32,8 +32,8 @@ export default function Explanation() {
                     </video>
                 </div>
                 <p>
-                    Every scene in a visual grid. Browse an entire episode in
-                    seconds. Pick exactly what you need.
+                    Every scene in a visual grid, letting you browse an entire episode in
+                    seconds.
                 </p>
             </div>
         </div>

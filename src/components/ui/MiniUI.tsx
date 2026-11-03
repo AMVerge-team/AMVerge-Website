@@ -18,7 +18,7 @@ const episodes = Array.from({ length: 12 }).map((_, i) => `Frieren S1E${i + 1}`)
 
 export default function MiniUI() {
     const [previewSrc, setPreviewSrc] = useState(
-        "/gifs/Sousou no Frieren - 01_0109.gif",
+        "/clips/frieren_v2_0000.webp",
     );
 
     return (
@@ -48,7 +48,7 @@ export default function MiniUI() {
                     <FaDiscord className="ah-discord" />
                 </div>
                 <div className="ah-right">
-                    <span className="ah-grid">Grid: 6 columns</span>
+                    <span className="ah-grid">Grid: 5 columns</span>
                     <button className="ah-step">-</button>
                     <button className="ah-step">+</button>
                 </div>
@@ -92,9 +92,9 @@ export default function MiniUI() {
                         </label>
                     </div>
                     <div className="am-grid">
-                        {Array.from({ length: 35 }).map((_, i) => {
-                            const num = String(i + 109).padStart(4, "0");
-                            const src = `/gifs/Sousou no Frieren - 01_${num}.gif`;
+                        {Array.from({ length: 45 }).map((_, i) => {
+                            const num = String(i).padStart(4, "0");
+                            const src = `/clips/frieren_v2_${num}.webp`;
                             return (
                                 <div
                                     key={i}

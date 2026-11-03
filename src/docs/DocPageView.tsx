@@ -19,7 +19,7 @@ export default function DocPageView() {
   const [attempt, setAttempt] = useState(0)
 
   useSEO({
-    title: page?.label ? `AMVerge Docs | ${page.label}` : "AMVerge Docs",
+    title: page?.label ? `AMVerge Docs - ${page.label}` : "AMVerge Docs",
     description: page?.label ? `AMVerge documentation: ${page.label}. Learn how to use the free scene selection tool.` : "AMVerge documentation. Guides, installation, and usage for the free scene selection tool.",
   })
 

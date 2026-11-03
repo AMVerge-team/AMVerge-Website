@@ -46,7 +46,6 @@ export default function Changelog() {
     return (
         <div className="page page-changelog">
             <div className="section-head">
-                <span className="section-eyebrow">Release history</span>
                 <h1 className="page-title">
                     <span>Changelog</span>
                 </h1>

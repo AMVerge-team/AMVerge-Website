@@ -71,7 +71,7 @@ No backend. Download counts and changelog data read live from the GitHub release
 ```txt
 src/
 ├── components/
-│   ├── home/          Landing, About, Explanation, Merge, CTA, Contributors
+│   ├── home/          Landing, About, Explanation, SceneScoutDemo, CTA, Contributors
 │   ├── ui/            Navbar, Footer, MiniUI, SectionDivider, ContributorAvatars
 │   └── features/      DetectSection, BrowseSection, MergeFeatureSection, ExportSection
 ├── pages/             Features, Changelog, FAQ, Gallery, ChangelogRelease
