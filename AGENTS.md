@@ -37,7 +37,7 @@ DATABASE_URL=postgres://... npm start   # node counter-server.cjs, port 3001
 | Language | TypeScript ~6 |
 | Routing | react-router-dom (landing `/`, docs `/docs/:slug`) |
 | Docs | Markdown fetched from the API, rendered with `react-markdown` (+ `remark-gfm`, `rehype-raw`, `rehype-slug`, `rehype-highlight`) |
-| FAQ | Fetched from admin backend API (`GET /api/faq`), rendered as collapsible accordion |
+| FAQ | Built-in answers plus the admin backend API (`GET /api/faq`), rendered as collapsible accordion |
 | SEO | Custom `useSEO` hook sets per-page title, description, og:*, twitter:* meta tags |
 | Icons | react-icons (Fi, Fa sets) |
 | Fonts | `Jersey 10` (Google Fonts, pixel look), system-ui fallback |
@@ -80,12 +80,7 @@ AMVerge-Website/
 │   │   │   └── Skeleton.tsx      shimmer loading placeholders (Skeleton, SkeletonText, SkeletonCard)
 │   │   │
 │   │   └── features/
-│   │       ├── clipFrames.ts     shared clip frame source list
-│   │       ├── DetectSection.tsx scene detection feature section
-│   │       ├── BrowseSection.tsx grid browser feature section
-│   │       ├── MergeFeatureSection.tsx smart merge feature section
-│   │       ├── ExportSection.tsx multi-format export + NLE import section
-│   │       └── FeatureCTA.tsx    bottom download CTA
+│   │       └── featureList.ts    every row on the Features page; add a feature here, keep each to one short line
 │   │
 │   ├── layouts/
 │   │   └── SiteLayout.tsx    Navbar + <Outlet/> + Footer for the multi-page routes
@@ -94,7 +89,7 @@ AMVerge-Website/
 │   │   ├── Features.tsx      feature sections with staggered fade-in
 │   │   ├── Changelog.tsx     live GitHub releases list
 │   │   ├── ChangelogRelease.tsx  single release detail page
-│   │   ├── FAQ.tsx           collapsible Q/A accordion (fetched from admin API)
+│   │   ├── FAQ.tsx           collapsible Q/A accordion (built-in items plus admin API)
 │   │   ├── Donate.tsx        donation page with card grid + CTA (Buymeacoffee)
 │   │   └── NotFound.tsx      404 page with navigation card grid
 │   │
@@ -108,7 +103,7 @@ AMVerge-Website/
 │   │   │   ├── client.ts      ghFetch wrapper, headers, base types
 │   │   │   ├── releases.ts    fetchLatestRelease, fetchReleases, cumulativeDownloadCount
 │   │   │   └── contributors.ts fetchContributors
-│   │   └── faq.ts             fetchFaqItems from admin backend (GET /api/faq)
+│   │   └── faq.ts             BUILT_IN_FAQ, and fetchFaqItems from admin backend (GET /api/faq)
 │   │
 │   ├── docs/                 runtime docs (content from the API, not files)
 │   │   ├── api.ts            fetch docs tree / page / search-index from the backend
@@ -169,14 +164,14 @@ Docs are no longer files in this repo. The tree (categories/subgroups/pages) and
 
 To add/edit/reorder pages or categories: use the admin Docs tab. No code change or redeploy needed.
 
-### FAQ content (managed from the admin)
+### FAQ content (built in, plus the admin)
 
-FAQ items live in the `faq_items` table in the admin backend and are edited from the FAQ tab. This site fetches them at runtime:
+Two sources, in this order:
 
-- `src/services/faq.ts` calls `GET /api/faq` (public, no auth).
-- `FAQ.tsx` renders the returned `{ question, answer }` items as a collapsible accordion, reusing the same `.faq-item` markup that was previously hardcoded.
-- Shows a skeleton loader while fetching; a fallback empty-state if no items are published.
-- To add/edit/reorder FAQ items: use the admin FAQ tab. No code change or redeploy needed.
+- `BUILT_IN_FAQ` in `src/services/faq.ts`: always shown, so the page has answers when the backend is down. Editing these needs a code change and redeploy. Keep the data question matched to what the app really does on the network.
+- `faq_items` in the admin backend, edited from the FAQ tab and fetched from `GET /api/faq` (public, no auth). No code change needed. A question matching a built-in one is skipped.
+
+`FAQ.tsx` renders both as a collapsible accordion. In an answer, blank lines split paragraphs and lines starting with `- ` become a list; a built-in item can also carry a `link`.
 
 ### Landing scroll model
 

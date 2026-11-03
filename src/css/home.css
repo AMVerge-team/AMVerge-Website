@@ -36,6 +36,16 @@ label,
   font-family: var(--body-font);
 }
 
+/* a link matches the text it sits in, since the rule on * would otherwise make it the pixel font */
+p a,
+li a,
+dd a,
+small a,
+blockquote a,
+figcaption a {
+  font-family: inherit;
+}
+
 body {
   background: black;
   display: flex;
@@ -887,9 +897,10 @@ Scene Scout Demo
 
 .scout-demo-text h1 {
   font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(34px, 2.5vw, 54px);
+  font-size: clamp(40px, 4vw, 64px);
   color: white;
   font-weight: normal;
+  line-height: 1.1;
   letter-spacing: 1px;
   margin-top: 0;
   margin-bottom: 20px;
@@ -912,21 +923,21 @@ Scene Scout Demo
   flex-direction: column;
   gap: clamp(14px, 1.6vw, 22px);
   width: 100%;
-  max-width: 1100px;
+  max-width: 920px;
 }
 
 .scout-demo-bar {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 1.5vw, 22px);
-  padding: clamp(12px, 1.4vw, 20px) clamp(18px, 2.2vw, 32px);
+  gap: clamp(10px, 1.1vw, 16px);
+  padding: clamp(8px, 0.8vw, 12px) clamp(14px, 1.6vw, 22px);
   border: 2px solid var(--accent);
-  border-radius: 16px;
+  border-radius: 12px;
   background: color-mix(in srgb, var(--accent) 7%, #050505);
   box-shadow: 0 0 34px color-mix(in srgb, var(--accent) 28%, transparent);
   color: var(--accent);
   font-family: 'Jersey 10', system-ui, sans-serif;
-  font-size: clamp(34px, 5vw, 72px);
+  font-size: clamp(26px, 3vw, 44px);
   line-height: 1.1;
 }
 

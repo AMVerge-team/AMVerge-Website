@@ -73,7 +73,7 @@ src/
 ├── components/
 │   ├── home/          Landing, About, Explanation, SceneScoutDemo, CTA, Contributors
 │   ├── ui/            Navbar, Footer, MiniUI, SectionDivider, ContributorAvatars
-│   └── features/      DetectSection, BrowseSection, MergeFeatureSection, ExportSection
+│   └── features/      featureList (the Features page's content)
 ├── pages/             Features, Changelog, FAQ, Gallery, ChangelogRelease
 ├── css/               home.css, pages.css, features.css, docs.css
 ├── docs/              DocsLayout, registry, MDX pages
