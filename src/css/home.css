@@ -36,13 +36,21 @@ label,
   font-family: var(--body-font);
 }
 
-/* a link matches the text it sits in, since the rule on * would otherwise make it the pixel font */
+/* links and bold or italic text match the text they sit in, since the rule on * would otherwise make them the pixel font */
 p a,
 li a,
 dd a,
+td a,
 small a,
 blockquote a,
-figcaption a {
+figcaption a,
+p strong,
+li strong,
+td strong,
+blockquote strong,
+p em,
+li em,
+td em {
   font-family: inherit;
 }
 
@@ -397,7 +405,7 @@ body {
 .hero-title {
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: clamp(3rem, 7vw, 7rem);
-  margin: 0 0 clamp(4px, 0.6vw, 8px);
+  margin: 0;
   color: white;
   font-weight: normal;
   line-height: 1;
@@ -560,7 +568,7 @@ body {
   border: 1px solid var(--accent);
   border-radius: 20px;
   padding: 3px 14px;
-  margin: 0 0 clamp(6px, 0.8vw, 12px);
+  /* margin: 0 0 clamp(6px, 0.8vw, 12px); */
   line-height: 1.4;
 }
 

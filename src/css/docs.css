@@ -37,7 +37,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  padding: 20px 16px;
+  padding: 20px 16px 16px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   box-sizing: border-box;
 }
@@ -253,10 +253,11 @@
 }
 
 /* Sidebar footer */
+/* two buttons of one height: a square github icon, and download filling the rest */
 .docs-sidebar-footer {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: stretch;
+  gap: 8px;
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -265,25 +266,33 @@
 .docs-sidebar-footer a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  height: 36px;
+  border-radius: 6px;
   color: #888;
   font-size: 18px;
   text-decoration: none;
-  transition: color 0.2s ease;
+  box-sizing: border-box;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.docs-sidebar-footer a:hover {
+.docs-sidebar-footer a:not(.docs-footer-cta) {
+  flex: 0 0 36px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.docs-sidebar-footer a:not(.docs-footer-cta):hover {
+  border-color: rgba(255, 255, 255, 0.35);
   color: white;
 }
 
 .docs-footer-cta {
-  margin-left: auto;
+  flex: 1;
   font-family: 'Jersey 10', system-ui, sans-serif;
   font-size: 16px !important;
   color: black !important;
   background: var(--accent);
-  padding: 6px 14px;
-  border-radius: 6px;
 }
 
 .docs-footer-cta:hover {
@@ -296,7 +305,7 @@
 .docs-content {
   flex: 1;
   min-width: 0;
-  padding: 40px clamp(24px, 4vw, 64px) 120px;
+  padding: 40px clamp(24px, 4vw, 64px) 32px;
 }
 
 .docs-content-inner {
@@ -504,81 +513,28 @@
 }
 
 .docs-content pre {
-  background: #121216;
+  background: #0c0c10;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  padding: 46px 18px 16px;
+  padding: 12px 44px 12px 16px;
   overflow-x: auto;
 }
 
-.docs-content pre code {
+/* highlighted tokens are spans, which the site-wide pixel font would otherwise catch */
+.docs-content code * {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* .hljs too: the highlight theme adds its own padding and background to the code */
+.docs-content pre code,
+.docs-content pre code.hljs {
   background: none;
   padding: 0;
   font-size: 13.5px;
   line-height: 1.6;
-}
-
-/* ---- Code / terminal header bar (icon + language label, injected by JS) ---- */
-.code-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 12px 0 14px;
-  background: #16161c;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px 8px 0 0;
-  font-family: ui-monospace, Consolas, monospace;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: #9a9aa5;
-}
-
-.code-ic {
-  display: inline-flex;
-  align-items: center;
-}
-
-.code-ic svg {
-  width: 15px;
-  height: 15px;
-  display: block;
-}
-
-.code-lang {
-  line-height: 1;
-}
-
-/* terminal variant: traffic-light dots instead of an icon, darker bar */
-.code-header.terminal {
-  background: #14141a;
-}
-
-.code-dots {
-  flex: 0 0 auto;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #ff5f56;
-  box-shadow: 16px 0 #ffbd2e, 32px 0 #27c93f;
-  margin-right: 30px;
-}
-
-/* terminal blocks get a darker body */
-.docs-content pre:has(code[class*="language-bash"]),
-.docs-content pre:has(code[class*="language-sh"]),
-.docs-content pre:has(code[class*="language-shell"]),
-.docs-content pre:has(code[class*="language-console"]),
-.docs-content pre:has(code[class*="language-terminal"]),
-.docs-content pre:has(code[class*="language-powershell"]),
-.docs-content pre:has(code[class*="language-ps"]),
-.docs-content pre:has(code[class*="language-zsh"]) {
-  background: #07070a;
-  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .docs-content blockquote {
@@ -782,13 +738,13 @@
 
 .copy-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.6);

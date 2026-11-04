@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useLocation, useParams } from 'react-router-dom'
 import { fetchDocPage } from './api'
 import { docHref } from './docsTypes'
 import { useDocsData } from './DocsData'
@@ -13,6 +13,7 @@ type LoadState = 'loading' | 'ready' | 'notfound' | 'offline'
 
 export default function DocPageView() {
   const { slug } = useParams()
+  const { hash } = useLocation()
   const { indexSlug, loading: treeLoading, error: treeError, reload } = useDocsData()
   const [page, setPage] = useState<DocPageContent | null>(null)
   const [state, setState] = useState<LoadState>('loading')
@@ -44,6 +45,13 @@ export default function DocPageView() {
       cancelled = true
     }
   }, [slug, attempt])
+
+  // A link to a section (/docs/page#section) scrolls there once the page has rendered.
+  useEffect(() => {
+    if (state !== 'ready' || !hash) return
+    const frame = requestAnimationFrame(() => document.getElementById(hash.slice(1))?.scrollIntoView())
+    return () => cancelAnimationFrame(frame)
+  }, [state, hash, slug])
 
   // Index route (/docs): wait for the tree, then send to the first page.
   if (!slug) {

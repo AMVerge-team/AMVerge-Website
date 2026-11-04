@@ -1,12 +1,25 @@
+import type { AnchorHTMLAttributes } from 'react'
 import ReactMarkdown, { type Components } from 'react-markdown'
+import { Link } from 'react-router-dom'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
 import rehypeHighlight from 'rehype-highlight'
 import Media from './Media'
 
+// Links inside the site stay in the app; everything else opens in a new tab.
+function DocLink({ href = '', children }: AnchorHTMLAttributes<HTMLAnchorElement>) {
+  if (href.startsWith('/')) return <Link to={href}>{children}</Link>
+  if (href.startsWith('#')) return <a href={href}>{children}</a>
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  )
+}
+
 // `media` maps the custom <Media> tag (lowercased by the HTML parser) to a component.
-const components = { media: Media } as unknown as Components
+const components = { media: Media, a: DocLink } as unknown as Components
 
 // The HTML parser ignores the self-closing slash on custom elements, so a bare
 // `<Media .../>` stays open and swallows everything after it. Expand it to an

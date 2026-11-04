@@ -6,6 +6,8 @@ import { downloadLatestExe } from "../../utils/download";
 const pages = [
     { to: "/", label: "Home", end: true },
     { to: "/features", label: "Features" },
+    { to: "/cli", label: "CLI" },
+    { to: "/extension", label: "AE Extension" },
     { to: "/faq", label: "FAQ" },
     { to: "/changelog", label: "Changelog" },
     { to: "/docs", label: "Docs" },

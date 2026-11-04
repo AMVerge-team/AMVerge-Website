@@ -71,22 +71,24 @@ export default function SearchModal({ open, onClose }: Props) {
           <span className="docs-search-kbd">Esc</span>
         </div>
 
-        <div className="docs-search-results">
-          {query && results.length === 0 && (
-            <div className="docs-search-empty">No results for “{query}”</div>
-          )}
-          {results.map((r, i) => (
-            <button
-              key={r.slug}
-              className={`docs-search-result ${i === active ? 'active' : ''}`}
-              onMouseEnter={() => setActive(i)}
-              onClick={() => go(r.slug)}
-            >
-              <span className="docs-search-result-label">{r.label}</span>
-              <span className="docs-search-result-snippet">{r.snippet}</span>
-            </button>
-          ))}
-        </div>
+        {query.trim() && (
+          <div className="docs-search-results">
+            {results.length === 0 && (
+              <div className="docs-search-empty">No results for “{query}”</div>
+            )}
+            {results.map((r, i) => (
+              <button
+                key={r.slug}
+                className={`docs-search-result ${i === active ? 'active' : ''}`}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => go(r.slug)}
+              >
+                <span className="docs-search-result-label">{r.label}</span>
+                <span className="docs-search-result-snippet">{r.snippet}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

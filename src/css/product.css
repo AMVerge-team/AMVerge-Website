@@ -1,0 +1,47 @@
+/* ---- /cli and /extension: a docs page inside the regular site frame ---- */
+.page-main:has(.page-product) {
+    padding-top: 92px;
+}
+
+.page.page-product {
+    max-width: 1000px;
+    padding: 0 24px 48px;
+    text-align: left;
+}
+
+.page-product .docs-content {
+    padding: 0;
+}
+
+.product-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.page .product-link,
+.page .product-link-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Jersey 10', system-ui, sans-serif;
+    font-size: 19px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.page .product-link-primary {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.page .product-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}

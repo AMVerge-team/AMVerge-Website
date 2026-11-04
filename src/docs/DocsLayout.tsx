@@ -16,7 +16,6 @@ import DocsNotice from './DocsNotice'
 import { Skeleton } from '../components/ui/Skeleton'
 import SearchModal from './SearchModal'
 import CopyCodeButton from './CopyCodeButton'
-import CodeBlockHeader from './CodeBlockHeader'
 import '../css/docs.css'
 import 'highlight.js/styles/github-dark.css'
 
@@ -255,7 +254,6 @@ export default function DocsLayout() {
           <article key={location.pathname} className="docs-article-anim">
             <Outlet />
             <CopyCodeButton />
-            <CodeBlockHeader />
           </article>
         </div>
       </main>

@@ -117,7 +117,7 @@ AMVerge-Website/
 │   │   ├── searchIndex.ts    runtime-fetched, cached search index
 │   │   ├── SearchModal.tsx   Ctrl+K search over the index
 │   │   ├── useToc.ts         "On this page" headings (MutationObserver, async-safe)
-│   │   ├── CopyCodeButton.tsx / CodeBlockHeader.tsx / codeLanguages.tsx  code-block decorators
+│   │   ├── CopyCodeButton.tsx  adds a copy button to code blocks
 │   │   └── docs.css          docs styling, matches landing (black/Jersey/--accent)
 │   │
 │   └── assets/               hero.png, logos
@@ -141,7 +141,7 @@ AMVerge-Website/
 `main.tsx` mounts `BrowserRouter`:
 
 - `/` renders the landing `App` (scroll page, its own Navbar).
-- `/features`, `/changelog`, `/changelog/:tag`, `/faq`, `/donate` render under `SiteLayout` (shared Navbar + Footer, scroll-to-top on change).
+- `/features`, `/cli`, `/extension`, `/changelog`, `/changelog/:tag`, `/faq` render under `SiteLayout` (shared Navbar + Footer, scroll-to-top on change).
 - `/gallery` redirects to `/` (page removed, kept for old bookmarks).
 - `/docs` renders `DocsLayout` (wrapped in `DocsDataProvider`). `index` and `:slug` both render `DocPageView`; the index redirects to the first page.
 - `*` (catch-all) renders `NotFound` (custom 404 page with nav cards).
@@ -152,13 +152,17 @@ AMVerge-Website/
 
 `src/hooks/useSEO.ts` manages per-page `<title>`, `og:title/description/image/url`, `twitter:*`, and `meta description` via direct DOM manipulation. Pages pass a `title` string; the hook appends `AMVerge | ` prefix unless the title already contains "AMVerge" (full-title override). Docs pages use `AMVerge Docs | {pageLabel}`. Re-run on route change via React Router.
 
-### Docs content (managed from the admin)
+### Docs content (built in, plus the admin)
 
-Docs are no longer files in this repo. The tree (categories/subgroups/pages) and each page's Markdown live in the `doc_nodes` table and are edited from the admin dashboard's Docs tab (`AMVerge-Website-Admin`). This site only renders them:
+The main docs ship with the site, so they work when the backend is down:
 
-- `DocsData` fetches `GET /api/docs/tree` once and shares it.
-- `DocPageView` fetches `GET /api/docs/page/:slug` and renders the Markdown via `DocMarkdown`.
-- `searchIndex` lazy-loads `GET /api/docs/search-index` (cached) for Ctrl+K search.
+- **Built-in pages:** `src/docs/content/<slug>.md`, listed in the sidebar by `STRUCTURE` in `src/docs/builtInDocs.ts`. To add a page, add the file and one line there. Run every command you document: the CLI's own docs have been wrong before (`scenes.json` is really `<name>_scenes/<name>_scenes.json`).
+- **Writing style:** like the MongoDB docs. Task first, second person, short sentences. Use Before you begin, numbered Steps, tables for options, `> **Note:**` callouts and Next steps links. No em dashes.
+- `/cli` and `/extension` (`pages/ProductPage.tsx`) render `cli-overview.md` and `extension-overview.md`, so each stays identical to its docs page.
+- **Extra pages from the admin:** `doc_nodes` pages edited in the admin dashboard's Docs tab (`AMVerge-Website-Admin`) appear after the built-in ones when the backend responds. A page using a built-in slug is skipped.
+- `DocsData` starts with `BUILT_IN_TREE` and appends `GET /api/docs/tree`.
+- `DocPageView` uses the built-in page for its slug, else `GET /api/docs/page/:slug`, and renders the Markdown via `DocMarkdown`, which keeps `/...` links inside the app.
+- `searchIndex` covers built-in pages plus `GET /api/docs/search-index` (cached) for Ctrl+K search.
 - Inside Markdown, the custom `<Media src caption gif />` tag renders images/videos (parsed by `rehype-raw`, mapped to `Media`).
 - `DocsNotice` renders the offline/empty/not-found states. A network/5xx failure (API or DB down) shows an "offline" panel with a retry button; a real 404 (`fetchDocPage` returns `null`) shows "not found". Keep that 404-vs-error split intact.
 

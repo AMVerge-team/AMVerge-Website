@@ -8,6 +8,7 @@ import DocPageView from './docs/DocPageView.tsx'
 import { DocsDataProvider } from './docs/DocsData.tsx'
 import SiteLayout from './layouts/SiteLayout.tsx'
 import Features from './pages/Features.tsx'
+import { CliPage, ExtensionPage } from './pages/ProductPage.tsx'
 import Changelog from './pages/Changelog.tsx'
 import ChangelogRelease from './pages/ChangelogRelease.tsx'
 import FAQ from './pages/FAQ.tsx'
@@ -20,6 +21,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route element={<SiteLayout />}>
           <Route path="/features" element={<Features />} />
+          <Route path="/cli" element={<CliPage />} />
+          <Route path="/extension" element={<ExtensionPage />} />
           <Route path="/changelog" element={<Changelog />} />
           <Route path="/changelog/:tag" element={<ChangelogRelease />} />
           <Route path="/faq" element={<FAQ />} />
