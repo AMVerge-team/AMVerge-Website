@@ -85,12 +85,12 @@ export default function SceneScoutDemo() {
             <div className="scout-demo-text">
                 <div className="section-head">
                     <h1>
-                        Find Any Scene.<br />
+                        Find Any Scene,<br />
                         <span>Just Describe It.</span>
                     </h1>
                 </div>
                 <p>
-                    Scene Scout lets you search whole episodes by describing what you want.
+                    Scene Scout lets you search whole episodes by describing what you want.<br/>
                     Index them once, type a few words, and every match is ready to preview and export.
                 </p>
             </div>

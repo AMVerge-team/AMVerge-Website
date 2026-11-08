@@ -670,7 +670,7 @@ About-page
   color: white;
   font-weight: normal;
   margin: 0 0 clamp(16px, 2vw, 28px);
-  line-height: 1.1;
+  line-height: 0.95;
   text-align: center;
   letter-spacing: 1px;
 }
@@ -1636,7 +1636,9 @@ UI Section
   justify-content: space-between;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  padding: 5px 8px;
+  box-sizing: border-box;
+  height: 30px;
+  padding: 0 8px;
   color: #ccc;
 }
 
@@ -1679,7 +1681,12 @@ UI Section
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
-  padding: 7px 9px;
+  /* same height as the export profile selector above it */
+  box-sizing: border-box;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 9px;
 }
 
 .rp-opts {
@@ -1745,11 +1752,12 @@ UI Section
   align-items: center;
   justify-content: center;
   gap: 4px;
-  font-size: 9px;
+  font-size: 8px;
+  line-height: 1.2;
   color: #999;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 5px;
-  padding: 3px 0;
+  padding: 2px 0;
 }
 
 .rp-tab.active {
@@ -1762,14 +1770,14 @@ UI Section
   counter-reset: s;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .rp-steps li {
   counter-increment: s;
-  font-size: 9px;
+  font-size: 11px;
   color: #bbb;
-  padding-left: 14px;
+  padding-left: 16px;
   position: relative;
   line-height: 1.3;
 }

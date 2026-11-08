@@ -45,8 +45,7 @@ export default function CTA() {
                     </h2>
                 </div>
                 <p className="cta-sub">
-                    Turn hours of timeline scrubbing into seconds of browsing.
-                    <br/>Free, open source, built for editors.
+                    Making scene selection easier.
                 </p>
 
                 <button className="cta-download" onClick={downloadLatest}>

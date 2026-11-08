@@ -83,7 +83,40 @@ export const FEATURE_SECTIONS: FeatureSection[] = [
             { name: "Merge", description: "Join clips into one file, best for cuts that are on the same scenes so you could merge them." },
             { name: "Profiles", description: "Save your export settings and switch between them." },
             { name: "DaVinci Resolve", description: "Send exported clips straight to your timeline (Studio only)." },
-            { name: "Depth maps", description: "Create a depth map of the clips you pick after exporting." },
+            { name: "After export", description: "Make a depth map or upscale of the clips you pick once they're exported." },
+        ],
+    },
+    {
+        id: "depth-maps",
+        title: "Depth Maps",
+        summary: "Turn any clip into a depth map for 3D camera, fog and focus effects.",
+        demo: {
+            src: "/gifs/depth_showcase.gif",
+            alt: "A clip and its depth map rendering side by side in Tools",
+            aspectRatio: "1280 / 508",
+        },
+        features: [
+            { name: "Depth Anything V2 Small", description: "The fastest. Good for quick previews and slower PCs." },
+            { name: "Depth Anything V2 Base", description: "A balance of speed and detail." },
+            { name: "Depth Anything V2 Large", description: "The most detailed edges. Best on a strong GPU." },
+            { name: "Color maps", description: "Inferno, Viridis, Plasma, Magma, Turbo or Jet." },
+        ],
+    },
+    {
+        id: "upscaling",
+        title: "Upscaling",
+        summary: "Upscale anime clips to 2x their resolution.",
+        demo: {
+            src: "/gifs/upscaling_showcase.gif",
+            alt: "A clip and its 2x upscale compared side by side in Tools",
+            aspectRatio: "1280 / 635",
+        },
+        features: [
+            { name: "Fallin Soft", description: "The cleanest result. Smooths out noise and compression." },
+            { name: "Adore", description: "High quality with fine line detail kept." },
+            { name: "Fallin Strong", description: "Sharper lines, for soft or blurry sources." },
+            { name: "ShuffleCUGAN", description: "General purpose, works on most footage." },
+            { name: "Output quality", description: "Lossless, High, Balanced or Fast, depending on file size." },
         ],
     },
     {
