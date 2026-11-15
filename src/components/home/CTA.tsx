@@ -1,23 +1,13 @@
 import { useEffect, useState } from "react";
-import { FiDownload, FiGithub } from "react-icons/fi";
+import { FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
 import { useFadeIn } from "../../hooks/useFadeIn";
+import DownloadDropdown from "../ui/DownloadDropdown";
 import {
     fetchLatestRelease,
     fetchReleases,
     cumulativeDownloadCount,
 } from "../../services/github";
-
-async function downloadLatest() {
-    try {
-        const { exe } = await fetchLatestRelease();
-        if (exe?.browser_download_url) {
-            window.location.href = exe.browser_download_url;
-        }
-    } catch {
-        // best-effort
-    }
-}
 
 export default function CTA() {
     const ref = useFadeIn<HTMLElement>();
@@ -48,9 +38,7 @@ export default function CTA() {
                     Scene selection made easy.
                 </p>
 
-                <button className="cta-download" onClick={downloadLatest}>
-                    <FiDownload /> Download
-                </button>
+                <DownloadDropdown buttonClassName="cta-download" align="center" />
 
                 <div className="cta-secondary">
                     <a

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FiDownload, FiMenu, FiX } from "react-icons/fi";
-import { downloadLatestExe } from "../../utils/download";
+import { FiMenu, FiX } from "react-icons/fi";
+import DownloadDropdown from "./DownloadDropdown";
 
 const pages = [
     { to: "/", label: "Home", end: true },
@@ -90,9 +90,7 @@ export default function Navbar() {
                 <div className="nav-right">
                     <div className="nav-actions">
                         {slider}
-                        <button className="nav-download" onClick={downloadLatestExe}>
-                            <FiDownload /> Download
-                        </button>
+                        <DownloadDropdown buttonClassName="nav-download" align="right" />
                     </div>
                     <button
                         className="nav-toggle"
@@ -109,9 +107,11 @@ export default function Navbar() {
                     <div className="nav-mobile-links">{links}</div>
                     <div className="nav-mobile-actions">
                         {slider}
-                        <button className="nav-download" onClick={downloadLatestExe}>
-                            <FiDownload /> Download
-                        </button>
+                        <DownloadDropdown
+                            buttonClassName="nav-download"
+                            align="center"
+                            onDownloaded={() => setMenuOpen(false)}
+                        />
                     </div>
                 </div>
             )}

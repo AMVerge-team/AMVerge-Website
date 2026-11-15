@@ -1,18 +1,79 @@
 import { ghFetch } from "./client";
 import type { GithubAsset, GithubRelease } from "./client";
 
+const EXTENSION_REPO = "AMVerge-team/AMVerge-Extension";
+
 export interface LatestRelease {
   release: GithubRelease;
   exe: GithubAsset | null;
+  dmg: GithubAsset | null;
 }
 
-export async function fetchLatestRelease(): Promise<LatestRelease> {
-  const release = await ghFetch<GithubRelease>("/releases/latest");
-  const exe =
-    release.assets?.find(
-      (a) => a.name.endsWith(".exe") && !a.name.endsWith(".sig"),
-    ) ?? null;
-  return { release, exe };
+export interface LatestExtensionRelease {
+  release: GithubRelease;
+  exe: GithubAsset | null;
+  zxp: GithubAsset | null;
+}
+
+let latestAppPromise: Promise<LatestRelease> | null = null;
+let latestExtensionPromise: Promise<LatestExtensionRelease> | null = null;
+
+export function fetchLatestRelease(): Promise<LatestRelease> {
+  if (!latestAppPromise) {
+    latestAppPromise = ghFetch<GithubRelease>("/releases/latest")
+      .then((release) => {
+        const assets = release.assets ?? [];
+        const exe =
+          assets.find(
+            (a) => a.name.endsWith(".exe") && !a.name.endsWith(".sig"),
+          ) ?? null;
+        const dmg =
+          assets.find(
+            (a) =>
+              a.name.toLowerCase().includes("universal") &&
+              a.name.endsWith(".dmg") &&
+              !a.name.endsWith(".sig"),
+          ) ??
+          assets.find(
+            (a) => a.name.endsWith(".dmg") && !a.name.endsWith(".sig"),
+          ) ??
+          null;
+        return { release, exe, dmg };
+      })
+      .catch((err) => {
+        latestAppPromise = null;
+        throw err;
+      });
+  }
+  return latestAppPromise;
+}
+
+export function fetchLatestExtensionRelease(): Promise<LatestExtensionRelease> {
+  if (!latestExtensionPromise) {
+    latestExtensionPromise = ghFetch<GithubRelease>(
+      "/releases/latest",
+      EXTENSION_REPO,
+    )
+      .then((release) => {
+        const assets = release.assets ?? [];
+        const exe =
+          assets.find((a) => /^amvergesetup\.exe$/i.test(a.name)) ??
+          assets.find(
+            (a) => a.name.endsWith(".exe") && !a.name.endsWith(".sig"),
+          ) ??
+          null;
+        const zxp =
+          assets.find((a) => /^amverge\.zxp$/i.test(a.name)) ??
+          assets.find((a) => a.name.endsWith(".zxp")) ??
+          null;
+        return { release, exe, zxp };
+      })
+      .catch((err) => {
+        latestExtensionPromise = null;
+        throw err;
+      });
+  }
+  return latestExtensionPromise;
 }
 
 export async function fetchReleases(): Promise<GithubRelease[]> {

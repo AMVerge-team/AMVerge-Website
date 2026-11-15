@@ -1,4 +1,4 @@
-const API_BASE = "https://api.github.com/repos/AMVerge-team/AMVerge";
+const DEFAULT_REPO = "AMVerge-team/AMVerge";
 
 function headers(): HeadersInit {
   const token = import.meta.env.VITE_GITHUB_TOKEN as string | undefined;
@@ -9,8 +9,8 @@ function headers(): HeadersInit {
   return h;
 }
 
-export async function ghFetch<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, { headers: headers() });
+export async function ghFetch<T>(path: string, repo = DEFAULT_REPO): Promise<T> {
+  const res = await fetch(`https://api.github.com/repos/${repo}${path}`, { headers: headers() });
   if (!res.ok) throw new Error(`GitHub API ${res.status}: ${res.statusText}`);
   return res.json() as Promise<T>;
 }

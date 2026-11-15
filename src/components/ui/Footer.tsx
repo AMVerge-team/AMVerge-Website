@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { FiGithub, FiDownload } from "react-icons/fi";
+import { FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
-import { downloadLatestExe } from "../../utils/download";
 import ContributorAvatars from "./ContributorAvatars";
+import DownloadDropdown from "./DownloadDropdown";
 
 export default function Footer() {
     return (
@@ -16,9 +16,11 @@ export default function Footer() {
                         Scene selection made easy. Built for the AMV community,
                         by editors, for editors.
                     </p>
-                    <button className="footer-download" onClick={downloadLatestExe}>
-                        <FiDownload /> Download
-                    </button>
+                    <DownloadDropdown
+                        buttonClassName="footer-download"
+                        align="left"
+                        placement="up"
+                    />
                 </div>
 
                 <div className="footer-col">

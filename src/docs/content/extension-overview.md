@@ -24,15 +24,15 @@ It uses the [same backend](/docs/architecture) as the AMVerge app, and it can wo
 
 ### Use a ZXP installer
 
-1. Download the extension from [GitHub](https://github.com/AMVerge-team/AMVerge-Extension). Choose the build for your After Effects version.
+1. Download `AMVerge.zxp` from the [latest release](https://github.com/AMVerge-team/AMVerge-Extension/releases/latest) (one universal build for After Effects CC 2018+).
 2. Install the free [ZXP Installer](https://aescripts.com/learn/post/zxp-installer).
-3. Drag the `.zxp` file onto the ZXP Installer window.
+3. Drag `AMVerge.zxp` onto the ZXP Installer window.
 4. Restart After Effects.
 5. Open **Window > Extensions > AMVerge**.
 
 ### Use the setup wizard
 
-Run `AMVergeSetup_AEXXXX.exe` for your version, follow the steps, then open **Window > Extensions > AMVerge** in After Effects.
+Run `AMVergeSetup.exe` from the [latest release](https://github.com/AMVerge-team/AMVerge-Extension/releases/latest), follow the steps, then open **Window > Extensions > AMVerge** in After Effects.
 
 ## Choose a mode
 

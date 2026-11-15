@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { FiDownload, FiGithub } from "react-icons/fi";
+import { FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
 import ContributorAvatars from "../ui/ContributorAvatars";
+import DownloadDropdown from "../ui/DownloadDropdown";
 import {
   fetchLatestRelease,
   fetchReleases,
@@ -13,7 +14,6 @@ export default function Landing() {
   const [version, setVersion] = useState("");
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
   const [displayCount, setDisplayCount] = useState(0);
-  const [downloading, setDownloading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(true);
 
@@ -83,23 +83,6 @@ export default function Landing() {
     return () => clearTimeout(timer);
   }, []);
 
-  async function handleDownload() {
-    if (downloading) return;
-    setDownloading(true);
-    try {
-      const { exe } = await fetchLatestRelease();
-      if (!exe?.browser_download_url) {
-        alert("Could not find the latest .exe download.");
-        return;
-      }
-      window.location.href = exe.browser_download_url;
-    } catch {
-      alert("Something went wrong while starting the download.");
-    } finally {
-      setDownloading(false);
-    }
-  }
-
   return (
     <div id="home" className={`landing-fade ${loaded ? "visible" : ""}`}>
       <section className="hero">
@@ -125,14 +108,7 @@ export default function Landing() {
             Scene selection made easy.
           </p>
           <div className="hero-actions">
-            <button
-              className="hero-download"
-              onClick={handleDownload}
-              disabled={downloading}
-            >
-              <FiDownload />{" "}
-              {downloading ? "Downloading..." : "Download"}
-            </button>
+            <DownloadDropdown buttonClassName="hero-download" align="center" />
             <p className="hero-count">
               {downloadCount === null
                 ? "Loading..."

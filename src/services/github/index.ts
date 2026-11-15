@@ -1,7 +1,8 @@
 export type { GithubAsset, GithubRelease, GithubContributor } from "./client";
-export type { LatestRelease } from "./releases";
+export type { LatestRelease, LatestExtensionRelease } from "./releases";
 export {
   fetchLatestRelease,
+  fetchLatestExtensionRelease,
   fetchReleases,
   fetchReleaseByTag,
   cumulativeDownloadCount,
