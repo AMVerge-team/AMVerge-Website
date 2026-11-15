@@ -403,6 +403,51 @@
     border-radius: 12px;
 }
 
+.release-body-markdown {
+    white-space: normal;
+}
+
+.release-body-markdown h1,
+.release-body-markdown h2,
+.release-body-markdown h3 {
+    color: #fff;
+    margin: 18px 0 8px;
+    line-height: 1.3;
+}
+
+.release-body-markdown h1:first-child,
+.release-body-markdown h2:first-child,
+.release-body-markdown p:first-child {
+    margin-top: 0;
+}
+
+.release-body-markdown ul {
+    margin: 8px 0 14px;
+    padding-left: 20px;
+}
+
+.release-body-markdown li {
+    margin: 5px 0;
+}
+
+.release-body-markdown strong {
+    color: #fff;
+}
+
+.release-body-markdown hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 16px 0;
+}
+
+.release-body-markdown blockquote {
+    margin: 12px 0 0;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+}
+
 .release-downloads {
     display: flex;
     flex-direction: column;

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FiDownload, FiExternalLink, FiArrowLeft, FiHardDrive } from "react-icons/fi";
 import { FaWindows, FaApple } from "react-icons/fa";
-import { fetchReleaseByTag } from "../services/github";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { fetchReleaseByTag, fetchSharedChangelogNotes } from "../services/github";
 import useSEO from "../hooks/useSEO";
 import { Skeleton } from "../components/ui/Skeleton";
 import type { GithubRelease, GithubAsset } from "../services/github";
@@ -59,6 +61,7 @@ function DownloadCard({ asset }: { asset: GithubAsset }) {
 export default function ChangelogRelease() {
     const { tag } = useParams<{ tag: string }>();
     const [release, setRelease] = useState<GithubRelease | null>(null);
+    const [sharedNotes, setSharedNotes] = useState<string | null>(null);
     const [error, setError] = useState(false);
 
     useSEO({
@@ -68,9 +71,23 @@ export default function ChangelogRelease() {
 
     useEffect(() => {
         if (!tag) return;
+        let cancelled = false;
+        setSharedNotes(null);
         fetchReleaseByTag(tag)
-            .then(setRelease)
-            .catch(() => setError(true));
+            .then((rel) => {
+                if (!cancelled) setRelease(rel);
+            })
+            .catch(() => {
+                if (!cancelled) setError(true);
+            });
+        fetchSharedChangelogNotes(tag)
+            .then((md) => {
+                if (!cancelled && md) setSharedNotes(md);
+            })
+            .catch(() => {});
+        return () => {
+            cancelled = true;
+        };
     }, [tag]);
 
     if (error || (!release && tag)) {
@@ -132,10 +149,14 @@ export default function ChangelogRelease() {
                 </h1>
             </div>
 
-            {release.body && (
+            {(sharedNotes || release.body) && (
                 <div className="release-body-section">
                     <h2 className="release-section-title">Release Notes</h2>
-                    <pre className="release-body">{release.body.trim()}</pre>
+                    <div className="release-body release-body-markdown">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {(sharedNotes || release.body || "").trim()}
+                        </ReactMarkdown>
+                    </div>
                 </div>
             )}
 

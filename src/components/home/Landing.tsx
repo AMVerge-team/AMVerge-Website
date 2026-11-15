@@ -3,14 +3,16 @@ import { FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
 import ContributorAvatars from "../ui/ContributorAvatars";
 import DownloadDropdown from "../ui/DownloadDropdown";
+import { fetchLatestRelease } from "../../services/github";
 import {
-  fetchLatestRelease,
-  fetchReleases,
-  cumulativeDownloadCount,
-} from "../../services/github";
+  DOWNLOAD_COUNT_EVENT,
+  INITIAL_DOWNLOAD_COUNT,
+  fetchDownloadCount,
+} from "../../utils/download";
 
 export default function Landing() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasAnimatedRef = useRef(false);
   const [version, setVersion] = useState("");
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
   const [displayCount, setDisplayCount] = useState(0);
@@ -24,26 +26,40 @@ export default function Landing() {
         if (!cancelled) setVersion(r.release.tag_name);
       })
       .catch(() => {});
-    fetchReleases()
-      .then((releases) => {
-        if (!cancelled) setDownloadCount(cumulativeDownloadCount(releases));
+    fetchDownloadCount()
+      .then((count) => {
+        if (!cancelled) setDownloadCount(count);
       })
       .catch(() => {
-        if (!cancelled) setDownloadCount(0);
+        if (!cancelled) setDownloadCount(INITIAL_DOWNLOAD_COUNT);
       });
+
+    const onCountUpdated = (e: Event) => {
+      const next = (e as CustomEvent<number>).detail;
+      if (typeof next === "number" && Number.isFinite(next)) {
+        setDownloadCount(next);
+      }
+    };
+    window.addEventListener(DOWNLOAD_COUNT_EVENT, onCountUpdated);
     return () => {
       cancelled = true;
+      window.removeEventListener(DOWNLOAD_COUNT_EVENT, onCountUpdated);
     };
   }, []);
 
   useEffect(() => {
     if (downloadCount === null) return;
+    if (hasAnimatedRef.current) {
+      setDisplayCount(downloadCount);
+      return;
+    }
     let start = 0;
     const duration = 1500;
     const step = Math.max(1, Math.ceil(downloadCount / (duration / 16)));
     const timer = setInterval(() => {
       start += step;
       if (start >= downloadCount) {
+        hasAnimatedRef.current = true;
         setDisplayCount(downloadCount);
         clearInterval(timer);
       } else {

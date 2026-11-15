@@ -84,6 +84,22 @@ export async function fetchReleaseByTag(tag: string): Promise<GithubRelease> {
   return ghFetch<GithubRelease>(`/releases/tags/${tag}`);
 }
 
+const SHARED_CHANGELOG_RAW_BASE =
+  "https://raw.githubusercontent.com/AMVerge-team/AMVerge/main";
+
+export async function fetchSharedChangelogNotes(tag: string): Promise<string | null> {
+  try {
+    const res = await fetch(
+      `${SHARED_CHANGELOG_RAW_BASE}/updates/${encodeURIComponent(tag)}.md`,
+    );
+    if (!res.ok) return null;
+    const text = (await res.text()).trim();
+    return text || null;
+  } catch {
+    return null;
+  }
+}
+
 export function cumulativeDownloadCount(releases: GithubRelease[]): number {
   let total = 0;
   for (const release of releases) {

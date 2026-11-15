@@ -5,6 +5,7 @@ export {
   fetchLatestExtensionRelease,
   fetchReleases,
   fetchReleaseByTag,
+  fetchSharedChangelogNotes,
   cumulativeDownloadCount,
 } from "./releases";
 export { fetchContributors } from "./contributors";

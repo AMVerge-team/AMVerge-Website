@@ -9,9 +9,14 @@ import type { GithubRelease } from "../services/github";
 
 function getExcerpt(body: string | null) {
     if (!body) return null;
-    const line = body.trim().split("\n")[0];
-    if (line.length <= 80) return line;
-    return line.slice(0, 80) + "...";
+    for (const rawLine of body.trim().split("\n")) {
+        const line = rawLine.trim();
+        if (!line || line.startsWith("#") || /^[-*_]{3,}$/.test(line)) continue;
+        const clean = line.replace(/^[-*]\s+/, "").replace(/\*\*/g, "");
+        if (clean.length <= 80) return clean;
+        return clean.slice(0, 80) + "...";
+    }
+    return null;
 }
 
 function getReleaseDownloads(rel: GithubRelease) {
