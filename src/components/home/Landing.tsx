@@ -112,7 +112,7 @@ export default function Landing() {
             <span>AMV</span>erge
           </h1>
           <p className="hero-subtitle">
-            All-in-one scene selection tool.
+            Scene selection made easy.
           </p>
           <div className="hero-actions">
             <button

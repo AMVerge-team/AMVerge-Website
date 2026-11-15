@@ -45,7 +45,7 @@ export default function CTA() {
                     </h2>
                 </div>
                 <p className="cta-sub">
-                    Making scene selection easier.
+                    Scene selection made easy.
                 </p>
 
                 <button className="cta-download" onClick={downloadLatest}>
