@@ -18,12 +18,22 @@ export default function Landing() {
   const [showScrollHint, setShowScrollHint] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
     fetchLatestRelease()
-      .then((r) => setVersion(r.release.tag_name))
+      .then((r) => {
+        if (!cancelled) setVersion(r.release.tag_name);
+      })
       .catch(() => {});
     fetchReleases()
-      .then((releases) => setDownloadCount(cumulativeDownloadCount(releases)))
-      .catch(() => setDownloadCount(0));
+      .then((releases) => {
+        if (!cancelled) setDownloadCount(cumulativeDownloadCount(releases));
+      })
+      .catch(() => {
+        if (!cancelled) setDownloadCount(0);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
