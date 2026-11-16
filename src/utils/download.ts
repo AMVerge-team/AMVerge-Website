@@ -2,6 +2,7 @@ import {
     fetchLatestExtensionRelease,
     fetchLatestRelease,
 } from "../services/github";
+import { getAdminApiBase } from "./apiBase";
 
 export type DownloadTarget = "windows" | "mac" | "extension";
 
@@ -11,10 +12,7 @@ const COOLDOWN_STORAGE_KEY = "amverge_download_cooldown_ts";
 const COUNT_STORAGE_KEY = "amverge_download_count_cache";
 export const DOWNLOAD_COUNT_EVENT = "amverge:download-count";
 
-const API_BASE = (
-    (import.meta.env.VITE_ADMIN_API_URL as string | undefined) ||
-    "http://localhost:3001"
-).replace(/\/$/, "");
+const API_BASE = getAdminApiBase();
 
 function readCachedCount(): number {
     try {
@@ -46,11 +44,11 @@ function writeCachedCount(count: number): number {
 export async function fetchDownloadCount(): Promise<number> {
     const cached = readCachedCount();
     try {
-        const res = await fetch(`${API_BASE}/count`);
+        const res = await fetch(`${API_BASE}/count`, { cache: "no-store" });
         if (res.ok) {
             const data = (await res.json()) as { value?: number };
             if (typeof data.value === "number" && Number.isFinite(data.value)) {
-                return writeCachedCount(Math.max(cached, data.value));
+                return writeCachedCount(data.value);
             }
         }
     } catch {
@@ -84,23 +82,23 @@ export async function recordDownloadIncrement(): Promise<number> {
         return readCachedCount();
     }
     markDownloadCooldown();
-    const optimistic = writeCachedCount(readCachedCount() + 1);
     try {
         const res = await fetch(`${API_BASE}/increment`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            cache: "no-store",
             keepalive: true,
         });
         if (res.ok) {
             const data = (await res.json()) as { value?: number };
             if (typeof data.value === "number" && Number.isFinite(data.value)) {
-                return writeCachedCount(Math.max(optimistic, data.value));
+                return writeCachedCount(data.value);
             }
         }
     } catch {
         // keep optimistic local count when counter server is unreachable
     }
-    return optimistic;
+    return writeCachedCount(readCachedCount() + 1);
 }
 
 export async function getDownloadUrl(target: DownloadTarget): Promise<string | null> {
@@ -120,7 +118,10 @@ export async function downloadTarget(target: DownloadTarget): Promise<boolean> {
     try {
         const url = await getDownloadUrl(target);
         if (!url) return false;
-        void recordDownloadIncrement();
+        await Promise.race([
+            recordDownloadIncrement(),
+            new Promise<void>((resolve) => setTimeout(resolve, 250)),
+        ]);
         window.location.href = url;
         return true;
     } catch {

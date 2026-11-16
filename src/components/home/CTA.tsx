@@ -3,11 +3,12 @@ import { FiGithub } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
 import { useFadeIn } from "../../hooks/useFadeIn";
 import DownloadDropdown from "../ui/DownloadDropdown";
+import { fetchLatestRelease } from "../../services/github";
 import {
-    fetchLatestRelease,
-    fetchReleases,
-    cumulativeDownloadCount,
-} from "../../services/github";
+    DOWNLOAD_COUNT_EVENT,
+    INITIAL_DOWNLOAD_COUNT,
+    fetchDownloadCount,
+} from "../../utils/download";
 
 export default function CTA() {
     const ref = useFadeIn<HTMLElement>();
@@ -15,12 +16,21 @@ export default function CTA() {
     const [version, setVersion] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchReleases()
-            .then((r) => setCount(cumulativeDownloadCount(r)))
-            .catch(() => {});
+        fetchDownloadCount()
+            .then((n) => setCount(n))
+            .catch(() => setCount(INITIAL_DOWNLOAD_COUNT));
         fetchLatestRelease()
             .then(({ release }) => setVersion(release.tag_name))
             .catch(() => {});
+
+        const onCountUpdated = (e: Event) => {
+            const next = (e as CustomEvent<number>).detail;
+            if (typeof next === "number" && Number.isFinite(next)) {
+                setCount(next);
+            }
+        };
+        window.addEventListener(DOWNLOAD_COUNT_EVENT, onCountUpdated);
+        return () => window.removeEventListener(DOWNLOAD_COUNT_EVENT, onCountUpdated);
     }, []);
 
     return (

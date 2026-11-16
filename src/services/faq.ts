@@ -1,3 +1,5 @@
+import { getAdminApiBase } from '../utils/apiBase'
+
 export interface FaqItem {
   id: string
   question: string
@@ -10,7 +12,7 @@ interface FaqResponse {
   items: FaqItem[]
 }
 
-const API_BASE = (import.meta.env.VITE_ADMIN_API_URL as string || 'http://localhost:3001').replace(/\/$/, '')
+const API_BASE = getAdminApiBase()
 
 // always shown, so the page has answers even when the admin backend is unreachable
 export const BUILT_IN_FAQ: FaqItem[] = [
