@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { FiDownload, FiExternalLink, FiArrowLeft, FiHardDrive } from "react-icons/fi";
+import { FiDownload, FiExternalLink, FiArrowLeft } from "react-icons/fi";
 import { FaWindows, FaApple } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -11,11 +11,13 @@ import type { GithubRelease, GithubAsset } from "../services/github";
 
 function getDownloads(rel: GithubRelease) {
     const list = (rel.assets ?? []).filter(
-        (a) => !a.name.endsWith(".sig") && !a.name.endsWith("latest.json"),
+        (a) =>
+            !a.name.endsWith(".sig") &&
+            (a.name.endsWith(".exe") || a.name.endsWith(".dmg")),
     );
     return list.sort((a, b) => {
-        const pa = a.name.endsWith(".exe") ? 0 : a.name.endsWith(".dmg") ? 1 : 2;
-        const pb = b.name.endsWith(".exe") ? 0 : b.name.endsWith(".dmg") ? 1 : 2;
+        const pa = a.name.endsWith(".exe") ? 0 : 1;
+        const pb = b.name.endsWith(".exe") ? 0 : 1;
         return pa - pb;
     });
 }
@@ -28,16 +30,8 @@ function formatSize(bytes: number) {
 
 function DownloadCard({ asset }: { asset: GithubAsset }) {
     const isWindows = asset.name.endsWith(".exe");
-    const isMacApp = asset.name.endsWith(".dmg");
-    const isMacTar = asset.name.includes("-x86_64");
-    const isMacArm = asset.name.includes("-aarch64");
-
-    let icon = <FiHardDrive />;
-    let label = "Download";
-    if (isWindows) { icon = <FaWindows />; label = "Windows"; }
-    else if (isMacApp) { icon = <FaApple />; label = "macOS"; }
-    else if (isMacTar) { icon = <FaApple />; label = "macOS Intel"; }
-    else if (isMacArm) { icon = <FaApple />; label = "macOS ARM"; }
+    const icon = isWindows ? <FaWindows /> : <FaApple />;
+    const label = isWindows ? "Windows" : "macOS";
 
     return (
         <a
@@ -111,9 +105,9 @@ export default function ChangelogRelease() {
                 </Link>
                 <div className="release-fade-in">
                     <div className="release-header">
-                        <Skeleton width="180px" height="28px" className="skeleton-center" />
-                        <div style={{ height: 12 }} />
                         <Skeleton width="60%" height="48px" className="skeleton-center" />
+                        <div style={{ height: 10 }} />
+                        <Skeleton width="140px" height="20px" className="skeleton-center" />
                     </div>
                     <div className="release-body-section">
                         <Skeleton width="30%" height="22px" />
@@ -140,13 +134,12 @@ export default function ChangelogRelease() {
 
             <div className="release-fade-in">
             <div className="release-header">
-                <div className="release-meta">
-                    <span className="changelog-tag">{release.tag_name}</span>
-                    <time>{date}</time>
-                </div>
                 <h1 className="release-title">
                     {release.name || release.tag_name}
                 </h1>
+                <div className="release-meta">
+                    <time>{date}</time>
+                </div>
             </div>
 
             {(sharedNotes || release.body) && (
