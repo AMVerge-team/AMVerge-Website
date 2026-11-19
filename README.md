@@ -117,3 +117,14 @@ Any derivative work must also be open-source under the same license.
 See [LICENSE](LICENSE) for the full text.
 
 </details>
+
+---
+
+## Links
+
+- **Website**: [amverge.app](https://amverge.app/)
+- **Desktop App**: [AMVerge-team/AMVerge](https://github.com/AMVerge-team/AMVerge)
+- **CLI Backend**: [AMVerge-team/AMVerge-CLI](https://github.com/AMVerge-team/AMVerge-CLI)
+- **After Effects Extension**: [AMVerge-team/AMVerge-Extension](https://github.com/AMVerge-team/AMVerge-Extension)
+- **Homebrew Tap (macOS)**: [AMVerge-team/homebrew-tap](https://github.com/AMVerge-team/homebrew-tap)
+- **Discord**: [Join the AMVerge Discord](https://discord.gg/bmXjTgsAaN)
