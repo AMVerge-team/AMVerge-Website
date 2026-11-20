@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FiChevronDown, FiDownload, FiLayers } from "react-icons/fi";
-import { FaApple, FaWindows } from "react-icons/fa";
+import { FaApple, FaLinux, FaWindows } from "react-icons/fa";
 import {
     fetchLatestExtensionRelease,
     fetchLatestRelease,
@@ -121,6 +121,48 @@ export default function DownloadDropdown({
                         <span className="dl-item-text">
                             <span className="dl-item-title">Mac App</span>
                             <span className="dl-item-sub">Universal (.dmg)</span>
+                        </span>
+                        {appTag && <span className="dl-item-tag">{appTag}</span>}
+                    </button>
+
+                    <button
+                        type="button"
+                        className="dl-item"
+                        role="menuitem"
+                        onClick={() => void handleSelect("linux-appimage")}
+                    >
+                        <span className="dl-item-icon"><FaLinux aria-hidden="true" /></span>
+                        <span className="dl-item-text">
+                            <span className="dl-item-title">Linux App</span>
+                            <span className="dl-item-sub">AppImage (x86_64)</span>
+                        </span>
+                        {appTag && <span className="dl-item-tag">{appTag}</span>}
+                    </button>
+
+                    <button
+                        type="button"
+                        className="dl-item"
+                        role="menuitem"
+                        onClick={() => void handleSelect("linux-deb")}
+                    >
+                        <span className="dl-item-icon"><FaLinux aria-hidden="true" /></span>
+                        <span className="dl-item-text">
+                            <span className="dl-item-title">Linux (.deb)</span>
+                            <span className="dl-item-sub">Debian / Ubuntu</span>
+                        </span>
+                        {appTag && <span className="dl-item-tag">{appTag}</span>}
+                    </button>
+
+                    <button
+                        type="button"
+                        className="dl-item"
+                        role="menuitem"
+                        onClick={() => void handleSelect("linux-rpm")}
+                    >
+                        <span className="dl-item-icon"><FaLinux aria-hidden="true" /></span>
+                        <span className="dl-item-text">
+                            <span className="dl-item-title">Linux (.rpm)</span>
+                            <span className="dl-item-sub">Fedora / RHEL</span>
                         </span>
                         {appTag && <span className="dl-item-tag">{appTag}</span>}
                     </button>

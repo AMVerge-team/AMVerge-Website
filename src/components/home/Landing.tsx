@@ -116,7 +116,7 @@ export default function Landing() {
         <div className="hero-overlay" />
         <div className="hero-grid" />
         <div className="hero-content">
-          {version && <p className="hero-badge">{version} · Windows / macOS</p>}
+          {version && <p className="hero-badge">{version} · Windows / macOS / Linux</p>}
           <h1 className="hero-title">
             <span>AMV</span>erge
           </h1>
