@@ -1,6 +1,6 @@
 # Install AMVerge
 
-Install the AMVerge desktop app on Windows or macOS.
+Install the AMVerge desktop app on Windows, macOS, or Linux.
 
 ## Install on Windows
 
@@ -16,6 +16,14 @@ Install the AMVerge desktop app on Windows or macOS.
 1. Download the latest `.dmg` from our [GitHub releases](https://github.com/AMVerge-team/AMVerge/releases).
 2. Open the `.dmg`.
 3. Drag AMVerge into your **Applications** folder.
+
+## Install on Linux
+
+Download the package for your distro from our [GitHub releases](https://github.com/AMVerge-team/AMVerge/releases):
+
+- **AppImage (universal):** `chmod +x AMVerge_*_amd64.AppImage && ./AMVerge_*_amd64.AppImage`
+- **Debian / Ubuntu (`.deb`):** `sudo apt install ./AMVerge_*_amd64.deb`
+- **Fedora / RHEL (`.rpm`):** `sudo dnf install ./AMVerge-*.x86_64.rpm`
 
 ## Updates
 

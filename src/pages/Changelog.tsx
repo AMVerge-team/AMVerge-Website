@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiChevronRight, FiDownload } from "react-icons/fi";
-import { FaWindows, FaApple } from "react-icons/fa";
+import { FaWindows, FaApple, FaLinux } from "react-icons/fa";
 import { fetchReleases } from "../services/github";
 import useSEO from "../hooks/useSEO";
 import { SkeletonCard } from "../components/ui/Skeleton";
@@ -39,7 +39,7 @@ export default function Changelog() {
 
     useSEO({
         title: "Changelog",
-        description: "AMVerge release history and changelog. See what's new in each version, download the latest build for Windows and macOS.",
+        description: "AMVerge release history and changelog. See what's new in each version, download the latest build for Windows, macOS, and Linux.",
     });
 
     useEffect(() => {
@@ -124,6 +124,9 @@ export default function Changelog() {
                                             )}
                                             {hasPlatform(rel, ".dmg") && (
                                                 <span className="changelog-platform"><FaApple /></span>
+                                            )}
+                                            {(hasPlatform(rel, ".AppImage") || hasPlatform(rel, ".deb") || hasPlatform(rel, ".rpm")) && (
+                                                <span className="changelog-platform"><FaLinux /></span>
                                             )}
                                             {dls > 0 && (
                                                 <span className="changelog-dls">

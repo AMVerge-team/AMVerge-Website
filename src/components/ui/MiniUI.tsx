@@ -11,7 +11,7 @@ import {
     FiHelpCircle,
     FiFilePlus,
 } from "react-icons/fi";
-import { FaDiscord, FaWindows, FaApple, FaRegTrashAlt } from "react-icons/fa";
+import { FaDiscord, FaWindows, FaApple, FaLinux, FaRegTrashAlt } from "react-icons/fa";
 import { LuArrowDownUp, LuFolderPlus } from "react-icons/lu";
 
 const episodes = Array.from({ length: 12 }).map((_, i) => `Frieren S1E${i + 1}`);
@@ -154,6 +154,7 @@ export default function MiniUI() {
                         <div className="rp-tabs">
                             <span className="rp-tab active"><FaWindows /> Windows</span>
                             <span className="rp-tab"><FaApple /> macOS</span>
+                            <span className="rp-tab"><FaLinux /> Linux</span>
                         </div>
                         <ol className="rp-steps">
                             <li>Select clips with <b>Ctrl + Click</b> or <b>Shift + Click</b></li>

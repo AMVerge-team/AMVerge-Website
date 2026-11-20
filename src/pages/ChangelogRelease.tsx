@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FiDownload, FiExternalLink, FiArrowLeft } from "react-icons/fi";
-import { FaWindows, FaApple } from "react-icons/fa";
+import { FaWindows, FaApple, FaLinux } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { fetchReleaseByTag, fetchSharedChangelogNotes } from "../services/github";
@@ -13,13 +13,22 @@ function getDownloads(rel: GithubRelease) {
     const list = (rel.assets ?? []).filter(
         (a) =>
             !a.name.endsWith(".sig") &&
-            (a.name.endsWith(".exe") || a.name.endsWith(".dmg")),
+            !a.name.startsWith("linux-x86_64-") &&
+            (a.name.endsWith(".exe") ||
+                a.name.endsWith(".dmg") ||
+                a.name.endsWith(".AppImage") ||
+                a.name.endsWith(".deb") ||
+                a.name.endsWith(".rpm")),
     );
-    return list.sort((a, b) => {
-        const pa = a.name.endsWith(".exe") ? 0 : 1;
-        const pb = b.name.endsWith(".exe") ? 0 : 1;
-        return pa - pb;
-    });
+    const priority = (name: string) => {
+        if (name.endsWith(".exe")) return 0;
+        if (name.endsWith(".dmg")) return 1;
+        if (name.endsWith(".AppImage")) return 2;
+        if (name.endsWith(".deb")) return 3;
+        if (name.endsWith(".rpm")) return 4;
+        return 5;
+    };
+    return list.sort((a, b) => priority(a.name) - priority(b.name));
 }
 
 function formatSize(bytes: number) {
@@ -30,8 +39,18 @@ function formatSize(bytes: number) {
 
 function DownloadCard({ asset }: { asset: GithubAsset }) {
     const isWindows = asset.name.endsWith(".exe");
-    const icon = isWindows ? <FaWindows /> : <FaApple />;
-    const label = isWindows ? "Windows" : "macOS";
+    const isMac = asset.name.endsWith(".dmg");
+    const isAppImage = asset.name.endsWith(".AppImage");
+    const isDeb = asset.name.endsWith(".deb");
+    const isRpm = asset.name.endsWith(".rpm");
+
+    let icon = <FaWindows />;
+    let label = "Windows";
+    if (isWindows) { icon = <FaWindows />; label = "Windows"; }
+    else if (isMac) { icon = <FaApple />; label = "macOS"; }
+    else if (isAppImage) { icon = <FaLinux />; label = "Linux (AppImage)"; }
+    else if (isDeb) { icon = <FaLinux />; label = "Linux (.deb)"; }
+    else if (isRpm) { icon = <FaLinux />; label = "Linux (.rpm)"; }
 
     return (
         <a

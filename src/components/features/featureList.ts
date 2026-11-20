@@ -127,7 +127,7 @@ export const FEATURE_SECTIONS: FeatureSection[] = [
             { name: "Community events", description: "Browse and promote editing contests on the app for free." },
             { name: "Themes", description: "Pick your accent color, background image or video, font and text size." },
             { name: "Pin window", description: "Keep AMVerge floating above your editor." },
-            { name: "Platforms", description: "Windows and macOS" },
+            { name: "Platforms", description: "Windows, macOS, and Linux" },
         ],
     },
 ];
