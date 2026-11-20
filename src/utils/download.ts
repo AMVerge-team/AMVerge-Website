@@ -4,7 +4,13 @@ import {
 } from "../services/github";
 import { getAdminApiBase } from "./apiBase";
 
-export type DownloadTarget = "windows" | "mac" | "extension";
+export type DownloadTarget =
+    | "windows"
+    | "mac"
+    | "linux-appimage"
+    | "linux-deb"
+    | "linux-rpm"
+    | "extension";
 
 export const INITIAL_DOWNLOAD_COUNT = 10365;
 const DOWNLOAD_COOLDOWN_MS = 30 * 60 * 1000; // 30 minutes
@@ -107,9 +113,18 @@ export async function getDownloadUrl(target: DownloadTarget): Promise<string | n
         return (exe ?? zxp)?.browser_download_url ?? release.html_url ?? null;
     }
 
-    const { release, exe, dmg } = await fetchLatestRelease();
+    const { release, exe, dmg, appImage, deb, rpm } = await fetchLatestRelease();
     if (target === "mac") {
         return dmg?.browser_download_url ?? release.html_url ?? null;
+    }
+    if (target === "linux-appimage") {
+        return appImage?.browser_download_url ?? release.html_url ?? null;
+    }
+    if (target === "linux-deb") {
+        return deb?.browser_download_url ?? release.html_url ?? null;
+    }
+    if (target === "linux-rpm") {
+        return rpm?.browser_download_url ?? release.html_url ?? null;
     }
     return exe?.browser_download_url ?? release.html_url ?? null;
 }

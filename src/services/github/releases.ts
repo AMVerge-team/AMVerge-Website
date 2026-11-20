@@ -7,6 +7,9 @@ export interface LatestRelease {
   release: GithubRelease;
   exe: GithubAsset | null;
   dmg: GithubAsset | null;
+  appImage: GithubAsset | null;
+  deb: GithubAsset | null;
+  rpm: GithubAsset | null;
 }
 
 export interface LatestExtensionRelease {
@@ -38,7 +41,26 @@ export function fetchLatestRelease(): Promise<LatestRelease> {
             (a) => a.name.endsWith(".dmg") && !a.name.endsWith(".sig"),
           ) ??
           null;
-        return { release, exe, dmg };
+        const appImage =
+          assets.find(
+            (a) =>
+              a.name.endsWith(".AppImage") &&
+              !a.name.endsWith(".sig") &&
+              !a.name.startsWith("linux-x86_64-"),
+          ) ??
+          assets.find(
+            (a) => a.name.endsWith(".AppImage") && !a.name.endsWith(".sig"),
+          ) ??
+          null;
+        const deb =
+          assets.find(
+            (a) => a.name.endsWith(".deb") && !a.name.endsWith(".sig"),
+          ) ?? null;
+        const rpm =
+          assets.find(
+            (a) => a.name.endsWith(".rpm") && !a.name.endsWith(".sig"),
+          ) ?? null;
+        return { release, exe, dmg, appImage, deb, rpm };
       })
       .catch((err) => {
         latestAppPromise = null;
