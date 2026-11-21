@@ -361,6 +361,7 @@ body {
 /* hero */
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   display: flex;
