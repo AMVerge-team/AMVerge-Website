@@ -72,7 +72,7 @@
 /* ---- Features ---- */
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
     gap: 20px;
     text-align: left;
 }
@@ -719,7 +719,7 @@
 /* ---- 404 ---- */
 .notfound-links {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
     gap: 16px;
     max-width: 700px;
     margin: 0 auto;
