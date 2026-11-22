@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AMVerge-team/AMVerge/main/frontend/src/assets/amverge_title_gif.gif" alt="AMVerge" width="720"/>
+  <img src="https://raw.githubusercontent.com/AMVerge-team/.github/main/assets/banners/AMVerge-Website.gif" alt="AMVerge Website" width="720"/>
 </p>
 
 <p align="center">
